@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
+#    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/03 20:59:28 by anatashi         ###   ########.fr        #
+#    Updated: 2020/11/04 15:42:39 by kbatwoma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ TEMP_LIST	=	minishell.c\
 				promt_string.c\
 				signal.c\
 				read_cmd.c\
-				init_struct_commands.c
+				init_struct_commands.c \
+				create_list.c
 
 		
 # _LIST	=	

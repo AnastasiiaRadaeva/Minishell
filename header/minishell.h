@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/04 12:11:45 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/04 15:42:14 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ void			init_struct_commands(t_commands *cmd);
 */
 void			signal_handler(int num);
 void			read_cmd(t_commands *cmd ,char **line);
+
+t_commands		*creat_list(t_commands *cmd, char *line);
 
 #endif
