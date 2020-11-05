@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:35:52 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/05 13:23:33 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/05 14:41:06 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 #include "minishell.h"
 
-t_commands		*create_list(t_commands *cmd, char *line, char **new_line);
+void		create_list(t_commands *cmd, char *line, char **new_line);
 
 #endif

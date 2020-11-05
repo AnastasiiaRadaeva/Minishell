@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/05 13:57:04 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/05 14:05:42 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int    			main(int argc, char **argv, char **environ)
 	while (1)
 	{
 		read_cmd(cmd, &line);
-		cmd = create_list(cmd, line, &new_line);
+		create_list(&cmd, line, &new_line);
 		if (*new_line == '\0')
 			print_promt_string();
 		else

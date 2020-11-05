@@ -6,12 +6,13 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:29:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/05 13:39:04 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/05 14:51:37 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+#if 0
 static int	ft_skip_spases(char *line, char flag)
 {
 	int index;
@@ -31,20 +32,6 @@ static int	ft_skip_spases(char *line, char flag)
 	return (index);	
 }
 
-#if 0
-static char	*ft_comand_line(char *old_line)
-{
-	int		index;
-	char	*new_line;
-
-	index = ft_skip_spases(old_line, 's');
-	old_line += index;
-	index = ft_skip_spases(old_line, 'e');
-	if (!(new_line = ft_strndup(old_line, index + 1)))
-		return (NULL);
-	return (new_line);
-}
-#endif
 
 static void	ft_comand_line(t_commands *cmd, char *old_line, char **new_line)
 {
@@ -56,12 +43,29 @@ static void	ft_comand_line(t_commands *cmd, char *old_line, char **new_line)
 	if (!(*new_line = ft_strndup(old_line, index + 1)))
 		error_output(cmd, MALLOC_2);
 }
+#endif
 
-t_commands	*create_list(t_commands *cmd, char *line, char **new_line)
+static void	ft_skip_spases(char *line, int	*index)
+{
+	while (ft_isspace(line[*index]))
+		++(*index);
+}
+
+static void	ft_comand_line(t_commands *cmd, char *old_line, char **new_line)
+{
+	int		index;
+
+	ft_skip_spases(old_line, &index);
+	if (!(*new_line = ft_strdup(old_line + index)))
+		error_output(cmd, MALLOC_2);
+}
+
+
+void	create_list(t_commands *cmd, char *line, char **new_line)
 {
 	init_struct_commands(cmd);
 	ft_comand_line(cmd, line, new_line);
 	ft_free_tmp(line);
 	// ft_spec_symb
-	return (cmd);
+	// return (cmd);
 }
