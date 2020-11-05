@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/15 16:48:11 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/03 19:21:47 by anatashi         ###   ########.fr        #
+#    Updated: 2020/11/05 11:59:40 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ OPFLAGS = -O2
 FLAGS = -Wall -Wextra -Werror
 HEADER = header/
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re norm
 
 all: $(NAME)
 
@@ -55,10 +55,5 @@ fclean: clean
 
 re: fclean all
 	
-test: 
-	@gcc -g main.c -L. libft.a -o prog
-	@./prog
-
-grind:
-	@gcc -g main.c -L. libft.a -o prog
-	@valgrind --leak-check=full ./prog
+norm:
+	norminette $(DIR).
