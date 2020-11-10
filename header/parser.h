@@ -15,6 +15,6 @@
 
 #include "minishell.h"
 
-void		create_list(t_commands *cmd, char **line, char **new_line);
+void		create_list(t_commands **cmd, char *line, char **new_line);
 
 #endif
