@@ -15,19 +15,27 @@
 
 #include "../libft/header/libft.h"
 #include "signal.h"
+#include <unistd.h>
 
 typedef struct			s_commands
 {
 	char				*cmd;
 	char				*cmd_dir;
 	char				**arg;
-	int					dit_find;
+	int					count_args;
+	//int					dit_find;
 	int					type_redir;
 	int					invalid;
 	struct s_commands	*redir;
 	struct s_commands	*pipe;
 	struct s_commands	*next;
 }						t_commands;
+
+typedef struct			s_other
+{
+	char				**envp;
+	char				*home;
+}						t_other;
 
 int				main(int argc, char **argv, char **environ);
 // 
