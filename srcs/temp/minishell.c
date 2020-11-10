@@ -13,30 +13,31 @@
 
 #include "minishell.h"
 
-int    			main(int argc, char **argv, char **environ)
+int    			main(int argc, char **argv, char **envp)
 {
     t_commands	*cmd;
+	t_other		*all;
 	char		*line;
 	char		*new_line;
 	
 	(void)argc;
 	(void)argv;
-	(void)environ;
 	cmd = NULL;
 	signal(SIGINT,signal_handler);
 	print_promt_string();
 	while (1)
 	{
+		cmd = NULL;
 		read_cmd(cmd, &line);
-		create_list(cmd, &line, &new_line);
+		create_list(&cmd, line, &new_line);
 		if (*new_line == '\0')
 			print_promt_string();
 		else
 		{
-			print_result(cmd, new_line);
+			print_result(&cmd, new_line);
 			print_promt_string();
 		} 
-		// free(cmd);
+		freeing_memory_from_struct_commands(cmd);
 	}
 	exit(EXIT_SUCCESS);
 }
