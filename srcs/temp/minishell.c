@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/05 16:04:05 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/10 13:33:23 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 int    			main(int argc, char **argv, char **envp)
 {
     t_commands	*cmd;
-	t_other		*all;
+	t_data		*all;
 	char		*line;
 	char		*new_line;
 	
 	(void)argc;
 	(void)argv;
 	cmd = NULL;
+	create_env_v(&all, envp);
 	signal(SIGINT,signal_handler);
 	print_promt_string();
 	while (1)

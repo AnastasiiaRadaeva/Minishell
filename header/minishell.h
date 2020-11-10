@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/05 12:49:59 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/10 16:56:25 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ typedef struct			s_commands
 	struct s_commands	*next;
 }						t_commands;
 
-typedef struct			s_other
+typedef struct			s_data
 {
 	char				**envp;
-	char				*home;
-}						t_other;
+	int					home_dir;
+	int					current_pwd;
+	int					old_pwd;
+	int					env_var;
+}						t_data;
 
 int				main(int argc, char **argv, char **environ);
 // 

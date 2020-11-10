@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_exit.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:46:31 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/04 20:50:06 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/10 17:04:34 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # define MALLOC_6 "Error : Malloc fail (ft_join_all_args)"
 # define MALLOC_7 
 # define MALLOC_8 
+# define MALLOC_9 "Error : Malloc fail (create_env_v)"
+# define MALLOC_10 "Error : Malloc fail (copy_double_array)"
+# define MALLOC_11 "Error : Malloc fail (change_var)"
 # define GNL_1 "Error : GNL fail (read_cmd)"
 # define CMD_NO_FOUND "minishell: command not found: "
 # define PWD_GETCWD "Error : too many characters in the path (getcwd)"
