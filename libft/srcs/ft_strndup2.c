@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strndup2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/03 10:40:49 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/06 12:27:32 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/05 17:59:24 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/06 12:26:07 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_strcmp(const char *s1, const char *s2)
+char		*ft_strndup2(char **src, size_t n)
 {
-	int		i;
+	char	*new_array;
+	size_t	i;
+	size_t	size;
 
 	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
+	size = 0;
+	if (!(new_array = (char *)malloc(sizeof(char) * (ft_strlen(*src) + 1))))
+		return (NULL);
+	while ((*src)[i] && size != n)
+	{
+		new_array[i] = (*src)[i];
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		size++;
+	}
+	new_array[i] = '\0';
+	free(*src);
+	return (new_array);
 }

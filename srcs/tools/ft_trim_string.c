@@ -1,14 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_trim_string.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/11 10:55:01 by kbatwoma         ###   ########.fr       */
+/*   Created: 2020/11/07 14:58:40 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/07 19:57:08 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "tools.h"
 
+char		*ft_trim_string(char *string, size_t size)
+{
+	string[size] = '\0';
+	return (string);
+}

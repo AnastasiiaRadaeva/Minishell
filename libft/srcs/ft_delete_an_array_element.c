@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_delete_an_array_element.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/03 10:40:49 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/06 12:27:32 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/10 10:48:06 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/10 16:44:29 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_strcmp(const char *s1, const char *s2)
+void		ft_delete_an_array_element(char ***array, size_t i)
 {
-	int		i;
+	size_t	len_arr;
+	char	*tmp;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
+	len_arr = ft_strlenarr(*array);
+	if (len_arr <= i)
+		return;
+	while (array[i + 1])
+	{
+		tmp = *(array)[i];
+		*(array)[i] = *(array)[i + 1];
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	ft_free_tmp((*array)[i]);
 }

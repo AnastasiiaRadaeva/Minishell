@@ -1,14 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   skip_spaces.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/11 10:55:01 by kbatwoma         ###   ########.fr       */
+/*   Created: 2020/11/09 11:17:18 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/09 17:00:37 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "tools.h"
 
+char		*skip_spaces(char *p1)
+{
+	while (ft_isspace(*p1))
+		p1++;
+	return (p1);
+}

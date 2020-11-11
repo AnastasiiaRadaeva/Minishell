@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
+#    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/05 13:33:31 by anatashi         ###   ########.fr        #
+#    Updated: 2020/11/11 11:38:01 by kbatwoma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,12 @@ ERROR_OUTPUT_LIST 	=	error_output.c\
 		
 PARSER_DIR			=	srcs/parser/
 PARSER_LIST			=	create_list.c \
-# _LIST	=	
+						move_pointer.c \
+						checking_cmd_for_tocken.c
+
+TOOLS_DIR			=	srcs/tools/
+TOOLS_LIST			=	ft_trim_string.c \
+						skip_spaces.c
 
 # _LIST	=
 
@@ -45,9 +50,10 @@ PARSER_LIST			=	create_list.c \
 SOURCE_TEMP			= $(addprefix $(TEMP_DIR), $(TEMP_LIST))
 SOURCE_ERROR		= $(addprefix $(ERROR_OUTPUT_DIR), $(ERROR_OUTPUT_LIST))
 SOURCE_PARSER		= $(addprefix $(PARSER_DIR), $(PARSER_LIST))
+SOURCE_TOOLS		= $(addprefix $(TOOLS_DIR), $(TOOLS_LIST))
 
-OBJ	= $(patsubst %.c, %.o, $(SOURCE_TEMP) $(SOURCE_ERROR) $(SOURCE_PARSER))
-D_FILES = $(patsubst %.c, %.d, $(SOURCE_TEMP) $(SOURCE_ERROR) $(SOURCE_PARSER)) 
+OBJ	= $(patsubst %.c, %.o, $(SOURCE_TEMP) $(SOURCE_ERROR) $(SOURCE_PARSER) $(SOURCE_TOOLS))
+D_FILES = $(patsubst %.c, %.d, $(SOURCE_TEMP) $(SOURCE_ERROR) $(SOURCE_PARSER) $(SOURCE_TOOLS)) 
 
 .PHONY: all clean fclean re test norm
 

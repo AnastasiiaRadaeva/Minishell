@@ -1,14 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_free_lstnext.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/11 10:55:01 by kbatwoma         ###   ########.fr       */
+/*   Created: 2020/11/10 12:31:57 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/10 12:33:13 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "libft.h"
 
+void	ft_free_lstnext(t_list *lst)
+{
+	t+
+}

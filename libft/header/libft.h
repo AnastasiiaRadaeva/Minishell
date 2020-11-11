@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 09:22:15 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/03 19:21:32 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/10 16:43:21 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-
 typedef struct		s_tree
 {
 	double			num;
@@ -40,6 +39,7 @@ void				*ft_memmove(void *dest, const void *src, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t				ft_strlen(const char *s);
+size_t				ft_strlenarr(char **array);
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 size_t				ft_strlcat(char *dest, const char *src, size_t dsize);
 char				*ft_strchr(const char *s, int c);
@@ -94,4 +94,11 @@ int					ft_min(int value_1, int value_2);
 double				*ft_binary_tree_sorting(double *x, int in);
 int					ft_strnstrindex(char *big, char *little);
 void				ft_free_two_dimensional_arr(char **array);
+char				*ft_strndup2(char **src, size_t n);
+char				*ft_strcdup2(char **src, int c);
+char				**ft_add_element_to_two_dimensional_array(char **array,
+							char *elem);
+char				*ft_strchr2(const char *s1, const char *s2);
+void				ft_delete_an_array_element(char ***array, size_t i);
+char 				**create_two_dimensional_array_from_lst(t_list *lst);
 #endif

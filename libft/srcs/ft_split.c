@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@21-school.ru>           +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 17:42:00 by anatashi          #+#    #+#             */
-/*   Updated: 2020/05/21 10:40:19 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/06 16:26:25 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	int	ft_lensplit(char const *s, int c)
 	cles = 0;
 	if (*s == '\0')
 		return (0);
-	while (*s != '\0')
+	while (*s)
 	{
 		if (*s == c)
 			cles = 0;
@@ -70,7 +70,7 @@ char		**ft_split(char const *s, char c)
 	lens = ft_lensplit(s, c);
 	if (!(nstr = (char **)malloc(sizeof(char *) * (lens + 1))))
 		return (NULL);
-	while (lens--)
+	while (lens)
 	{
 		while (s[i] == c && s[i])
 			i++;
@@ -78,6 +78,7 @@ char		**ft_split(char const *s, char c)
 			return (ft_freearrpnt(nstr, j));
 		i += ft_lenword(s, i, c);
 		j++;
+		lens--;
 	}
 	nstr[j] = NULL;
 	return (nstr);

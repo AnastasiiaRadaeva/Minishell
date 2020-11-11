@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   create_two_dimensional_array_from_lst.c            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/03 10:40:49 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/06 12:27:32 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/10 12:01:45 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/10 13:30:24 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_strcmp(const char *s1, const char *s2)
+char 		**create_two_dimensional_array_from_lst(t_list *lst)
 {
-	int		i;
+	t_list	*tmp;
+	size_t	i;
+	char	**new_array;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	tmp = lst;
+	i = -1;
+	if (!(new_array = (char **)malloc(sizeof(char *) * (ft_lstsize(tmp) + 1))))
+		return (NULL);
+	while (tmp)
+	{
+		new_array[++i] = tmp->content;
+		tmp = tmp->next;
+	}
+	return (new_array);
 }
