@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/10 17:06:08 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/11 16:45:07 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,22 @@ void	ft_cd(t_commands *cmd, t_data *all)
 	char	*tmp_path;
 
 	if (cmd->count_args == 0)
-		cmd->arg[0] = all->envp[all->home_dir] + 5;
+		cmd->lst->content = all->envp[all->home_dir] + 5;
 	if (cmd->count_args == 2)
 	{
 		ft_putstr(CD_STR_NOT);
-		error_output(cmd, cmd->arg[0]);
+		error_output(cmd, cmd->lst->content);
 	}
 	if (cmd->count_args > 2)
 		error_output(cmd, CD_MANY_ARGS);
-	if (cmd->arg[0][0] == '~')
+	if (cmd->lst->content[0] == '~')
 	{
-		if (!(tmp_path = ft_strjoin(all->envp[all->home_dir] + 5, cmd->arg[0] + 1)))
+		if (!(tmp_path = ft_strjoin(all->envp[all->home_dir] + 5, cmd->lst->content + 1)))
 			error_output(cmd, MALLOC_5);
-		free(cmd->arg[0]);
-		cmd->arg[0] = tmp_path;
+		free(cmd->lst->content);
+		cmd->lst->content = tmp_path;
 	}
-	if (chdir(cmd->arg[0]) != 0)
+	if (chdir(cmd->lst->content) != 0)
 	{
 		ft_putstr(CD_NO_SUCH_F_D);
 		error_output(cmd, MALLOC_5);

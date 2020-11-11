@@ -6,13 +6,14 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/11 11:44:55 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/11 16:48:27 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
 
+#if 0
 int    			main(int argc, char **argv, char **envp)
 {
     t_commands	*cmd;
@@ -43,3 +44,24 @@ int    			main(int argc, char **argv, char **envp)
 	}
 	exit(EXIT_SUCCESS);
 }
+#endif 
+
+int    			main(int argc, char **argv, char **envp)
+{
+    t_commands	*cmd;
+	t_data		*all;
+	char		*line;
+	char		*new_line;
+	
+	all = NULL;
+	create_env_v(&all, envp);
+	print_promt_string();
+	while (1)
+	{
+		
+		print_result(cmd, new_line);
+		print_promt_string();
+	}
+	exit(EXIT_SUCCESS);
+}
+
