@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_two_dimensional_array_from_lst.c            :+:      :+:    :+:   */
+/*   if_dollar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 12:01:45 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/11 17:11:26 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/14 15:53:02 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/14 16:07:08 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-char 		**create_two_dimensional_array_from_lst(t_list *lst)
+char		*if_dollar(t_data *data, char *line, int *invalid)
 {
-	t_list	*tmp;
 	size_t	i;
-	char	**new_array;
 
-	tmp = lst;
-	i = -1;
-	if (!(new_array = (char **)malloc(sizeof(char *) * (ft_lstsize(tmp) + 1))))
-		return (NULL);
-	while (tmp)
-	{
-		new_array[++i] = tmp->content;
-		tmp = tmp->next;
-	}
-	return (new_array);
+	i = 0;
+	while (ft_isalpha(line[i]) || line[i] == '_')
+		i++;
 }

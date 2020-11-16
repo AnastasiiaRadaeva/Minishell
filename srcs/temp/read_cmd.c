@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 15:03:58 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/11 11:39:21 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/12 22:13:15 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		read_cmd(t_commands *cmd, char **line)
+void		read_cmd(char **line)
 {
 	if (get_next_line(0, line) < 0)
-		error_output(cmd, GNL_1);
+		error_output(NULL, GNL_1);
 	if (!(ft_strncmp("exit", *line, ft_strlen(*line))))
 	{
 		ft_free_tmp(*line);
-		program_exit(cmd, 1);
+		program_exit(NULL, 1);
 	}
 }

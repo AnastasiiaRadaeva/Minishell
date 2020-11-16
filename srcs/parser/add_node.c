@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_two_dimensional_array_from_lst.c            :+:      :+:    :+:   */
+/*   add_node.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 12:01:45 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/11 17:11:26 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/14 16:21:23 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/16 16:35:43 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-char 		**create_two_dimensional_array_from_lst(t_list *lst)
+void	add_node(t_commands *cmd, t_data *data, char **line)
 {
-	t_list	*tmp;
-	size_t	i;
-	char	**new_array;
-
-	tmp = lst;
-	i = -1;
-	if (!(new_array = (char **)malloc(sizeof(char *) * (ft_lstsize(tmp) + 1))))
-		return (NULL);
-	while (tmp)
+	if (**line == '>' || **line == '<')
 	{
-		new_array[++i] = tmp->content;
-		tmp = tmp->next;
+		cmd->redir = init_struct_commands();
+		cmd = cmd->redir;
 	}
-	return (new_array);
+	else if (**line == '|')
+	{
+		cmd->pipe = init_struct_commands();
+		cmd = cmd->pipe;
+	}
+	else if (**line == ';')
+	{
+		cmd->next = init_struct_commands();
+		cmd = cmd->next;
+	}
+	++*line;
+	data_collection(&cmd, data, line);
 }

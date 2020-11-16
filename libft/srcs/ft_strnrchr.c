@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_two_dimensional_array_from_lst.c            :+:      :+:    :+:   */
+/*   ft_strnrchr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 12:01:45 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/11 17:11:26 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/12 11:28:53 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/12 12:06:55 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char 		**create_two_dimensional_array_from_lst(t_list *lst)
+char				*ft_strnrchr(const char *s, int c, size_t size)
 {
-	t_list	*tmp;
-	size_t	i;
-	char	**new_array;
+	char			*res;
+	size_t			i;
 
-	tmp = lst;
-	i = -1;
-	if (!(new_array = (char **)malloc(sizeof(char *) * (ft_lstsize(tmp) + 1))))
-		return (NULL);
-	while (tmp)
+	i = ft_strlen(s);
+	res = NULL;
+	while (i && size)
 	{
-		new_array[++i] = tmp->content;
-		tmp = tmp->next;
+		if (s[i] == (char)c)
+			res = (char *)&s[i];
+		i--;
+		size--;
 	}
-	return (new_array);
+	if ((char)c == s[i])
+		return ((char *)&s[i]);
+	return (res);
 }
