@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/14 16:08:27 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:23:13 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ void			print_promt_string(void);
 /*
 *	initialization of structures
 */
-t_commands		*init_struct_commands(void);
+t_commands		*init_struct_commands(t_commands *cmd, t_data *data);
 t_data			*init_struct_data(void);
 
 /*
 *	SIGNAL
 */
 void			signal_handler(int num);
-void			read_cmd(char **line);
+void			read_cmd(t_data *data, char **line);
 
 
 

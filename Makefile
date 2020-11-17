@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/16 12:52:31 by anatashi         ###   ########.fr        #
+#    Updated: 2020/11/16 17:35:42 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,10 @@ ERROR_OUTPUT_LIST 	=	error_output.c\
 						program_exit.c
 		
 PARSER_DIR			=	srcs/parser/
-PARSER_LIST			=	create_list.c \
+PARSER_LIST			=	create_tree.c \
+						data_collection.c\
 						move_pointer.c \
-						checking_cmd_for_tocken.c\
+						init_cmd.c\
 						add_node.c
 
 TOOLS_DIR			=	srcs/tools/

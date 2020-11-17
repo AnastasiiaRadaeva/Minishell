@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:32:10 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/13 15:20:20 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:20:24 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ t_data	*init_struct_data(void)
 	t_data *new_struct;
 
 	if (!(new_struct = (t_data *)ft_calloc(sizeof(t_data), 1)))
-		error_output(NULL, NULL);
+		error_output(NULL, NULL, 0);
+	// new_struct->fd
 	return (new_struct);
 }
 
-t_commands	*init_struct_commands(void)
+t_commands	*init_struct_commands(t_commands *cmd, t_data *data)
 {
 	t_commands *new_tree;
 
 	if (!(new_tree = (t_commands *)ft_calloc(sizeof(t_commands), 1)))
-		error_output(new_tree, MALLOC_1);
+		error_output(cmd, data, MALLOC_1);
 	return (new_tree);
 }

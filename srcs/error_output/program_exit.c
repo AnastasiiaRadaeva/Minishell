@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 17:02:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/11 11:39:33 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:23:36 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ static	void freeing_memory_from_struct_commands(t_commands *cmd)
 	}
 }
 
-int		program_exit(t_commands *cmd, int num)
+int		program_exit(t_commands *cmd, t_data *data, int num)
 {
 	if (cmd)
 		freeing_memory_from_struct_commands(cmd);
+	if (data)
+		;
 	// sleep(1000);
 	exit(num);
 }

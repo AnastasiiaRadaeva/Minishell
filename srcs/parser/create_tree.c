@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_output.c                                     :+:      :+:    :+:   */
+/*   create_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/03 16:53:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/17 16:13:41 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/03 16:29:17 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/17 16:42:26 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "program_exit.h"
+#include "minishell.h"
 
-void	error_output(t_commands *cmd, t_data *data, char *str)
+t_commands		*create_tree(t_data *data, char *line)
 {
-	ft_putendl_fd(str, 2);
-	program_exit(cmd, data, 0);
+	char		*p;
+	t_commands 	*cmd;
+	t_commands	*tmp;
+
+	cmd = NULL;
+	p = line;
+	cmd = init_struct_commands(cmd, data);
+	tmp = cmd;
+	while (*p)
+	{
+		data_collection(tmp, data, &p);
+		add_node(&tmp, data, &p);
+	}
+	return (cmd);
 }
+

@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/16 16:42:58 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:43:35 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,34 @@ int    			main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		print_promt_string();
-		read_cmd(&line);
-		cmd = create_list(data, line);
+		read_cmd(data, &line);
+		cmd = create_tree(data, line);
 		
 		/*
 		** print contents of cmd
 		*/
-		#if 0
-		while (cmd)
+		// #if 0
+		t_commands *tmp = cmd;
+		while (tmp)
 		{
 			ft_putendl("---next output cmd->cmd---");
-			ft_putendl(cmd->cmd);
+			ft_putendl(tmp->cmd);
 			ft_putendl("---next output cmd->lst---");
-			for (int i = 0, size = ft_lstsize(cmd->lst); i < size ; i++)
+			for (int i = 0, size = ft_lstsize(tmp->lst); i < size ; i++)
 			{
-				ft_putendl(cmd->lst->content);
-				cmd->lst = cmd->lst->next;
+				ft_putendl(tmp->lst->content);
+				tmp->lst = tmp->lst->next;
 			}
-			if (cmd->next)
-				cmd = cmd->next;
-			else if (cmd->pipe)
-				cmd = cmd->pipe;
-			else if (cmd->redir)
-				cmd = cmd->redir;
+			if (tmp->next)
+				tmp = tmp->next;
+			else if (tmp->pipe)
+				tmp = tmp->pipe;
+			else if (tmp->redir)
+				tmp = tmp->redir;
 			else
-				cmd = cmd->next;
+				tmp = tmp->next;
 		}
-		#endif
+		// #endif
 
 
 		if (line == '\0')
