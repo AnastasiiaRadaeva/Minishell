@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/11 16:45:07 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:51:49 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	change_var(t_commands *cmd, t_data *all)
 		error_output(cmd, MALLOC_11);
 	free(tmp);
 	tmp = all->envp[all->current_pwd];
-	if (!(all->envp[all->current_pwd] = ft_strdup(cmd->arg[0])))
+	if (!(all->envp[all->current_pwd] = ft_strdup(cmd->lst->content)))
 		error_output(cmd, MALLOC_11);
 	free(tmp);
 }

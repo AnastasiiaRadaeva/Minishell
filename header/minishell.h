@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/11 11:45:44 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:10:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct			s_data
 	int					current_pwd;
 	int					old_pwd;
 	int					env_var;
+	int					count_str;
+	char				*error_string;
 }						t_data;
 
 int				main(int argc, char **argv, char **environ);
