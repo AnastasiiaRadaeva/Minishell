@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_exit.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:46:31 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/17 16:15:58 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:09:03 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define CD_MANY_ARGS "cd: too many arguments"
 # define CD_NO_SUCH_F_D "cd: no such file or directory: "
 
-void	error_output(t_commands *cmd, char *str);
-int		program_exit(t_commands *cmd, int num);
+void	error_output(t_commands *cmd, t_data *data, char *str);
+int		program_exit(t_commands *cmd, t_data *data, int num);
 
 #endif

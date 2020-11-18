@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_output.c                                     :+:      :+:    :+:   */
+/*   if_dollar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/03 16:53:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/17 16:13:41 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/14 15:53:02 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/14 16:07:08 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "program_exit.h"
+#include "parser.h"
 
-void	error_output(t_commands *cmd, t_data *data, char *str)
+char		*if_dollar(t_data *data, char *line, int *invalid)
 {
-	ft_putendl_fd(str, 2);
-	program_exit(cmd, data, 0);
+	size_t	i;
+
+	i = 0;
+	while (ft_isalpha(line[i]) || line[i] == '_')
+		i++;
 }

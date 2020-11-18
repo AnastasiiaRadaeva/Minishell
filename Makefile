@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
+#    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/11 11:38:01 by kbatwoma         ###   ########.fr        #
+#    Updated: 2020/11/16 17:35:42 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,13 @@ MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 LIBFT_DIR			=	libft/
 HEADER_DIR			=	header/
-# _DIR	=	tools/
 
 TEMP_DIR			=	srcs/temp/
 TEMP_LIST			=	minishell.c\
 						promt_string.c\
 						signal.c\
 						read_cmd.c\
-						init_struct_commands.c \
+						init_struct.c \
 						print_result.c
 
 ERROR_OUTPUT_DIR 	=	srcs/error_output/
@@ -34,17 +33,15 @@ ERROR_OUTPUT_LIST 	=	error_output.c\
 						program_exit.c
 		
 PARSER_DIR			=	srcs/parser/
-PARSER_LIST			=	create_list.c \
+PARSER_LIST			=	create_tree.c \
+						data_collection.c\
 						move_pointer.c \
-						checking_cmd_for_tocken.c
+						init_cmd.c\
+						add_node.c
 
 TOOLS_DIR			=	srcs/tools/
 TOOLS_LIST			=	ft_trim_string.c \
 						skip_spaces.c
-
-# _LIST	=
-
-
 
 
 SOURCE_TEMP			= $(addprefix $(TEMP_DIR), $(TEMP_LIST))

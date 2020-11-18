@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:35:52 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/11 11:39:39 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/17 15:21:13 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 
 #include "minishell.h"
 
-void		create_list(t_commands *cmd, char **line, char **new_line);
-char		*move_pointer(char *p1, char *p2);
-int			checking_cmd_for_tocken(char *word);
+t_commands		*create_tree(t_data *data, char *line);
 
+/*
+**	collecting data about cmd
+*/
+void			data_collection(t_commands *cmd, t_data *data, char **line);
+
+size_t			move_pointer(t_commands *cmd, t_data *data, char *p, char *line);
+void 			init_cmd(t_commands *cmd);
+void			add_node(t_commands **cmd, t_data *data, char **line);
 #endif
