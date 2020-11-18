@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/17 16:58:52 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/18 11:58:05 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_export(t_commands *cmd, t_data *all)
 
 	index = -1;
 	temp_list = cmd->lst;
-	check_args_for_validity(all, cmd); //функция должна прверить на валидность аргументы и перезаписать их нужным образом
+	check_args_for_validity(all, cmd); //функция должна проверить на валидность аргументы и перезаписать их нужным образом
 	all->count_str += cmd->count_args;
 	temp_env = all->envp;
 	if (!(all->envp = (char **)malloc(sizeof(char *) * all->count_str)))
