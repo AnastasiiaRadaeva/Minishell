@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 13:33:33 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/10 16:58:02 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/17 16:11:20 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	data_filling(t_data **all, t_commands *cmd)
 			(*all)->env_var = index;
 		index++;
 	}
+	(*all)->count_str = index;
 }
 
 void	create_env_v(t_data **all, char **envp_baze, t_commands *cmd)
@@ -62,5 +63,7 @@ void	create_env_v(t_data **all, char **envp_baze, t_commands *cmd)
 	(*all)->old_pwd = -1;
 	(*all)->env_var = -1;
 	(*all)->envp = copy_double_array(envp_baze, cmd);
+	(*all)->count_str = -1;
+	(*all)->error_string = NULL;
 	data_filling(all, cmd);
 }

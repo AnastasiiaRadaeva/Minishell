@@ -26,6 +26,7 @@
 # define MALLOC_9 "Error : Malloc fail (create_env_v)"
 # define MALLOC_10 "Error : Malloc fail (copy_double_array)"
 # define MALLOC_11 "Error : Malloc fail (change_var)"
+# define MALLOC_12 "Error : Malloc fail (ft_export)"
 # define GNL_1 "Error : GNL fail (read_cmd)"
 # define CMD_NO_FOUND "minishell: command not found: "
 # define PWD_GETCWD "Error : too many characters in the path (getcwd)"

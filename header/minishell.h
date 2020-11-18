@@ -45,6 +45,8 @@ typedef struct			s_data
 	int					current_pwd;
 	int					old_pwd;
 	int					env_var;
+	int					count_str;
+	char				*error_string;
 }						t_data;
 
 

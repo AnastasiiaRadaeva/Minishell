@@ -13,6 +13,7 @@
 
 #include "minishell.h"
 
+#if 0
 int    			main(int argc, char **argv, char **envp)
 {
 	char		*line;
@@ -69,3 +70,24 @@ int    			main(int argc, char **argv, char **envp)
 	}
 	exit(EXIT_SUCCESS);
 }
+#endif 
+
+int    			main(int argc, char **argv, char **envp)
+{
+    t_commands	*cmd;
+	t_data		*all;
+	char		*line;
+	char		*new_line;
+	
+	all = NULL;
+	create_env_v(&all, envp);
+	print_promt_string();
+	while (1)
+	{
+		
+		print_result(cmd, new_line);
+		print_promt_string();
+	}
+	exit(EXIT_SUCCESS);
+}
+
