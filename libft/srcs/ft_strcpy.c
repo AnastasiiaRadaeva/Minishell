@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   promt_string.c                                     :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/03 11:03:31 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/19 11:01:52 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/18 17:25:28 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/18 17:26:15 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void 	print_promt_string(void)
+char *ft_strcpy(char *dest, char *src)
 {
-	ft_putstr_fd("\033[1;34m", 1);
-	ft_putstr_fd("minishell$ ", 1);
-	ft_putstr_fd("\x1B[0m", 1);
+	int i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

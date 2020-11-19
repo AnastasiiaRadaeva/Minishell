@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/15 16:48:11 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/12 15:37:03 by anatashi         ###   ########.fr        #
+#    Updated: 2020/11/18 17:26:17 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIST =	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 		ft_isspace.c ft_min.c ft_binary_tree_sorting.c ft_strnstrindex.c ft_strcmp.c ft_free_two_dimensional_arr.c \
 		ft_strndup2.c ft_strcdup2.c ft_add_element_to_two_dimensional_array.c ft_strlenarr.c ft_strchr2.c \
 		ft_delete_an_array_element.c create_two_dimensional_array_from_lst.c ft_strnrchr.c \
-		ft_strrchr2.c
+		ft_strrchr2.c ft_strcpy.c
 
 SOURCE = $(addprefix $(DIR), $(LIST))
 OBJ	= $(patsubst %.c, %.o, $(SOURCE))

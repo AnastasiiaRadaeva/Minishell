@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/16 17:35:42 by anatashi         ###   ########.fr        #
+#    Updated: 2020/11/19 17:00:36 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,10 @@ PARSER_LIST			=	create_tree.c \
 						data_collection.c\
 						move_pointer.c \
 						init_cmd.c\
-						add_node.c
+						add_node.c \
+						lexer.c\
+						parse.c
+						
 
 TOOLS_DIR			=	srcs/tools/
 TOOLS_LIST			=	ft_trim_string.c \

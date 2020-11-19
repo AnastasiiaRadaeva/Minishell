@@ -6,12 +6,13 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:29:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/17 16:42:26 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/19 11:00:54 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+#if 0
 t_commands		*create_tree(t_data *data, char *line)
 {
 	char		*p;
@@ -29,4 +30,4 @@ t_commands		*create_tree(t_data *data, char *line)
 	}
 	return (cmd);
 }
-
+#endif

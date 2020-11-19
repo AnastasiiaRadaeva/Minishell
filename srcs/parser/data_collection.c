@@ -6,13 +6,14 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 17:25:08 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/17 16:23:48 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/19 17:26:15 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void			init_arg(t_commands *cmd)
+#if 0
+void			init_arg(t_commands *cmd)
 {
 	t_list			*tmp;
 
@@ -21,7 +22,8 @@ static void			init_arg(t_commands *cmd)
 	cmd->lst = tmp;
 }
 
-static void			add_list(t_commands *cmd, t_data *data, char **line, size_t size)
+static void			add_list(t_commands *cmd, t_data *data, char **line,
+								size_t size)
 {
 	t_list			*new_list;
 	char			*new_line;
@@ -98,3 +100,5 @@ void			data_collection(t_commands *cmd, t_data *data, char **line)
 	cmd->count_args = ft_lstsize(cmd->lst);
 	ft_free_tmp(command);
 }
+
+#endif

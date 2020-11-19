@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 18:25:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/16 17:35:45 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/19 20:59:04 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ static int	checking_cmd(char *cmd)
 	while (tmp[++i])
 	{
 		if (ft_isalpha(tmp[i]))
-		{
 			if (tmp[i] >= 'A' && tmp[i] <= 'Z')
 				tmp[i] += 32;
-		}
 	}
 	if (tmp[i])
 		return (-1);

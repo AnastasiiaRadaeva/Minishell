@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 09:22:15 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/12 15:37:20 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/18 17:26:13 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,5 @@ void				ft_delete_an_array_element(char ***array, size_t i);
 char 				**create_two_dimensional_array_from_lst(t_list *lst);
 char				*ft_strnrchr(const char *s, int c, size_t size);
 char				*ft_strrchr2(const char *s1, const char *s2);
+char 				*ft_strcpy(char *dest, char *src);
 #endif
