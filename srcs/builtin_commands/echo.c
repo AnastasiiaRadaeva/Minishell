@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kcustard <kcustard@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/11 16:32:44 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/20 17:59:40 by kcustard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+/*
+*Функция выдает поданные аргументы через пробел. 
+*Если нет флага -n, функция добавляет \n на конце строкию
+*Возвращает требуемую строку.
+*В случае ошибки функция печатает строку ошибки и вызывает error_output.
+*Нужно подумать, как выводить эту ошибку, думаю, что тут нужен exit.
+*К этому моменту все $ уже должны быть обработаны.
+*В функцию должны подаваться уже готовые аргументы.
+*/
+
+#include "../../header/minishell.h"
+
+void	error_output(t_commands *cmd, char *str);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *src);
+int		ft_strcmp(const char *s1, const char *s2);
 
 static char	*ft_join_all_args(t_commands *cmd, t_list *start, int flag)
 {
@@ -29,7 +44,8 @@ static char	*ft_join_all_args(t_commands *cmd, t_list *start, int flag)
 			temp_line = line_for_print;
 			if (!(line_for_print = start->next ? ft_strjoin(line_for_print, " ") : line_for_print))
 					error_output(cmd, MALLOC_6);
-			free(temp_line);
+			if (ft_strcmp(temp_line, line_for_print) != 0)
+				free(temp_line);
 			start = start->next;
 		}
 	if (flag == 0)
@@ -46,13 +62,10 @@ char	*ft_echo(t_commands *cmd)
 /*в print_result нужно убрать \n в конце строки и добавлять их уже при обработке функциями
 */
 {
-	char	end_of_string;
-	char	*line_for_print;
 	int		flag;
 	t_list	*start;
 
 	flag = 0;
-	end_of_string = '\n';
 	start = cmd->lst;
 	if (ft_strcmp(cmd->lst->content, "-n") == 0)
 	{
@@ -60,5 +73,5 @@ char	*ft_echo(t_commands *cmd)
 		start = cmd->lst->next;
 		cmd->count_args--;
 	}
-	return (line_for_print = ft_join_all_args(cmd, start, flag));
+	return (ft_join_all_args(cmd, start, flag));
 }

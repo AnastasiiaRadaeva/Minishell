@@ -1,6 +1,4 @@
 # include "../../header/minishell.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 int					ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -18,6 +16,16 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (0);
+}
+
+int			ft_strcmp(const char *s1, const char *s2)
+{
+	int		i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 size_t		ft_strlen(const char *s)
@@ -255,7 +263,7 @@ char	**ft_env(t_commands *cmd, t_data *all);
 void	ft_cd(t_commands **cmd, t_data *all);
 char	*ft_echo(t_commands *cmd);
 void	ft_export(t_commands *cmd, t_data *all);
-char	*ft_pwd(t_commands *cmd);
+char	*ft_pwd(t_commands *cmd, t_data *all);
 
 #include <stdio.h>
 
@@ -265,28 +273,48 @@ int    			main(int argc, char **argv, char **envp)
 	t_data		*all;
 	char		**copy_args;
 	
-	argc = 1;
 	(void)argv;
-	char s[100];
+	
+// создаем структуру для cd 	
+	argc = 3;
 	if (!(copy_args = (char **)malloc(sizeof(char *) * argc)))
 		return (0);
 	int index = 0;
 	while (index < argc)
 	{
-		if (!(copy_args[index] = ft_strdup("..")))
+		if (!(copy_args[index] = ft_strdup("/home/venus/Desktop/Nastya")))
 			return (0);
 		index++;
 	}
+////////////////////////////
+
 	all = NULL;
 	cmd = NULL;
 	create_env_v(&all, envp, cmd);
 	create_cmd(&cmd, copy_args, argc);
 
 // check cd	
+	/*
+	char s[100];
 	printf("%s\n", getcwd(s, 100)); 
 	ft_cd(&cmd, all);
 	printf("%s\n", getcwd(s, 100));
+	printf("%s\n", all->envp[all->old_pwd]);
+	printf("%s\n", all->envp[all->current_pwd]);
+	*/
+/////////////
 
- 
+// check pwd
+	/*
+	printf("%s\n", ft_pwd(cmd, all));
+	*/
+/////////////
+
+// check echo
+	
+	printf("%s", ft_echo(cmd));
+	
+/////////////	
+
 	return (0);
 }
