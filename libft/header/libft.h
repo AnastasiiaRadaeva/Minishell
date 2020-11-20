@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 09:22:15 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/18 17:26:13 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/20 14:27:31 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include "get_next_line.h"
+# include <fcntl.h>
 
 typedef struct		s_list
 {

@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   error_output.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/03 16:32:10 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/18 17:48:47 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/03 16:53:36 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/20 20:02:33 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_data	*init_struct_data(void)
+void	error_output(t_commands *cmd, t_data *data, char *str)
 {
-	t_data *new_struct;
-
-	if (!(new_struct = (t_data *)ft_calloc(sizeof(t_data), 1)))
-		error_output(NULL, NULL, 0);
-	// new_struct->fd
-	return (new_struct);
+	ft_putendl_fd(str, 2);
+	program_exit(cmd, data, 0);
 }
-
-t_commands	*init_struct_commands(t_commands *cmd, t_data *data)
-{
-	t_commands *new_tree;
-
-	if (!(new_tree = (t_commands *)ft_calloc(sizeof(t_commands), 1)))
-		error_output(cmd, data, MALLOC_1);
-	return (new_tree);
-}
-
-

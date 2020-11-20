@@ -6,14 +6,15 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:17:30 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/19 10:55:02 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/20 21:28:24 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 #define LEXER_H
 
-#define TOKEN_TYPE "|&\'\"; ><0$"
+# define TOKEN_TYPE "|&\'\"; ><0$"
+
 
 typedef	enum		e_token_type
 {
@@ -34,8 +35,7 @@ typedef	enum		e_token_type
 enum {
 	STATE_IN_DQUOTE,
 	STATE_IN_QUOTE,
-	
-	STATE_IN_ESCAPESEQ,
+	STATE_IN_DOLLAR,
 	STATE_GENERAL,
 };
 
@@ -53,5 +53,5 @@ typedef	struct		s_lexer
 }					t_lexer;
 
 int lexer_build(char *input, int size, t_lexer  *lexerbuf);
-void lexer_destroy(t_lexer *lexerbuf);
+void freeing_memory_from_lexer(t_lexer *lexerbuf);
 #endif

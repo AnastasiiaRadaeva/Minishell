@@ -6,11 +6,11 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 17:02:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/17 16:23:36 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/20 20:04:29 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "program_exit.h"
+#include "minishell.h"
 
 static	void freeing_memory_from_struct_commands(t_commands *cmd)
 {

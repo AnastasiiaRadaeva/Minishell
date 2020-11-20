@@ -6,39 +6,25 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/19 19:44:14 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/20 18:08:13 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void			init_arg(t_commands *cmd)
-{
-	t_list			*tmp;
-	
-	tmp = cmd->lst->next;
-	free(cmd->lst);
-	cmd->lst = tmp;
-}
-
-void			add_lst_to_node(t_commands **syntax_tree, char *data)
+static	void	add_lst_to_node(t_commands **syntax_tree, char *data)
 {
 	t_list		*lst;
 
-	if (!(lst = ft_lstnew(data)))
-		error_output(NULL, NULL, NULL);
-	ft_lstadd_back(&(*syntax_tree)->lst, lst);
+	if (*data)
+	{
+		if (!(lst = ft_lstnew(data)))
+			error_output(NULL, NULL, NULL);
+		ft_lstadd_back(&(*syntax_tree)->lst, lst);
+	}
 }
 
-void			init(t_commands **cmd)
-{
-	if (!(*cmd)->lst)
-		return;
-	init_cmd(*cmd);
-	init_arg(*cmd);
-}
-
-void			add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
+static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
 {
 	t_lexer		*tmp;
 
