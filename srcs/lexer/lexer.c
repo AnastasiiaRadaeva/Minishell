@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 21:29:37 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:17:12 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	_if_char_quote(t_tok **token, int *arr)
 {
 	arr[3] = STATE_IN_QUOTE;
 	(*token)->data[arr[1]] = CHAR_QOUTE;
-	(*token)->type = TOKEN;
+	(*token)->type = CHAR_QOUTE;
 	arr[1]++;
 }
 
@@ -107,7 +107,7 @@ void 	_if_char_dquote(t_tok **token, int *arr)
 {
 	arr[3] = STATE_IN_DQUOTE;
 	(*token)->data[arr[1]] = CHAR_DQUOTE;
-	(*token)->type = TOKEN;
+	(*token)->type = CHAR_DQUOTE;
 	arr[1]++;
 }
 
@@ -131,23 +131,6 @@ void	_if_char_whitespace(t_tok **token, int *arr, int size)
 		arr[1] = 0;
 	}
 }
-
-void	_if_char_dollar(t_tok **token, int *arr, int size)
-{
-	if (arr[1] > 0)
-	{
-		arr[3] = STATE_IN_DOLLAR;
-		(*token)->data[arr[1]] = 0;
-		(*token)->next = init_tok_list();
-		*token = (*token)->next;
-		(*token)->data = malloc(size - arr[0] + 1);
-		(*token)->data[0] = 0;
-		(*token)->type = CHAR_DOLLAR;
-		arr[1] = 0;
-	}
-
-}
-
 
 void	_if_char_separator(t_tok **token, int *arr, int size)
 {
@@ -215,7 +198,6 @@ int		_check_char_separator(int chtype)
 	return (0);
 }
 
-
 void	_if_state_in_general(t_tok **token, int *arr, char c, int size)
 {
 	if (arr[4] == CHAR_QOUTE)
@@ -226,21 +208,9 @@ void	_if_state_in_general(t_tok **token, int *arr, char c, int size)
 		_if_char_general(token, arr, c);
 	else if (arr[4] == CHAR_WHITESPACE)
 		_if_char_whitespace(token, arr, size);
-	else if (arr[4] == CHAR_DOLLAR)
-		_if_char_dollar(token, arr, size);
 	else if ((_check_char_separator(arr[4])))
 		_if_char_separator(token, arr, size);
-}
 
-int	_if_state_in_dollar(t_tok **token, int *arr, char c)
-{
-	if (c == '_' || ft_isalnum(c))
-	{
-		(*token)->data[arr[1]] = c;
-		arr[1]++;
-		return (STATE_IN_DOLLAR);
-	}
-	return (STATE_GENERAL);
 }
 
 void strip_quotes_in_lst(t_tok **token, int *arr)
@@ -285,13 +255,11 @@ int lexer_build(char *input, int size, t_lexer  *lexerbuf)
 			arr[3] = _if_state_in_dquote(&token, arr, input[arr[0]]);
 		else if (arr[3] == STATE_IN_QUOTE)
 			arr[3] = _if_state_in_quote(&token, arr, input[arr[0]]);
-		else if (arr[3] == STATE_IN_DOLLAR)
-			arr[3] = _if_state_in_dollar(&token, arr, input[arr[0]]);
 	}
 	_if_char_null(&token, arr, input[arr[0]]);
 	token = lexerbuf->llisttok;
-	while (token)
-		strip_quotes_in_lst(&token, arr);
+	// while (token)
+		// strip_quotes_in_lst(&token, arr);
 	lexerbuf->ntoks = arr[5];
 	return (arr[5]);
 }
