@@ -259,10 +259,10 @@ void	create_cmd(t_commands **cmd, char **argv, int argc)
 	(*cmd)->next = NULL;
 }
 
-char	**ft_env(t_commands *cmd, t_data *all);
+char	*ft_env(t_commands *cmd, t_data *all);
 void	ft_cd(t_commands **cmd, t_data *all);
 char	*ft_echo(t_commands *cmd);
-void	ft_export(t_commands *cmd, t_data *all);
+void	ft_export(t_commands **cmd, t_data **all);
 char	*ft_pwd(t_commands *cmd, t_data *all);
 
 #include <stdio.h>
@@ -311,10 +311,24 @@ int    			main(int argc, char **argv, char **envp)
 /////////////
 
 // check echo
-	
+	/*
 	printf("%s", ft_echo(cmd));
-	
+	*/
 /////////////	
+
+// check env
+	/*
+	printf("%s\n", ft_env(cmd, all));
+	*/
+/////////////
+
+// check export
+	
+	ft_export(&cmd, &all);
+	cmd->count_args = 0;
+	printf("%s\n", ft_env(cmd, all));
+	
+/////////////
 
 	return (0);
 }
