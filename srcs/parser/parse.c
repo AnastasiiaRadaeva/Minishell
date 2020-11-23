@@ -6,19 +6,48 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 18:08:13 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/23 12:08:49 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static	void	add_lst_to_node(t_commands **syntax_tree, char *data)
+void 		_strip_quotes(char *content, size_t n, int j)
+{
+	size_t 	i;
+	char	lastquote;
+	char	c;
+
+	i = -1;
+	lastquote = 0;
+	while (++i < n)
+	{
+		c = content[i];
+		if ((c == '\'' || c == '\"') && lastquote == 0)
+			lastquote = c;
+		else if (c == lastquote)
+			lastquote = 0;
+		else
+			content[j++] = c;
+	}
+	content[j] = 0;
+}
+
+static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
+								char *content, int type)
 {
 	t_list		*lst;
-
-	if (*data)
+	// char		*tmp;
+	(void)data;
+	if (type == CHAR_QOUTE || type == CHAR_DQUOTE)
 	{
-		if (!(lst = ft_lstnew(data)))
+		// tmp = content;
+		_strip_quotes(content, ft_strlen(content), 0);
+		// ft_free_tmp(tmp);
+	}
+	if (*content)
+	{
+		if (!(lst = ft_lstnew(content)))
 			error_output(NULL, NULL, NULL);
 		ft_lstadd_back(&(*syntax_tree)->lst, lst);
 	}
@@ -48,7 +77,7 @@ static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
 		(*cmd) = (*cmd)->pipe;
 	}
 	else
-		add_lst_to_node(cmd, tmp->llisttok->data);
+		add_lst_to_node(cmd, data, tmp->llisttok->data, tmp->llisttok->type);
 }
 
 t_commands		*parse(t_data *data, t_lexer *lexerbuf)

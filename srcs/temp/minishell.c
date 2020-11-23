@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/23 11:25:52 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/23 12:01:52 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int    				main(int argc, char **argv, char **envp)
 			/*
 			** print contents of cmd
 			*/
-			#if 0
+			// #if 0
 			t_commands *tmp = syntax_tree;
-			// while (tmp)
+			while (tmp)
 			{
 				ft_putendl("---next output cmd->cmd---");
 				ft_putendl(tmp->cmd);
@@ -78,8 +78,8 @@ int    				main(int argc, char **argv, char **envp)
 				else
 					tmp = tmp->next;
 				ft_putendl("--------------------------");
-			// }
-			#endif
+			}
+			// #endif
 			executor(syntax_tree, data);
 	
 			if (line == '\0')
