@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/22 19:17:12 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/23 11:31:38 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,28 @@ int		_check_char_separator(int chtype)
 	return (0);
 }
 
+void	_if_char_dollar(t_tok **token, int *arr, char c)
+{
+	(*token)->data[arr[1]] = c;
+	(*token)->type = CHAR_DOLLAR;
+	arr[3] = STATE_IN_DOLLAR;
+	arr[1]++;
+}
+
+int		_if_state_in_dollar(t_tok **token, int *arr, char c)
+{
+	if (_check_char_separator(arr[4]) || arr[4] == CHAR_WHITESPACE)
+	{
+		arr[0]--;
+		return (STATE_GENERAL);
+	}
+	(*token)->data[arr[1]] = c;
+	arr[1]++;
+	return (STATE_IN_DOLLAR);
+
+	
+}
+
 void	_if_state_in_general(t_tok **token, int *arr, char c, int size)
 {
 	if (arr[4] == CHAR_QOUTE)
@@ -208,6 +230,8 @@ void	_if_state_in_general(t_tok **token, int *arr, char c, int size)
 		_if_char_general(token, arr, c);
 	else if (arr[4] == CHAR_WHITESPACE)
 		_if_char_whitespace(token, arr, size);
+	else if (arr[4] == CHAR_DOLLAR)
+		_if_char_dollar(token, arr, c);
 	else if ((_check_char_separator(arr[4])))
 		_if_char_separator(token, arr, size);
 
@@ -255,6 +279,8 @@ int lexer_build(char *input, int size, t_lexer  *lexerbuf)
 			arr[3] = _if_state_in_dquote(&token, arr, input[arr[0]]);
 		else if (arr[3] == STATE_IN_QUOTE)
 			arr[3] = _if_state_in_quote(&token, arr, input[arr[0]]);
+		else if (arr[3] == STATE_IN_DOLLAR)
+			arr[3] = _if_state_in_dollar(&token, arr, input[arr[0]]);
 	}
 	_if_char_null(&token, arr, input[arr[0]]);
 	token = lexerbuf->llisttok;
