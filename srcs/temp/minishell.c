@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/23 12:01:52 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/23 16:00:41 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ int    				main(int argc, char **argv, char **envp)
 	(void)envp;
 	data = init_struct_data();
 	create_env(data, envp);
+	/*
+	** print content of env
+	*/
+	#if 0
+		for (size_t i = 0; i < ft_strlenarr(envp); i++)
+			ft_putendl(envp[i]);
+	#endif
 	/*
 	**	for minishell_test
 	*/

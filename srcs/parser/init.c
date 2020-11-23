@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 18:25:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 19:36:06 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/23 15:28:38 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static int		checking_cmd(char *cmd)
 
 	i = -1;
 	tmp = cmd;
-	while (tmp[++i])
-	{
-		if (ft_isalpha(tmp[i]))
-			if (tmp[i] >= 'A' && tmp[i] <= 'Z')
-				tmp[i] += 32;
-	}
+	// while (tmp[++i])
+	// {
+	// 	if (ft_isalpha(tmp[i]))
+	// 		if (tmp[i] >= 'A' && tmp[i] <= 'Z')
+	// 			tmp[i] += 32;
+	// }
 	if (tmp[i])
 		return (-1);
 	return (checking_cmd_for_tocken(tmp));

@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/23 12:08:49 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/23 17:09:19 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,71 @@ void 		_strip_quotes(char *content, size_t n, int j)
 	content[j] = 0;
 }
 
+int				check_env(char	**envp, char *var)
+{
+	int			i;
+	int			j;
+
+	i = -1;
+	while (envp[++i])
+	{
+		j = 0;
+		if (envp[i][j] == var[j])
+		{
+			while (envp[i][j] == var[j])
+			{	
+				if (envp[i][j + 1] == '=' || envp[i][j + 1] == '\0')
+					return (i);
+				j++;
+			}
+		}
+	}
+	return (0);
+}
+
+/*
+** p 	- a pointer to the CHAR_DOLLAR
+** rem	- the remainder of the string after $ content
+*/
+void			_if_type_dollar(t_data *data, char **content, char *rem)
+{
+	char		*p;
+	char		*env;
+	int			i;
+	int			num_env;
+
+	i = 0;
+	p = rem ? ft_strchr(rem, CHAR_DOLLAR) : ft_strchr(*content, CHAR_DOLLAR);
+	if (p)
+	{
+		p++;
+		// p = (p[i] == '_' || ft_isalpha(p[i])) ? p +$P 1 : p + 0;
+		// i++;
+		while (p[i] == '_' || ft_isalnum(p[i]))
+			i++;
+	}
+	env = i > 0 ? ft_strndup(p, i) : NULL;
+	if ((num_env = env ? check_env(data->envp, env) : 0))
+	{
+		p--;
+		*p = '\0';
+		rem = (p + i + 1) ? NULL : ft_strdup(p + i + 1) ;
+		*content = ft_strjoin_gnl(content, data->envp[num_env] + i + 1);
+		if (rem != '\0')
+			_if_type_dollar(data, content, rem);
+	}
+}
+
 static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 								char *content, int type)
 {
 	t_list		*lst;
-	// char		*tmp;
+
 	(void)data;
 	if (type == CHAR_QOUTE || type == CHAR_DQUOTE)
-	{
-		// tmp = content;
 		_strip_quotes(content, ft_strlen(content), 0);
-		// ft_free_tmp(tmp);
-	}
+	else if (type == CHAR_DOLLAR)
+		_if_type_dollar(data, &content, NULL);
 	if (*content)
 	{
 		if (!(lst = ft_lstnew(content)))
