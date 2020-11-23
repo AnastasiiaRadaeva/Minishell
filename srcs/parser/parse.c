@@ -6,56 +6,12 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/23 17:47:04 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/23 18:54:02 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void 		_strip_quotes(char *content, size_t n, int j)
-{
-	size_t 	i;
-	char	lastquote;
-	char	c;
-
-	i = -1;
-	lastquote = 0;
-	while (++i < n)
-	{
-		c = content[i];
-		if ((c == '\'' || c == '\"') && lastquote == 0)
-			lastquote = c;
-		else if (c == lastquote)
-			lastquote = 0;
-		else
-			content[j++] = c;
-	}
-	content[j] = 0;
-}
-
-#if 0
-int				check_env(char	**envp, char *var)
-{
-	int			i;
-	int			j;
-
-	i = -1;
-	while (envp[++i])
-	{
-		j = 0;
-		if (envp[i][j] == var[j])
-		{
-			while (envp[i][j] == var[j])
-			{	
-				if (envp[i][j + 1] == '=' || envp[i][j + 1] == '\0')
-					return (i);
-				j++;
-			}
-		}
-	}
-	return (0);
-}
-#endif
 int				check_env(char	**envp, char *var, int size)
 {
 	int			i;
@@ -81,6 +37,30 @@ int				check_env(char	**envp, char *var, int size)
 	}
 	return (0);
 }
+
+
+void 		_strip_quotes(char *content, size_t n, int j)
+{
+	size_t 	i;
+	char	lastquote;
+	char	c;
+
+	i = -1;
+	lastquote = 0;
+	while (++i < n)
+	{
+		c = content[i];
+		if ((c == '\'' || c == '\"') && lastquote == 0)
+			lastquote = c;
+		else if (c == lastquote)
+			lastquote = 0;
+		else
+			content[j++] = c;
+	}
+	content[j] = 0;
+}
+
+
 /*
 ** p 	- a pointer to the CHAR_DOLLAR
 ** rem	- the remainder of the string after $ content
@@ -97,16 +77,19 @@ void			_if_type_dollar(t_data *data, char **content, char *rem)
 	{
 		p++;
 		i = (p[i] == '_' || ft_isalpha(p[i])) ? 1 : 0;
-		while (p[i] == '_' || ft_isalnum(p[i]))
-			i++;
-		if ((num_env = check_env(data->envp, p, i)))
+		if (i)
 		{
-			p--;
-			*p = '\0';
-			rem = ft_strdup(p + i + 1);
-			*content = ft_strjoin_gnl(content, data->envp[num_env] + i + 1);
-			if (rem != '\0')
-				_if_type_dollar(data, content, rem);
+			while (p[i] == '_' || ft_isalnum(p[i]))
+				i++;
+			if ((num_env = check_env(data->envp, p, i)))
+			{
+				p--;
+				*p = '\0';
+				rem = ft_strdup(p + i + 1);
+				*content = ft_strjoin_gnl(content, data->envp[num_env] + i + 1);
+				if (rem != '\0')
+					_if_type_dollar(data, content, rem);
+			}
 		}
 	}
 }
@@ -118,7 +101,11 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 
 	(void)data;
 	if (type == CHAR_QOUTE || type == CHAR_DQUOTE)
+	{	
+		if (type == CHAR_DQUOTE)
+			_if_type_dollar(data, &content, NULL);	
 		_strip_quotes(content, ft_strlen(content), 0);
+	}
 	else if (type == CHAR_DOLLAR)
 		_if_type_dollar(data, &content, NULL);
 	if (*content)

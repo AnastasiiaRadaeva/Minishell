@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/23 11:31:38 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/23 19:14:39 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,8 @@ int		_if_state_in_dquote(t_tok **token, int *arr, char c)
 {
 	(*token)->data[arr[1]] = c;
 	arr[1]++;
-	if (arr[4] == CHAR_DQUOTE)
-		return (STATE_GENERAL);
+	// if (arr[4] == CHAR_DQUOTE)
+	// 	// return (STATE_GENERAL);
 	return (STATE_IN_DQUOTE);
 }
 
@@ -168,8 +168,8 @@ int		_if_state_in_quote(t_tok **token, int *arr, char c)
 {
 	(*token)->data[arr[1]] = c;
 	arr[1]++;
-	if (arr[4] == CHAR_QOUTE)
-		return (STATE_GENERAL);
+	// if (arr[4] == CHAR_QOUTE)
+		// return (STATE_GENERAL);
 	return (STATE_IN_QUOTE);
 }
 
