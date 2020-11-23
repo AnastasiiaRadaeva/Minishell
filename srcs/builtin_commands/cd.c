@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcustard <kcustard@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/20 10:44:28 by kcustard         ###   ########.fr       */
+/*   Updated: 2020/11/23 18:43:14 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,12 @@ void	ft_cd(t_commands **cmd, t_data *all)
 		((*cmd)->lst->content) = all->envp[all->home_dir] + 5;
 		(*cmd)->lst->next = NULL;
 	}
-	if ((*cmd)->count_args == 2)
+	if ((*cmd)->count_args > 1)
 	{
-		ft_putstr(CD_STR_NOT);
-		error_output(*cmd, ((*cmd)->lst->content));
+		ft_putstr("cd: ");
+		ft_putstr(cmd->lst->content);
+		error_output(*cmd, ": No such file or directory\n");
 	}
-	if ((*cmd)->count_args > 2)
-		error_output(*cmd, CD_MANY_ARGS);
 	if (((char*)(*cmd)->lst->content)[0] == '~')
 	{
 		if (!(tmp_path = ft_strjoin(all->envp[all->home_dir] + 5, (char *)(*cmd)->lst->content + 1)))
