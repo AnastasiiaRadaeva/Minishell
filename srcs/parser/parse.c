@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/23 17:09:19 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/23 17:47:04 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void 		_strip_quotes(char *content, size_t n, int j)
 	content[j] = 0;
 }
 
+#if 0
 int				check_env(char	**envp, char *var)
 {
 	int			i;
@@ -54,7 +55,32 @@ int				check_env(char	**envp, char *var)
 	}
 	return (0);
 }
+#endif
+int				check_env(char	**envp, char *var, int size)
+{
+	int			i;
+	int			j;
+	int			recover_size;
 
+	recover_size = size;
+	i = -1;
+	while (envp[++i])
+	{
+		j = 0;
+		if (envp[i][j] == var[j])
+		{
+			size = recover_size;
+			while (envp[i][j] == var[j] && size)
+			{	
+				if ((envp[i][j + 1] == '=' || envp[i][j + 1] == '\0') && size == 1)
+					return (i);
+				j++;
+				size--;
+			}
+		}
+	}
+	return (0);
+}
 /*
 ** p 	- a pointer to the CHAR_DOLLAR
 ** rem	- the remainder of the string after $ content
@@ -62,7 +88,6 @@ int				check_env(char	**envp, char *var)
 void			_if_type_dollar(t_data *data, char **content, char *rem)
 {
 	char		*p;
-	char		*env;
 	int			i;
 	int			num_env;
 
@@ -71,20 +96,18 @@ void			_if_type_dollar(t_data *data, char **content, char *rem)
 	if (p)
 	{
 		p++;
-		// p = (p[i] == '_' || ft_isalpha(p[i])) ? p +$P 1 : p + 0;
-		// i++;
+		i = (p[i] == '_' || ft_isalpha(p[i])) ? 1 : 0;
 		while (p[i] == '_' || ft_isalnum(p[i]))
 			i++;
-	}
-	env = i > 0 ? ft_strndup(p, i) : NULL;
-	if ((num_env = env ? check_env(data->envp, env) : 0))
-	{
-		p--;
-		*p = '\0';
-		rem = (p + i + 1) ? NULL : ft_strdup(p + i + 1) ;
-		*content = ft_strjoin_gnl(content, data->envp[num_env] + i + 1);
-		if (rem != '\0')
-			_if_type_dollar(data, content, rem);
+		if ((num_env = check_env(data->envp, p, i)))
+		{
+			p--;
+			*p = '\0';
+			rem = ft_strdup(p + i + 1);
+			*content = ft_strjoin_gnl(content, data->envp[num_env] + i + 1);
+			if (rem != '\0')
+				_if_type_dollar(data, content, rem);
+		}
 	}
 }
 
