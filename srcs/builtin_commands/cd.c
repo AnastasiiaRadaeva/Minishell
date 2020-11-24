@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/24 13:00:28 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 14:36:19 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_cd(t_commands **cmd, t_data *all)
 	{
 		ft_putstr("cd: ");
 		ft_putstr((*cmd)->lst->content);
-		error_output(*cmd,  all,": No such file or directory\n");
+		ft_putstr(": No such file or directory\n");
 	}
 	if (((char*)(*cmd)->lst->content)[0] == '~')
 	{

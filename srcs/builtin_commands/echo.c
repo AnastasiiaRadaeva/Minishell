@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/24 13:07:31 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 16:15:45 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ void	ft_echo(t_commands *cmd)
 
 	flag = 0;
 	start = cmd->lst;
-	if (ft_strcmp(cmd->lst->content, "-n") == 0)
-	{
-		flag = 1;
-		start = cmd->lst->next;
-		cmd->count_args--;
-	}
+	if (cmd->count_args > 0)
+		if (ft_strcmp(cmd->lst->content, "-n") == 0)
+		{
+			flag = 1;
+			start = cmd->lst->next;
+			cmd->count_args--;
+		}
 	// return (ft_join_all_args(cmd, start, flag));
 	ft_putstr(ft_join_all_args(cmd, start, flag));
 }

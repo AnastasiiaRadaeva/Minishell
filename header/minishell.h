@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 19:55:15 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 16:15:53 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct			s_data
 typedef struct			s_commands
 {
 	char				*cmd;
-	unsigned int		num_cmd;
+	int					num_cmd;
 	char				*cmd_dir;
 	int					count_args;
 	//int					dit_find;

@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 13:06:54 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 13:38:24 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 		ft_cd(&cmd, data);
 	else if (cmd->num_cmd == CMD_ECHO)
 		ft_echo(cmd);
+	else if (cmd->num_cmd == CMD_EXPORT)
+		ft_export(&cmd, &data);
 	
 }
 

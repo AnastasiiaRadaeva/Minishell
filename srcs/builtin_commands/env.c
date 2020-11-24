@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:20:39 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/24 12:54:17 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 14:46:49 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_env(t_commands *cmd, t_data *all)
 		ft_putstr("env: ");
 		ft_putstr(cmd->lst->content);
 		ft_putstr(": ");
-		error_output(cmd, all, "No such file or directory");
+		ft_putendl("No such file or directory");
 	}
 	/*
 	len = ft_strlen(all->envp[all->env_var]);

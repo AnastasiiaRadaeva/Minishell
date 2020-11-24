@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:37:28 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 16:10:52 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 16:22:32 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ static void	parse_env(t_data *data)
 			data->old_pwd = i;
 		else if (!ft_strncmp(data->envp[i], "PATH=", 5))
 			data->path = i;
+		if (ft_strncmp((data)->envp[i], "_=", 2) == 0)
+			data->env_var = i;
 	}
+	data->env_var = i;
 }
 
 void		create_env(t_data *data, char **envp)
