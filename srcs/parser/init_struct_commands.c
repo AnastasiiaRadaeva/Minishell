@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   init_struct_commands.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 11:35:52 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 19:59:13 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/20 18:59:28 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/20 19:00:11 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "parser.h"
 
-#include "lexer.h"
-#include "minishell.h"
-
-typedef	enum		e_cmd_type
+t_commands		*init_struct_commands(t_commands *cmd, t_data *data)
 {
-	CMD_ECHO = 1,
-	CMD_CD = 2,
-	CMD_PWD = 3,
-	CMD_EXPORT = 4,
-	CMD_UNSET = 5,
-	CMD_ENV = 6,
-	CMD_EXIT = 7,
-	CMD_ERROR = -1,
-}					t_cmd_type;
+	t_commands 	*new_tree;
 
-t_commands		*parse(t_data *data, t_lexer *lexerbuf);
-t_commands		*init_struct_commands(t_commands *cmd, t_data *data);
-void 			init(t_commands **cmd);
-
-#endif
+	if (!(new_tree = (t_commands *)ft_calloc(sizeof(t_commands), 1)))
+		error_output(cmd, data, MALLOC_1);
+	return (new_tree);
+}

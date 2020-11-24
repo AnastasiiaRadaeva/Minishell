@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   freeing_memory_from_lexer.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 11:35:52 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 19:59:13 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/20 17:25:17 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/20 20:02:07 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-
-#include "lexer.h"
 #include "minishell.h"
+#include "lexer.h"
 
-typedef	enum		e_cmd_type
+
+static void	freeing_memory_from_tok(t_tok *llistok)
 {
-	CMD_ECHO = 1,
-	CMD_CD = 2,
-	CMD_PWD = 3,
-	CMD_EXPORT = 4,
-	CMD_UNSET = 5,
-	CMD_ENV = 6,
-	CMD_EXIT = 7,
-	CMD_ERROR = -1,
-}					t_cmd_type;
+	if (llistok)
+	{
+		free(llistok->data);
+		llistok->data = NULL;
+		freeing_memory_from_tok(llistok->next);
+		free(llistok);
+		llistok = NULL;
+	}
+}
 
-t_commands		*parse(t_data *data, t_lexer *lexerbuf);
-t_commands		*init_struct_commands(t_commands *cmd, t_data *data);
-void 			init(t_commands **cmd);
+void		freeing_memory_from_lexer(t_lexer *lexerbuf)
+{
 
-#endif
+	if (!lexerbuf)
+		return;
+	freeing_memory_from_tok(lexerbuf->llisttok);
+	
+}

@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   give_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 11:35:52 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 19:59:13 by anatashi         ###   ########.fr       */
+/*   Created: 2020/11/20 15:58:06 by anatashi          #+#    #+#             */
+/*   Updated: 2020/11/20 20:00:12 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "executor.h"
 
-#include "lexer.h"
-#include "minishell.h"
-
-typedef	enum		e_cmd_type
+void		give_pwd(t_commands *cmd, t_data *data)
 {
-	CMD_ECHO = 1,
-	CMD_CD = 2,
-	CMD_PWD = 3,
-	CMD_EXPORT = 4,
-	CMD_UNSET = 5,
-	CMD_ENV = 6,
-	CMD_EXIT = 7,
-	CMD_ERROR = -1,
-}					t_cmd_type;
+	char	tmp[1024];
 
-t_commands		*parse(t_data *data, t_lexer *lexerbuf);
-t_commands		*init_struct_commands(t_commands *cmd, t_data *data);
-void 			init(t_commands **cmd);
-
-#endif
+	if (getcwd(tmp, 1000) == NULL)
+		error_output(cmd, data, PWD_GETCWD);
+	getcwd(tmp, 1024);
+	ft_putendl(tmp);
+}
