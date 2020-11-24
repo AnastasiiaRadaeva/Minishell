@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/24 12:59:03 by anatashi         ###   ########.fr        #
+#    Updated: 2020/11/24 13:06:19 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ EXECUTOR_LIST		=	executor.c\
 BUILTIN_CMD_DIR		= 	srcs/builtin_commands/
 BUILTIN_CMD_LIST	= 	pwd.c\
 						env.c\
-						cd.c
+						cd.c\
+						echo.c
 
 SOURCE_TEMP			= $(addprefix $(TEMP_DIR), $(TEMP_LIST))
 SOURCE_PARSER		= $(addprefix $(PARSER_DIR), $(PARSER_LIST))
