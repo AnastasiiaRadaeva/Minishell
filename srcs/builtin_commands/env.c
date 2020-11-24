@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcustard <kcustard@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:20:39 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/22 15:29:35 by kcustard         ###   ########.fr       */
+/*   Updated: 2020/11/24 11:33:20 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ char	*ft_env(t_commands *cmd, t_data *all)
 	i = 3;
 	if (cmd->count_args > 0)
 	{
-		ft_putstr("env: '");
+		ft_putstr("env: ");
 		ft_putstr(cmd->lst->content);
-		ft_putstr("': ");
+		ft_putstr(": ");
 		error_output(cmd, "No such file or directory");
 	}
 	/*

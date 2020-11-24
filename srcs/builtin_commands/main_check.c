@@ -276,7 +276,7 @@ int    			main(int argc, char **argv, char **envp)
 	(void)argv;
 	
 // создаем структуру для cd 	
-	argc = 3;
+	argc = 1;
 	if (!(copy_args = (char **)malloc(sizeof(char *) * argc)))
 		return (0);
 	int index = 0;
@@ -317,17 +317,17 @@ int    			main(int argc, char **argv, char **envp)
 /////////////	
 
 // check env
-	/*
+	
 	printf("%s\n", ft_env(cmd, all));
-	*/
+	
 /////////////
 
 // check export
-	
+	/*
 	ft_export(&cmd, &all);
 	cmd->count_args = 0;
 	printf("%s\n", ft_env(cmd, all));
-	
+	*/
 /////////////
 
 	return (0);
