@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 16:22:30 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 12:53:00 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int			redirects(t_commands *redir)
 	return (0);
 }
 
+#if 0
 void			give_env(t_data *data)
 {
 	int			i;
@@ -53,6 +54,7 @@ void			give_env(t_data *data)
 		}
 	}
 }
+#endif
 
 void			selection_cmd(t_commands *cmd, t_data *data,
 								t_commands *redirect, t_commands *pip)
@@ -67,9 +69,10 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 		return;
 	}
 	if (cmd->num_cmd == CMD_PWD)
-		give_pwd(cmd, data);
+		ft_pwd(cmd, data);
 	else if (cmd->num_cmd == CMD_ENV)
-		give_env(data);
+		// give_env(data);
+		ft_env(cmd, data);
 	
 }
 

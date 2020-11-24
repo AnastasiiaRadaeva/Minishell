@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/20 20:06:20 by anatashi         ###   ########.fr        #
+#    Updated: 2020/11/24 12:52:26 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,17 +47,22 @@ TOOLS_LIST			=	ft_trim_string.c \
 
 EXECUTOR_DIR		=	srcs/executor/
 EXECUTOR_LIST		=	executor.c\
-						give_pwd.c						
+						# give_pwd.c deleted ?
+
+BUILTIN_CMD_DIR		= 	srcs/builtin_commands/
+BUILTIN_CMD_LIST	= 	pwd.c\
+						env.c
 
 SOURCE_TEMP			= $(addprefix $(TEMP_DIR), $(TEMP_LIST))
 SOURCE_PARSER		= $(addprefix $(PARSER_DIR), $(PARSER_LIST))
 SOURCE_TOOLS		= $(addprefix $(TOOLS_DIR), $(TOOLS_LIST))
 SOURCE_EXECUTOR		= $(addprefix $(EXECUTOR_DIR), $(EXECUTOR_LIST))
 SOURCE_LEXER		= $(addprefix $(LEXER_DIR), $(LEXER_LIST))
-SOURCE_ERROR		= $(addprefix $(LEXER_DIR), $(LEXER_LIST))
+SOURCE_BUILTIN		= $(addprefix $(BUILTIN_CMD_DIR), $(BUILTIN_CMD_LIST))
 
-OBJ	= $(patsubst %.c, %.o, $(SOURCE_TEMP) $(SOURCE_PARSER) $(SOURCE_TOOLS) $(SOURCE_EXECUTOR) $(SOURCE_LEXER))
-D_FILES = $(patsubst %.c, %.d, $(SOURCE_TEMP) $(SOURCE_PARSER) $(SOURCE_TOOLS) $(SOURCE_EXECUTOR) $(SOURCE_LEXER))
+
+OBJ	= $(patsubst %.c, %.o, $(SOURCE_TEMP) $(SOURCE_PARSER) $(SOURCE_TOOLS) $(SOURCE_EXECUTOR) $(SOURCE_LEXER) $(SOURCE_BUILTIN))
+D_FILES = $(patsubst %.c, %.d, $(SOURCE_TEMP) $(SOURCE_PARSER) $(SOURCE_TOOLS) $(SOURCE_EXECUTOR) $(SOURCE_BUILTIN))
 
 .PHONY: all clean fclean re test norm
 

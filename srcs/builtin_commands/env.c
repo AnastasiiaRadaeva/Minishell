@@ -3,28 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:20:39 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/24 11:33:20 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/24 12:54:17 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-*Функция возвращает одномерный массив со всеми переменными окружения.
-*В случае ошибки функция печатает строку ошибки и вызывает error_output.
-*Нужно подумать, как выводить эту ошибку, думаю, что тут не нужен exit.
-*/
+#include "minishell.h"
 
-#include "../../header/minishell.h"
-
-void	error_output(t_commands *cmd, char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *src);
-int		ft_strcmp(const char *s1, const char *s2);
-void	ft_putstr(char *s); //
-
-char	*ft_env(t_commands *cmd, t_data *all)
+// char	*ft_env(t_commands *cmd, t_data *all)
+void	ft_env(t_commands *cmd, t_data *all)
 {
 	//int		len;
 	int		i;
@@ -37,7 +26,7 @@ char	*ft_env(t_commands *cmd, t_data *all)
 		ft_putstr("env: ");
 		ft_putstr(cmd->lst->content);
 		ft_putstr(": ");
-		error_output(cmd, "No such file or directory");
+		error_output(cmd, all, "No such file or directory");
 	}
 	/*
 	len = ft_strlen(all->envp[all->env_var]);
@@ -47,19 +36,20 @@ char	*ft_env(t_commands *cmd, t_data *all)
 	*bash и понять, где она там находится, нужно ли вообще её менять 
 	*/
 	if (!(string = ft_strdup("")))
-		error_output(cmd, "malloc: ft_env");
+		error_output(cmd,  all,"malloc: ft_env");
 	i = 0;
 	while (all->envp[i])
 	{
 		temp_str = string;
 		if (!(string = ft_strjoin(string, all->envp[i])))
-			error_output(cmd, "malloc: ft_env");
+			error_output(cmd, all, "malloc: ft_env");
 		free(temp_str);
 		temp_str = string;
 		if (!(string = all->envp[++i] ? ft_strjoin(string, "\n") : string))
-			error_output(cmd, "malloc: ft_env");
+			error_output(cmd, all, "malloc: ft_env");
 		if (ft_strcmp(temp_str, string) != 0)
 			free(temp_str);
 	}
-	return (string);
+	// return (string);
+	ft_putendl(string);
 }

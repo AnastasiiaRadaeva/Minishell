@@ -11,19 +11,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-*Функция показывает текущую директорию. 
-*Возвращает строку с директорией.
-*В случае ошибки функция печатает строку ошибки и вызывает error_output.
-*/
+#include "minishell.h"
 
-#include "../../header/minishell.h"
-
-void	error_output(t_commands *cmd, char *str);
-
+#if 0
 char	*ft_pwd(t_commands *cmd, t_data *all)
 {
 	if (!(all->envp[all->current_pwd]))
-		error_output(cmd, PWD_GETCWD); // ошибку getcwd переписать 
+		error_output(cmd, all, PWD_GETCWD); // ошибку getcwd переписать 
 	return (all->envp[all->current_pwd] + 4);
+}
+#endif
+
+void	ft_pwd(t_commands *cmd, t_data *all)
+{
+	if (!(all->envp[all->current_pwd]))
+		error_output(cmd, all, PWD_GETCWD); // ошибку getcwd переписать 
+	ft_putendl(all->envp[all->current_pwd] + 4);
 }
