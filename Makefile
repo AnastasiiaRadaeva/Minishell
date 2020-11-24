@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/24 13:37:51 by anatashi         ###   ########.fr        #
+#    Updated: 2020/11/24 19:22:54 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ BUILTIN_CMD_LIST	= 	pwd.c\
 						env.c\
 						cd.c\
 						echo.c\
-						export.c
+						export.c\
+						ft_check_cmd_in_path.c
 
 SOURCE_TEMP			= $(addprefix $(TEMP_DIR), $(TEMP_LIST))
 SOURCE_PARSER		= $(addprefix $(PARSER_DIR), $(PARSER_LIST))

@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:35:52 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 19:59:13 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 19:21:45 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@
 
 typedef	enum		e_cmd_type
 {
-	CMD_ECHO = 1,
-	CMD_CD = 2,
-	CMD_PWD = 3,
-	CMD_EXPORT = 4,
-	CMD_UNSET = 5,
-	CMD_ENV = 6,
-	CMD_EXIT = 7,
-	CMD_ERROR = -1,
+	CMD_ECHO,
+	CMD_CD,
+	CMD_PWD,
+	CMD_EXPORT,
+	CMD_UNSET,
+	CMD_ENV,
+	CMD_EXIT,
+	CMD_ERROR,
+	CMD_IN_PATH,
 }					t_cmd_type;
 
 t_commands		*parse(t_data *data, t_lexer *lexerbuf);

@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 13:38:24 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 19:07:11 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ int			redirects(t_commands *redir)
 
 	while (redir->redir)
 	{
-		if (redir->type_redir == 1 && !redir->redir->invalid)
+		if (redir->type_redir == CHAR_GREATER && redir->redir->invalid != -2)
 		{
 			if ((fd = open(redir->redir->cmd, O_RDWR)) == -1)
 				return (1);
 		}
 		else
 		{
-			if (redir->type_redir == 2 && !redir->redir->invalid)
+			if (redir->type_redir == CHAR_LESSER && redir->redir->invalid != -2)
 				fd = open(redir->redir->cmd, O_CREAT |
 							O_RDWR | O_TRUNC, S_IRWXU);
 			if (redir->type_redir == 3 && !redir->redir->invalid)
 				fd = open(redir->redir->cmd, O_CREAT |
 							O_RDWR | O_APPEND, S_IRWXU);
 		}
-		dup2(fd, (redir->type_redir == 1) ? 0 : 1);
+		dup2(fd, (redir->type_redir == CHAR_GREATER) ? 0 : 1);
 		redir = redir->redir;
 	}
 	return (0);
@@ -79,6 +79,8 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 		ft_echo(cmd);
 	else if (cmd->num_cmd == CMD_EXPORT)
 		ft_export(&cmd, &data);
+	else if (cmd->num_cmd == CMD_IN_PATH)
+		ft_check_cmd_in_path(&cmd, &data);
 	
 }
 

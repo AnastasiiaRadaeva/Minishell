@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 18:25:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/23 21:05:56 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 19:25:03 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static	int		checking_cmd_for_tocken(char *word)
 		return (CMD_ENV);
 	else if (!(ft_strcmp("exit", word)))
 		return (CMD_EXIT);
-	return (CMD_ERROR);
+	return (CMD_IN_PATH);
 }
 
 static int		checking_cmd(char *cmd)
@@ -63,7 +63,7 @@ static	void	init_cmd(t_commands *cmd)
 {
 	cmd->cmd = cmd->lst->content;
 	cmd->invalid = checking_cmd(cmd->cmd);
-	cmd->num_cmd = cmd->invalid > 0 ? cmd->invalid : 0;
+	cmd->num_cmd = cmd->invalid;
 }
 
 void			init(t_commands **cmd)

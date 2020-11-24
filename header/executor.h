@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:39:16 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 13:37:54 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 19:23:16 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void	ft_echo(t_commands *cmd);
 */
 
 void	ft_export(t_commands **cmd, t_data **all);
+void		ft_check_cmd_in_path(t_commands **cmd, t_data **data);
 
 #endif

@@ -6,12 +6,13 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/24 16:46:36 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 16:53:21 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+#if 0
 void	check_args_for_validity(t_data **all, t_commands **cmd)
 /*Функция проверяет:
 *Правильный синтаксис - нет пробелов, это буква.
@@ -40,7 +41,7 @@ void	check_args_for_validity(t_data **all, t_commands **cmd)
 		tmp_lst = tmp_lst->next;
 	}
 }
-
+#endif
 void	ft_export(t_commands **cmd, t_data **all)
 {
 	char	**temp_env;
