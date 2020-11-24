@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 13:33:33 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/17 16:11:20 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/19 16:57:31 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,20 @@ static char	**copy_double_array(char **origin, t_commands *cmd)
 {
 	char	**duplicate;
 	int		num_of_str;
+	int		index;
 
 	num_of_str = 0;
+	index = 0;
 	while (origin[num_of_str])
 		num_of_str++;
 	if (!(duplicate = (char **)malloc(sizeof(char *) * (num_of_str + 1))))
 		error_output(cmd, MALLOC_10);
 	duplicate[num_of_str] = NULL;
-	num_of_str = 0;
-	while (duplicate[num_of_str])
+	while (index < num_of_str)
 	{
-		if (!(duplicate[num_of_str] = ft_strdup(origin[num_of_str])))
+		if (!(duplicate[index] = ft_strdup(origin[index])))
 			error_output(cmd, MALLOC_10);
-		num_of_str++;
+		index++;
 	}
 	return (duplicate);
 }
