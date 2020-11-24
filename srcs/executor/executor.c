@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 12:53:00 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/24 12:59:49 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 	else if (cmd->num_cmd == CMD_ENV)
 		// give_env(data);
 		ft_env(cmd, data);
+	else if (cmd->num_cmd == CMD_CD)
+		ft_cd(&cmd, data);
 	
 }
 
