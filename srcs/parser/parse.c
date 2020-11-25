@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 19:22:27 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/25 14:43:36 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,17 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
 {
 	t_lexer		*tmp;
+	t_commands	*tmp_cmd;
 
 	tmp = lexerbuf;
+	tmp_cmd = (*cmd);
 	if (tmp->llisttok->type == CHAR_GREATER || tmp->llisttok->type == CHAR_LESSER)
 	{	
 		init(cmd);
 		(*cmd)->redir = init_struct_commands(*cmd, data);
 		(*cmd) = (*cmd)->redir;
-		(*cmd)->type_redir = tmp->llisttok->type;
+		(*cmd)->previous = tmp_cmd;
+		(*cmd)->previous->type_redir = tmp->llisttok->type;
 	}
 	else if (tmp->llisttok->type == CHAR_SEMICOLON)
 	{

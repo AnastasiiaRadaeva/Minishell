@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/24 19:22:54 by anatashi         ###   ########.fr        #
+#    Updated: 2020/11/25 16:22:58 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@ NAME = minishell
 
 CC = gcc -g
 OPFLAGS = -O2
-FLAGS = -Wall -Wextra -Werror 
-MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+FLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR			=	libft/
 HEADER_DIR			=	header/
