@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 19:07:11 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/25 17:36:47 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			redirects(t_commands *redir)
 	{
 		if (redir->type_redir == CHAR_GREATER && redir->redir->invalid != -2)
 		{
-			if ((fd = open(redir->redir->cmd, O_RDWR)) == -1)
+			if ((fd = open(redir->redir->cmd, O_CREAT | O_RDWR)) == -1)
 				return (1);
 		}
 		else
@@ -38,6 +38,13 @@ int			redirects(t_commands *redir)
 		redir = redir->redir;
 	}
 	return (0);
+	#if 0
+	(void)redir;
+	fd = open("test.c", O_CREAT | O_RDWR);
+	write(1, &fd, 1);
+	write(1, "\n", 1);
+	return (0);
+	#endif
 }
 
 #if 0
@@ -60,14 +67,10 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 								t_commands *redirect, t_commands *pip)
 {
 	// #if 0
-	(void)data;
 	(void)pip;
 	// #endif
-
 	if (redirects(redirect))
-	{
 		return;
-	}
 	if (cmd->num_cmd == CMD_PWD)
 		ft_pwd(cmd, data);
 	else if (cmd->num_cmd == CMD_ENV)
@@ -81,6 +84,7 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 		ft_export(&cmd, &data);
 	else if (cmd->num_cmd == CMD_IN_PATH)
 		ft_check_cmd_in_path(&cmd, &data);
+	
 	
 }
 
@@ -99,7 +103,7 @@ void			execute_cmd_line(t_commands *cmd, t_data *data)
 			pipe(fd);
 			dup2(fd[1], 1);
 		}
-		selection_cmd(cmd, data, pip, redirect);
+		selection_cmd(cmd, data, redirect, pip);
 	}
 }
 
@@ -122,4 +126,11 @@ void	executor(t_commands *syntax_tree, t_data *data)
 		if (!(data->error_string =ft_strdup("127")))
 			error_output(syntax_tree, data, NULL);
 	}	
+
+	#if 0
+	(void)syntax_tree;
+	(void)data;
+	int fd = open("test.c", O_RDWR);
+	write(1, &fd, 1);
+	#endif
 }
