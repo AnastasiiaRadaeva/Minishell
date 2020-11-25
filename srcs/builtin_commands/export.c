@@ -19,7 +19,7 @@ static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, in
 
 	if (error == 1)
 	{
-		ft_putstr("export: '");
+		ft_putstr("minishell: export: '");
 		ft_putstr((*lst_for_del)->content);
 		ft_putstr("': not a valid identifier\n");
 	}
@@ -47,6 +47,60 @@ static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, in
 	free(tmp_lst);
 	return (1);
 }
+
+static void	change_var(t_data **all, t_commands **cmd)
+{
+	t_list	*tmp_lst;
+	char 	**new_env;
+	int 	index;
+	int		i;
+	int		num_of_lst;
+	int		error;
+
+	tmp_lst = (*cmd)->lst;
+	num_of_lst = 0;
+	while (tmp_lst)
+	{
+		error = 0;
+		index = 0;
+		while ((*all)->envp[index])
+		{
+			i = 0;
+			while ((*all)->envp[index][i] != '=')
+				i++;
+			if (ft_strncmp((char *)tmp_lst->content, (*all)->envp[index], i + 1) == 0)
+			{
+				new_env = (*all)->envp;
+				if (!((*all)->envp = (char **)malloc(sizeof(char *) * (*all)->count_str + 1)))
+					error_output(*cmd, *all, "error: malloc (change_var)");
+				i = 0;
+				while (i < index)
+				{
+					(*all)->envp[i] = new_env[i];
+					i++;
+				}
+				(*all)->envp[i] = (char *)tmp_lst->content;
+				i++;
+				while (new_env[i])
+				{
+					(*all)->envp[i] = new_env[i];
+					i++;
+				}
+				(*all)->envp[i] = NULL;
+				free(new_env);
+				error = delete_lst(cmd, &tmp_lst, num_of_lst, 0);
+				break;
+			}
+			index++;
+		}
+		if (error == 0)
+		{
+			tmp_lst = tmp_lst->next;
+			num_of_lst++;
+		}
+	}
+}
+
 static void	check_args_for_validity(t_commands **cmd)
 /*Функция проверяет:
 *Синтаксис (есть =, нет пробелов, 1-ый символ _ или буква, остальные символы _, цифра или буква).
@@ -77,7 +131,7 @@ static void	check_args_for_validity(t_commands **cmd)
 				}
 				index++;
 			}
-			if (tmp_lst && ((char*)tmp_lst->content)[index] == '\0')
+			if (error == 0 && tmp_lst && ((char*)tmp_lst->content)[index] == '\0')
 				error = delete_lst(cmd, &tmp_lst, num_of_lst, 0);
 		}
 		else
@@ -98,7 +152,7 @@ void	ft_export(t_commands **cmd, t_data **all)
 
 	index = -1;
 	check_args_for_validity(cmd);
-	// change_var(all, cmd);//Меняет переменную окружения, если она уже существует
+	change_var(all, cmd);//Меняет переменную окружения, если она уже существует
 	//и удаляет этот аргумент + меняет число аргкментов
 	if ((*cmd)->lst)
 	{
