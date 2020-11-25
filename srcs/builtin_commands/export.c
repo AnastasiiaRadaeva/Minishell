@@ -12,7 +12,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 static void delete_lst(t_commands **cmd, t_list **lst_for_del, int *num_of_lst, int error)
 {
 	t_list	*new_lst;
@@ -92,7 +91,7 @@ void	ft_export(t_commands **cmd, t_data **all)
 
 	index = -1;
 	temp_list = (*cmd)->lst;
-	// check_args_for_validity(cmd); //функция должна проверить на валидность аргументы и перезаписать их нужным образом
+	check_args_for_validity(cmd); //функция должна проверить на валидность аргументы и перезаписать их нужным образом
 	// change_var(all, cmd);//Меняет переменную окружения, если она уже существует
 	//и удаляет этот аргумент + меняет число аргкментов
 	(*all)->count_str += (*cmd)->count_args;

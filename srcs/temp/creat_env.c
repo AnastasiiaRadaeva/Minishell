@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:37:28 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 16:22:32 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:18:30 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	parse_env(t_data *data)
 		if (ft_strncmp((data)->envp[i], "_=", 2) == 0)
 			data->env_var = i;
 	}
-	data->env_var = i;
+	data->count_str = i;
 }
 
 void		create_env(t_data *data, char **envp)
