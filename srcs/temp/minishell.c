@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 18:46:56 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/25 19:52:52 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int    				main(int argc, char **argv, char **envp)
 	/*
 	**	for minishell_test
 	*/
-	// #if 0
+	#if 0
 	if (argv[1][0] == '-' && argv[1][1] == 'c')
 	{
 		lexer_build(ft_strdup(argv[2]), ft_strlen(argv[2]), &lexerbuf);
@@ -43,7 +43,7 @@ int    				main(int argc, char **argv, char **envp)
 		executor(syntax_tree, data);
 	}
 	else
-	// #endif
+	#endif
 	{
 		while (1)
 		{
