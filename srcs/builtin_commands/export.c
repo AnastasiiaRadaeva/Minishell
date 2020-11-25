@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/25 17:45:50 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/25 18:44:33 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, in
 
 	if (error == 1)
 	{
-		ft_putstr("minishell: export: '");
+		ft_putstr("minishell: export: `");
 		ft_putstr((*lst_for_del)->content);
 		ft_putstr("': not a valid identifier\n");
 	}

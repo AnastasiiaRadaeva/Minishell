@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 17:36:47 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/25 17:52:06 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 int			redirects(t_commands *redir)
 {
+	#if 0
 	int			fd;
 
 	while (redir->redir)
@@ -38,13 +39,13 @@ int			redirects(t_commands *redir)
 		redir = redir->redir;
 	}
 	return (0);
-	#if 0
 	(void)redir;
 	fd = open("test.c", O_CREAT | O_RDWR);
 	write(1, &fd, 1);
 	write(1, "\n", 1);
-	return (0);
 	#endif
+	(void)redir;
+	return (0);
 }
 
 #if 0
@@ -126,11 +127,4 @@ void	executor(t_commands *syntax_tree, t_data *data)
 		if (!(data->error_string =ft_strdup("127")))
 			error_output(syntax_tree, data, NULL);
 	}	
-
-	#if 0
-	(void)syntax_tree;
-	(void)data;
-	int fd = open("test.c", O_RDWR);
-	write(1, &fd, 1);
-	#endif
 }
