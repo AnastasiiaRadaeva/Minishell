@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 13:01:15 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/25 16:06:07 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 	}
 	else
 		wait(&pid);
-	// #endif
+	ft_free_tmp(tmp_cmd);
+	ft_free_two_dimensional_arr(split_path);
+	ft_free_two_dimensional_arr(argv_for_execve);
 }

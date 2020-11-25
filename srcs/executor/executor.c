@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 19:07:11 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/25 16:06:47 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 								t_commands *redirect, t_commands *pip)
 {
 	// #if 0
-	(void)data;
 	(void)pip;
 	// #endif
-
 	if (redirects(redirect))
 	{
 		return;
@@ -81,6 +79,7 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 		ft_export(&cmd, &data);
 	else if (cmd->num_cmd == CMD_IN_PATH)
 		ft_check_cmd_in_path(&cmd, &data);
+	
 	
 }
 

@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 16:15:53 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/25 14:28:56 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct			s_commands
 	struct s_list		*lst;
 	struct s_commands	*redir;
 	struct s_commands	*pipe;
+	struct s_commands	*previous;
 	struct s_commands	*next;
 }						t_commands;
 
