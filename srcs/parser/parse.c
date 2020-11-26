@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 14:43:36 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/26 16:53:12 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 	t_list		*lst;
 
 	(void)data;
-	if (type == CHAR_QOUTE || type == CHAR_DQUOTE)
-	{	
+	// if (type == CHAR_QOUTE || type == CHAR_DQUOTE)
+	// {	
 		if (type == CHAR_DQUOTE)
 			_if_type_dollar(data, &content, NULL);	
-		_strip_quotes(content, ft_strlen(content), 0);
-	}
-	else if (type == CHAR_DOLLAR)
+	_strip_quotes(content, ft_strlen(content), 0);
+	// }
+	if (type == CHAR_DOLLAR)
 		_if_type_dollar(data, &content, NULL);
 	if (*content)
 	{
