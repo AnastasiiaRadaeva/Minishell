@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:39:16 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 19:23:16 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/25 19:10:59 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void	ft_echo(t_commands *cmd);
 
 void	ft_export(t_commands **cmd, t_data **all);
 void		ft_check_cmd_in_path(t_commands **cmd, t_data **data);
+void	ft_unset(t_commands **cmd, t_data **all);
 
 #endif

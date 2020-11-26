@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 15:28:40 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/25 19:52:26 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/26 17:06:18 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@ static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, in
 	t_list	*tmp_lst;
 
 	if (error == 1)
-	{
-		ft_putstr("minishell: unset: `");
-		ft_putstr((*lst_for_del)->content);
-		ft_putstr("': not a valid identifier\n");
-	}
+		error_case("minishell: unset: `", (*lst_for_del)->content, "': not a valid identifier\n");
 	tmp_lst = (*lst_for_del);
 	new_lst = (*cmd)->lst;
 	error = 0;
@@ -120,50 +116,60 @@ static void	check_args_for_validity(t_commands **cmd)
 	}
 }
 
-void	ft_unset(t_commands **cmd, t_data **all)
+static	size_t	find_char(char *str, char symb)
 {
-	char	**temp_env;
-	size_t	index;
-	t_list	*temp_list;
 	size_t	i;
 
-	index = -1;
+	i = 0;
+	while (str[i] != symb)
+		i++;
+	return (i);
+}
+
+static void	delete_right_env_variable(t_data **all, t_commands **cmd)
+{
+	t_list	*temp_list;
+	char	**temp_env;
+	int		index;
+	int		i;
+
+	index = 0;
+	i = 0;
+	(*all)->count_str -= (*cmd)->count_args;
+	temp_env = (*all)->envp;
+	if (!((*all)->envp = (char **)malloc(sizeof(char *) * ((*all)->count_str + 1))))
+		error_output(*cmd, *all, MALLOC_12);
+	while (temp_env[index])
+	{
+		temp_list = (*cmd)->lst;
+		while (temp_list && temp_env[index])
+		{
+			size_t f = find_char(temp_env[index],'=');
+			if (ft_strncmp((char *)temp_list->content, temp_env[index],	f) == 0 && \
+			f == ft_strlen((char *)temp_list->content))
+			{
+				index++;
+				free(temp_env[index - 1]);
+				temp_list = (*cmd)->lst;
+			}
+			else
+				temp_list = temp_list->next;
+		}
+		if (temp_env[index])
+		{
+			(*all)->envp[i] = temp_env[index];
+			i++;
+			index++;
+		}
+	}
+	(*all)->envp[i] = NULL;
+	free(temp_env);
+}
+
+void	ft_unset(t_commands **cmd, t_data **all)
+{
 	check_args_for_validity(cmd);
 	delete_not_found_envp(all, cmd);
 	if ((*cmd)->lst)
-	{
-		(*all)->count_str -= (*cmd)->count_args;
-		temp_list = (*cmd)->lst;
-		temp_env = (*all)->envp;
-		if (!((*all)->envp = (char **)malloc(sizeof(char *) * ((*all)->count_str + 1))))
-			error_output(*cmd, *all, MALLOC_12);
-		while (temp_list)
-		{
-			index = 0;
-			while ((*all)->envp[index])
-			{
-				i = 0;
-				while ((*all)->envp[index][i] != '=')
-					i++;
-				if (ft_strncmp((char *)temp_list->content, (*all)->envp[index], i) == 0 && i == ft_strlen((char *)temp_list->content))
-				{
-					i = 0;
-					while (i < index)
-					{
-						(*all)->envp[i] = temp_env[i];
-						i++;
-					}
-					while (temp_env[i])
-					{
-						(*all)->envp[i] = temp_env[i + 1];
-						i++;
-					}
-					free(temp_env);
-					break;
-				}
-				index++;
-			}
-			temp_list = temp_list->next;
-		}
-	}
+		delete_right_env_variable(all, cmd);
 }
