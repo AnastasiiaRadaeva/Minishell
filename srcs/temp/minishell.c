@@ -58,7 +58,7 @@ int    				main(int argc, char **argv, char **envp)
 			/*
 			** print contents of cmd
 			*/
-			#if 0
+			// #if 0
 			t_commands *tmp = syntax_tree;
 			while (tmp)
 			{
@@ -80,7 +80,7 @@ int    				main(int argc, char **argv, char **envp)
 					tmp = tmp->next;
 				ft_putendl("--------------------------");
 			}
-			#endif
+			// #endif
 			executor(syntax_tree, data);
 	
 			if (line == '\0')

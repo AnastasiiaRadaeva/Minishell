@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+f/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
@@ -14,37 +14,42 @@
 #include "executor.h"
 #include "parser.h"
 
+void		pipe_end(t_commands *pip, t_data *all, int fd0, int fd1)
+{
+	dup2(fd0, 0);
+	close(fd1);
+	close(fd0);
+	if (pip->pipe)
+	{
+		close(1);
+		dup2(all->fd_1, 1);
+		execute_cmd_line(pip->pipe, all);
+	}
+}
+
 int			redirects(t_commands *redir)
 {
-	#if 0
 	int			fd;
 
 	while (redir->redir)
 	{
-		if (redir->type_redir == CHAR_GREATER && redir->redir->invalid != -2)
+		if (redir->type_redir == CHAR_LESSER && redir->redir->invalid != -2)
 		{
-			if ((fd = open(redir->redir->cmd, O_CREAT | O_RDWR)) == -1)
+			if ((fd = open(redir->redir->cmd, O_CREAT, 0644)) == -1)
 				return (1);
 		}
 		else
 		{
-			if (redir->type_redir == CHAR_LESSER && redir->redir->invalid != -2)
+			if (redir->type_redir == CHAR_GREATER && redir->redir->invalid != -2)
 				fd = open(redir->redir->cmd, O_CREAT |
 							O_RDWR | O_TRUNC, S_IRWXU);
 			if (redir->type_redir == 3 && !redir->redir->invalid)
 				fd = open(redir->redir->cmd, O_CREAT |
 							O_RDWR | O_APPEND, S_IRWXU);
 		}
-		dup2(fd, (redir->type_redir == CHAR_GREATER) ? 0 : 1);
+		dup2(fd, (redir->type_redir == CHAR_LESSER) ? 0 : 1);
 		redir = redir->redir;
 	}
-	return (0);
-	(void)redir;
-	fd = open("test.c", O_CREAT | O_RDWR);
-	write(1, &fd, 1);
-	write(1, "\n", 1);
-	#endif
-	(void)redir;
 	return (0);
 }
 
@@ -86,9 +91,7 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 	else if (cmd->num_cmd == CMD_UNSET)
 		ft_unset(&cmd, &data);
 	else if (cmd->num_cmd == CMD_IN_PATH)
-		ft_check_cmd_in_path(&cmd, &data);
-	
-	
+		ft_check_cmd_in_path(&cmd, &data);	
 }
 
 void			execute_cmd_line(t_commands *cmd, t_data *data)
@@ -107,6 +110,7 @@ void			execute_cmd_line(t_commands *cmd, t_data *data)
 			dup2(fd[1], 1);
 		}
 		selection_cmd(cmd, data, redirect, pip);
+		pipe_end(pip, data, fd[0], fd[1]);
 	}
 }
 
