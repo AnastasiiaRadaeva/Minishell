@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:20:39 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/24 14:46:49 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/26 15:06:48 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,9 @@ void	ft_env(t_commands *cmd, t_data *all)
 
 	i = 3;
 	if (cmd->count_args > 0)
+		error_case("env: ", cmd->lst->content, ": No such file or directory\n");
+	else
 	{
-		ft_putstr("env: ");
-		ft_putstr(cmd->lst->content);
-		ft_putstr(": ");
-		ft_putendl("No such file or directory");
-	}
 	/*
 	len = ft_strlen(all->envp[all->env_var]);
 	while (--i >= 0 && --len >= 0)
@@ -36,7 +33,7 @@ void	ft_env(t_commands *cmd, t_data *all)
 	*bash и понять, где она там находится, нужно ли вообще её менять 
 	*/
 	if (!(string = ft_strdup("")))
-		error_output(cmd,  all,"malloc: ft_env");
+		error_output(cmd,  all, "malloc: ft_env");
 	i = 0;
 	while (all->envp[i])
 	{
@@ -52,4 +49,5 @@ void	ft_env(t_commands *cmd, t_data *all)
 	}
 	// return (string);
 	ft_putendl(string);
+	}
 }

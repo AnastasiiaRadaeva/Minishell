@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 14:28:56 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:57:16 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void			signal_handler(int num);
 void			read_cmd(t_data *data, char **line);
 void			error_output(t_commands *cmd, t_data *data, char *str);
 int				program_exit(t_commands *cmd, t_data *data, int num);
+void			error_case(char *str1, char *str2, char *str3);
 
 #endif

@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/25 18:44:33 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/26 15:40:02 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
+
 static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, int error)
 {
 	t_list	*new_lst;
 	t_list	*tmp_lst;
 
 	if (error == 1)
-	{
-		ft_putstr("minishell: export: `");
-		ft_putstr((*lst_for_del)->content);
-		ft_putstr("': not a valid identifier\n");
-	}
+		error_case("minishell: export: `", (*lst_for_del)->content, "': not a valid identifier\n");
 	// write(1, "Hello\n", 6);
 	tmp_lst = (*lst_for_del);
 	new_lst = (*cmd)->lst;
@@ -47,12 +45,21 @@ static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, in
 	return (1);
 }
 
+static	int	find_char(char *str, char symb)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != symb)
+		i++;
+	return (i);
+}
+
 static void	change_var(t_data **all, t_commands **cmd)
 {
 	t_list	*tmp_lst;
 	char 	**new_env;
 	int 	index;
-	int		i;
 	int		num_of_lst;
 	int		error;
 
@@ -64,9 +71,7 @@ static void	change_var(t_data **all, t_commands **cmd)
 		index = 0;
 		while ((*all)->envp[index])
 		{
-			i = 0;
-			while ((*all)->envp[index][i] != '=')
-				i++;
+			int i = find_char((*all)->envp[index],'=');
 			if (ft_strncmp((char *)tmp_lst->content, (*all)->envp[index], i + 1) == 0)
 			{
 				new_env = (*all)->envp;
@@ -78,8 +83,10 @@ static void	change_var(t_data **all, t_commands **cmd)
 					(*all)->envp[i] = new_env[i];
 					i++;
 				}
-				(*all)->envp[i] = (char *)tmp_lst->content;
+				if (!((*all)->envp[i] = ft_strdup((char *)tmp_lst->content)))
+					error_output(*cmd, *all, "error: malloc (change_var)");
 				i++;
+				free(new_env[i - 1]);
 				while (new_env[i])
 				{
 					(*all)->envp[i] = new_env[i];
@@ -143,6 +150,10 @@ static void	check_args_for_validity(t_commands **cmd)
 	}
 }
 
+/*
+** Функция добавляет переменную в конец (так как нам нужно будет все равно их тасовать)
+*/
+
 void	ft_export(t_commands **cmd, t_data **all)
 {
 	char	**temp_env;
@@ -160,17 +171,31 @@ void	ft_export(t_commands **cmd, t_data **all)
 		temp_env = (*all)->envp;
 		if (!((*all)->envp = (char **)malloc(sizeof(char *) * ((*all)->count_str + 1))))
 			error_output(*cmd, *all, MALLOC_12);
-		while (++index < (*all)->env_var)
+
+
+		while (temp_env[++index])
 			(*all)->envp[index] = temp_env[index];
-		while (index < (*all)->count_str - 1)
+		while (index < (*all)->count_str)
 		{
 			(*all)->envp[index] = temp_list->content;
 			temp_list = temp_list->next;
 			index++;
 		}
-		(*all)->envp[index] = temp_env[(*all)->env_var];
-		(*all)->env_var += (*cmd)->count_args;
-		(*all)->envp[++index] = NULL;
+		(*all)->envp[index] = NULL;
 		free(temp_env);
+		
+		
+		// while (++index < (*all)->env_var)
+		// 	(*all)->envp[index] = temp_env[index];
+		// while (index < (*all)->count_str - 1)
+		// {
+		// 	(*all)->envp[index] = temp_list->content;
+		// 	temp_list = temp_list->next;
+		// 	index++;
+		// }
+		// (*all)->envp[index] = temp_env[(*all)->env_var];
+		// (*all)->env_var += (*cmd)->count_args;
+		// (*all)->envp[++index] = NULL;
+		// free(temp_env);
 	}
 }

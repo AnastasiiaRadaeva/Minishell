@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/24 14:36:19 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/26 15:02:42 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ void	ft_cd(t_commands **cmd, t_data *all)
 		(*cmd)->lst->next = NULL;
 	}
 	if ((*cmd)->count_args > 1)
-	{
-		ft_putstr("cd: ");
-		ft_putstr((*cmd)->lst->content);
-		ft_putstr(": No such file or directory\n");
-	}
+		error_case("minishell: cd: ", (*cmd)->lst->content, ": No such file or directory\n");
 	if (((char*)(*cmd)->lst->content)[0] == '~')
 	{
 		if (!(tmp_path = ft_strjoin(all->envp[all->home_dir] + 5, (char *)(*cmd)->lst->content + 1)))
@@ -56,9 +52,6 @@ void	ft_cd(t_commands **cmd, t_data *all)
 		((*cmd)->lst->content) = tmp_path;
 	}
 	if (chdir((char *)(*cmd)->lst->content) != 0)
-	{
-		ft_putstr(CD_NO_SUCH_F_D);
-		error_output(*cmd,  all, (*cmd)->lst->content);
-	}
+		error_case("minishell: cd: ", (*cmd)->lst->content, ": No such file or directory\n");
 	change_var(*cmd, &all);
 }
