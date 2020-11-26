@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.h                                            :+:      :+:    :+:   */
+/*   error_case.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/07 15:00:58 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 19:13:33 by kbatwoma         ###   ########.fr       */
+/*   Created: 2020/11/26 14:53:54 by kbatwoma          #+#    #+#             */
+/*   Updated: 2020/11/26 14:57:19 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLS_H
-# define TOOLS_H
-
 #include "minishell.h"
 
-char		*ft_trim_string(char *string, size_t size);
-char		*skip_spaces(char *p1);
-#endif
+void	error_case(char *str1, char *str2, char *str3)
+{
+		ft_putstr(str1);
+		ft_putstr(str2);
+		ft_putstr(str3);
+}
