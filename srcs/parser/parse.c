@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/26 17:25:12 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/27 14:48:38 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,13 @@ void			_if_type_dollar(t_data *data, char **content, char *rem)
 				if (rem != '\0')
 					_if_type_dollar(data, content, rem);
 			}
+			else
+			{
+				ft_free_tmp(*content);
+				*content = ft_strdup("");
+			}
+			
+
 		}
 	}
 }
@@ -98,7 +105,7 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 								char *content, int type)
 {
 	t_list		*lst;
-	// char		*tmp;
+	
 	(void)data;
 	// if (type == CHAR_QOUTE || type == CHAR_DQUOTE)
 	{	
@@ -110,9 +117,6 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 		_if_type_dollar(data, &content, NULL);
 	if (*content)
 	{
-		// tmp = content;
-		// content = ft_strtrim(content, " ");
-		ft_free_tmp(content);
 		if (!(lst = ft_lstnew(content)))
 			error_output(NULL, NULL, NULL);
 		ft_lstadd_back(&(*syntax_tree)->lst, lst);
@@ -128,21 +132,21 @@ static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
 	tmp_cmd = (*cmd);
 	if (tmp->llisttok->type == CHAR_GREATER || tmp->llisttok->type == CHAR_LESSER)
 	{	
-		init(cmd);
+		init(cmd, data);
 		(*cmd)->redir = init_struct_commands(*cmd, data);
 		(*cmd) = (*cmd)->redir;
 		(*cmd)->previous = tmp_cmd;
-		(*cmd)->previous->type_redir = tmp->llisttok->type;
+		(*cmd)->previous->type_redir = (*cmd)->previous->type_redir == CHAR_GREATER ? 3 : tmp->llisttok->type;
 	}
 	else if (tmp->llisttok->type == CHAR_SEMICOLON)
 	{
-		init(cmd);
+		init(cmd, data);
 		(*cmd)->next = init_struct_commands(*cmd, data);
 		(*cmd) = (*cmd)->next;
 	}
 	else if (tmp->llisttok->type == CHAR_PIPE)
 	{
-		init(cmd);
+		init(cmd, data);
 		(*cmd)->pipe = init_struct_commands(*cmd, data);
 		(*cmd) = (*cmd)->pipe;
 	}
@@ -164,8 +168,8 @@ t_commands		*parse(t_data *data, t_lexer *lexerbuf)
 		lexerbuf->llisttok = lexerbuf->llisttok->next;
 	}
 	if (!syntax_tree->next && !syntax_tree->redir && !syntax_tree->pipe)
-		init(&syntax_tree);
+		init(&syntax_tree, data);
 	if (!tmp->next && !tmp->redir && !tmp->pipe && syntax_tree != tmp)
-		init(&tmp);
+		init(&tmp, data);
 	return (syntax_tree);	
 }

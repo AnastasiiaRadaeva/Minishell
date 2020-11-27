@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:35:52 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/24 19:21:45 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/27 14:49:39 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ typedef	enum		e_cmd_type
 
 t_commands		*parse(t_data *data, t_lexer *lexerbuf);
 t_commands		*init_struct_commands(t_commands *cmd, t_data *data);
-void 			init(t_commands **cmd);
+void 			init(t_commands **cmd, t_data *data);
 
 #endif
