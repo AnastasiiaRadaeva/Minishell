@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 19:13:31 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/27 18:39:05 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static	char	**creat_dimens_arr_for_execve(t_commands *cmd)
 		argv_for_execve[i] = tmp->content;
 		tmp = tmp->next;
 		i++;
-
 	}
 	argv_for_execve[i] = NULL;
 	return (argv_for_execve);

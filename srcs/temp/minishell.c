@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/26 18:56:24 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/27 18:41:58 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int    				main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
 	data = init_struct_data();
 	create_env(data, envp);
 	
@@ -48,7 +50,6 @@ int    				main(int argc, char **argv, char **envp)
 		while (1)
 		{
 			print_promt_string();
-			signal(SIGINT,signal_handler);
 			read_cmd(data, &line);
 			lexer_build(line, ft_strlen(line), &lexerbuf);
 			ft_free_tmp(line);
