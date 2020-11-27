@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/27 17:09:46 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/27 17:56:30 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,21 @@ void			give_env(t_data *data)
 }
 #endif
 
-void			check_syntax_error(t_commands *redir)
+int			check_syntax_error(t_commands *redir)
 {
 	char	*token_err;
 
-	if (!redir->redir->pipe->cmd)
+	if (redir->redir->type_redir != 3)
 	{
-		token_err = ft_strdup("`|'\n");
-		error_case("syntax error near unexpected token ", token_err, NULL);
-		ft_free_tmp(token_err);
+		if (!redir->redir->cmd && redir->redir->pipe->cmd)
+		{
+			token_err = ft_strdup("`|'\n");
+			error_case("minishell: syntax error near unexpected token ", token_err, NULL);
+			ft_free_tmp(token_err);
+			return (1);
+		}
 	}
+	return (0);
 }
 
 void			selection_cmd(t_commands *cmd, t_data *data,
@@ -90,9 +95,11 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 
 	if (redirects(redirect))
 	{
-		check_syntax_error(redirect);
+		// check_syntax_error(redirect);
 		return;
 	}
+	// if (check_syntax_error(redirect))
+		// return;
 	if (cmd->num_cmd == CMD_PWD)
 		ft_pwd(cmd, data);
 	else if (cmd->num_cmd == CMD_ENV)
