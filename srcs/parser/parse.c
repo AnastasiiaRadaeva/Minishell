@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/26 17:25:12 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/26 18:54:04 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,13 @@ void			_if_type_dollar(t_data *data, char **content, char *rem)
 				if (rem != '\0')
 					_if_type_dollar(data, content, rem);
 			}
+			else
+			{
+				ft_free_tmp(*content);
+				*content = ft_strdup("");
+			}
+			
+
 		}
 	}
 }
@@ -98,7 +105,7 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 								char *content, int type)
 {
 	t_list		*lst;
-	// char		*tmp;
+	
 	(void)data;
 	// if (type == CHAR_QOUTE || type == CHAR_DQUOTE)
 	{	
@@ -110,9 +117,6 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 		_if_type_dollar(data, &content, NULL);
 	if (*content)
 	{
-		// tmp = content;
-		// content = ft_strtrim(content, " ");
-		ft_free_tmp(content);
 		if (!(lst = ft_lstnew(content)))
 			error_output(NULL, NULL, NULL);
 		ft_lstadd_back(&(*syntax_tree)->lst, lst);
@@ -132,7 +136,7 @@ static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
 		(*cmd)->redir = init_struct_commands(*cmd, data);
 		(*cmd) = (*cmd)->redir;
 		(*cmd)->previous = tmp_cmd;
-		(*cmd)->previous->type_redir = tmp->llisttok->type;
+		(*cmd)->previous->type_redir = (*cmd)->previous->type_redir == CHAR_GREATER ? 3 : tmp->llisttok->type;
 	}
 	else if (tmp->llisttok->type == CHAR_SEMICOLON)
 	{
