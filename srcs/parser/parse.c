@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 14:43:36 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/26 17:25:12 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,21 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 								char *content, int type)
 {
 	t_list		*lst;
-
+	// char		*tmp;
 	(void)data;
-	if (type == CHAR_QOUTE || type == CHAR_DQUOTE)
+	// if (type == CHAR_QOUTE || type == CHAR_DQUOTE)
 	{	
 		if (type == CHAR_DQUOTE)
 			_if_type_dollar(data, &content, NULL);	
-		_strip_quotes(content, ft_strlen(content), 0);
+	_strip_quotes(content, ft_strlen(content), 0);
 	}
-	else if (type == CHAR_DOLLAR)
+	if (type == CHAR_DOLLAR)
 		_if_type_dollar(data, &content, NULL);
 	if (*content)
 	{
+		// tmp = content;
+		// content = ft_strtrim(content, " ");
+		ft_free_tmp(content);
 		if (!(lst = ft_lstnew(content)))
 			error_output(NULL, NULL, NULL);
 		ft_lstadd_back(&(*syntax_tree)->lst, lst);
