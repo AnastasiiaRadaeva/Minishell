@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/24 16:15:45 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/27 18:22:53 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ static char	*ft_join_all_args(t_commands *cmd, t_list *start, int flag)
 				free(temp_line);
 			start = start->next;
 		}
-	if (flag == 0)
-	{
-		temp_line = line_for_print;
-		if (!(line_for_print = ft_strjoin(line_for_print, "\n")))
-			error_output(cmd, NULL, MALLOC_6);
-		free(temp_line);
-	}
+	// if (flag == 0)
+	// {
+	// 	temp_line = line_for_print;
+	// 	if (!(line_for_print = ft_strjoin(line_for_print, "\n")))
+	// 		error_output(cmd, NULL, MALLOC_6);
+	// 	free(temp_line);
+	// }
+	(void)flag;
 	return (line_for_print);
 }
 
@@ -48,7 +49,7 @@ void	ft_echo(t_commands *cmd)
 /*в print_result нужно убрать \n в конце строки и добавлять их уже при обработке функциями
 */
 {
-	int		flag;
+	// int		flag;
 	t_list	*start;
 
 	flag = 0;

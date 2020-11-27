@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/27 17:14:20 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/27 18:36:07 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int    				main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
 	data = init_struct_data();
 	create_env(data, envp);
 	
@@ -47,8 +49,9 @@ int    				main(int argc, char **argv, char **envp)
 	{
 		while (1)
 		{
+			flag = 0;
 			print_promt_string();
-			signal(SIGINT,signal_handler);
+			// signal(SIGINT,signal_handler);
 			read_cmd(data, &line);
 			lexer_build(line, ft_strlen(line), &lexerbuf);
 			ft_free_tmp(line);
@@ -82,7 +85,8 @@ int    				main(int argc, char **argv, char **envp)
 			}
 			#endif
 			executor(syntax_tree, data);
-	
+			if (flag == 0 && syntax_tree->num_cmd != CMD_IN_PATH)
+				write(1, "\n", 1);
 			if (line == '\0')
 				print_promt_string();
 			freeing_memory_from_lexer(&lexerbuf);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/27 17:09:46 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/27 18:23:47 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 	else if (cmd->num_cmd == CMD_IN_PATH)
 		ft_check_cmd_in_path(&cmd, &data);
 	if (cmd->num_cmd == CMD_ERROR)
-		error_case("minishell: ", cmd->cmd, " command not found\n");
+		error_case("minishell: ", cmd->cmd, " command not found");
 }
 
 void			execute_cmd_line(t_commands *cmd, t_data *data)
