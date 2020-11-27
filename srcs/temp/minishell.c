@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/27 11:17:54 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/26 18:56:24 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int    				main(int argc, char **argv, char **envp)
 			/*
 			** print contents of cmd
 			*/
-			// #if 0
+			#if 0
 			t_commands *tmp = syntax_tree;
 			while (tmp)
 			{
@@ -80,7 +80,7 @@ int    				main(int argc, char **argv, char **envp)
 					tmp = tmp->next;
 				ft_putendl("--------------------------");
 			}
-			// #endif
+			#endif
 			executor(syntax_tree, data);
 	
 			if (line == '\0')
