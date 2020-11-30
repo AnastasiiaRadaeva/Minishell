@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/26 15:02:42 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/27 18:22:32 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_cd(t_commands **cmd, t_data *all)
 		(*cmd)->lst->next = NULL;
 	}
 	if ((*cmd)->count_args > 1)
-		error_case("minishell: cd: ", (*cmd)->lst->content, ": No such file or directory\n");
+		error_case("minishell: cd: ", (*cmd)->lst->content, ": No such file or directory");
 	if (((char*)(*cmd)->lst->content)[0] == '~')
 	{
 		if (!(tmp_path = ft_strjoin(all->envp[all->home_dir] + 5, (char *)(*cmd)->lst->content + 1)))
@@ -52,6 +52,6 @@ void	ft_cd(t_commands **cmd, t_data *all)
 		((*cmd)->lst->content) = tmp_path;
 	}
 	if (chdir((char *)(*cmd)->lst->content) != 0)
-		error_case("minishell: cd: ", (*cmd)->lst->content, ": No such file or directory\n");
+		error_case("minishell: cd: ", (*cmd)->lst->content, ": No such file or directory");
 	change_var(*cmd, &all);
 }
