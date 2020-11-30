@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 15:28:40 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/27 18:23:33 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/30 12:43:17 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, in
 	t_list	*tmp_lst;
 
 	if (error == 1)
-		error_case("minishell: unset: `", (*lst_for_del)->content, "': not a valid identifier");
+		error_case("minishell: unset: `", (*lst_for_del)->content, \
+					"': not a valid identifier\n");
 	tmp_lst = (*lst_for_del);
 	new_lst = (*cmd)->lst;
 	error = 0;
@@ -62,7 +63,8 @@ static void	delete_not_found_envp(t_data **all, t_commands **cmd)
 			i = 0;
 			while ((*all)->envp[index][i] != '=')
 				i++;
-			if (ft_strncmp((char *)tmp_lst->content, (*all)->envp[index], i) == 0 && i == ft_strlen((char *)tmp_lst->content))
+			if (ft_strncmp((char *)tmp_lst->content, (*all)->envp[index], i)\
+						 == 0 && i == ft_strlen((char *)tmp_lst->content))
 				arg = 1;
 			index++;
 		}
@@ -77,10 +79,6 @@ static void	delete_not_found_envp(t_data **all, t_commands **cmd)
 }
 
 static void	check_args_for_validity(t_commands **cmd)
-/*Функция проверяет:
-*Синтаксис (1-ый символ _ или буква, остальные символы _, цифра или буква).
-*Меняет количество аргументов.
-*/ 
 {
 	t_list	*tmp_lst;
 	int		index;
@@ -92,12 +90,14 @@ static void	check_args_for_validity(t_commands **cmd)
 	while (tmp_lst)
 	{
 		error = 0;
-		if ((((char*)tmp_lst->content)[0]) == '_' || ft_isalpha(((char*)tmp_lst->content)[0]) == 1)
+		if ((((char*)tmp_lst->content)[0]) == '_' || \
+				ft_isalpha(((char*)tmp_lst->content)[0]) == 1)
 		{
 			index = 1;
 			while (((char*)tmp_lst->content)[index] != '\0')
 			{
-				if (((char*)tmp_lst->content)[index] != '_' && ft_isalpha(((char*)tmp_lst->content)[index]) != 1 \
+				if (((char*)tmp_lst->content)[index] != '_' && \
+					ft_isalpha(((char*)tmp_lst->content)[index]) != 1 \
 					&& ft_isalnum(((char*)tmp_lst->content)[index]) != 1)
 				{
 					error = delete_lst(cmd, &tmp_lst, num_of_lst, 1);
@@ -137,7 +137,8 @@ static void	delete_right_env_variable(t_data **all, t_commands **cmd)
 	i = 0;
 	(*all)->count_str -= (*cmd)->count_args;
 	temp_env = (*all)->envp;
-	if (!((*all)->envp = (char **)malloc(sizeof(char *) * ((*all)->count_str + 1))))
+	if (!((*all)->envp = (char **)malloc(sizeof(char *) * \
+			((*all)->count_str + 1))))
 		error_output(*cmd, *all, MALLOC_12);
 	while (temp_env[index])
 	{
@@ -145,8 +146,8 @@ static void	delete_right_env_variable(t_data **all, t_commands **cmd)
 		while (temp_list && temp_env[index])
 		{
 			size_t f = find_char(temp_env[index],'=');
-			if (ft_strncmp((char *)temp_list->content, temp_env[index],	f) == 0 && \
-			f == ft_strlen((char *)temp_list->content))
+			if (ft_strncmp((char *)temp_list->content, temp_env[index],	f) == 0\
+								&& f == ft_strlen((char *)temp_list->content))
 			{
 				index++;
 				free(temp_env[index - 1]);
