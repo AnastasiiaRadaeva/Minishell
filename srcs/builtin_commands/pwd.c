@@ -26,5 +26,5 @@ void	ft_pwd(t_commands *cmd, t_data *all)
 {
 	if (!(all->envp[all->current_pwd]))
 		error_output(cmd, all, PWD_GETCWD); // эту ошибку переписать
-	ft_putendl(all->envp[all->current_pwd] + 4);
+	ft_putstr(all->envp[all->current_pwd] + 4);
 }

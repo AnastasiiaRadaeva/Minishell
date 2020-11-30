@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 15:28:40 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/26 17:06:18 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/27 18:23:33 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, in
 	t_list	*tmp_lst;
 
 	if (error == 1)
-		error_case("minishell: unset: `", (*lst_for_del)->content, "': not a valid identifier\n");
+		error_case("minishell: unset: `", (*lst_for_del)->content, "': not a valid identifier");
 	tmp_lst = (*lst_for_del);
 	new_lst = (*cmd)->lst;
 	error = 0;

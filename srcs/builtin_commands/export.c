@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/26 15:40:02 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/27 18:23:36 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, in
 	t_list	*tmp_lst;
 
 	if (error == 1)
-		error_case("minishell: export: `", (*lst_for_del)->content, "': not a valid identifier\n");
-	// write(1, "Hello\n", 6);
+		error_case("minishell: export: `", (*lst_for_del)->content, "': not a valid identifier");
 	tmp_lst = (*lst_for_del);
 	new_lst = (*cmd)->lst;
 	error = 0;
@@ -109,7 +108,8 @@ static void	change_var(t_data **all, t_commands **cmd)
 
 static void	check_args_for_validity(t_commands **cmd)
 /*Функция проверяет:
-*Синтаксис (есть =, нет пробелов, 1-ый символ _ или буква, остальные символы _, цифра или буква).
+*Синтаксис (есть =, нет пробелов, 1-ый символ _ или буква, остальные символы _,
+* цифра или буква).
 *Меняет количество аргументов.
 *Переставляет указатель на текущий лист.
 */ 
@@ -124,12 +124,15 @@ static void	check_args_for_validity(t_commands **cmd)
 	while (tmp_lst)
 	{
 		error = 0;
-		if ((((char*)tmp_lst->content)[0]) == '_' || ft_isalpha(((char*)tmp_lst->content)[0]) == 1)
+		if ((((char*)tmp_lst->content)[0]) == '_' || \
+				ft_isalpha(((char*)tmp_lst->content)[0]) == 1)
 		{
 			index = 1;
-			while (((char*)tmp_lst->content)[index] != '=' && ((char*)tmp_lst->content)[index] != '\0')
+			while (((char*)tmp_lst->content)[index] != '=' && \
+					((char*)tmp_lst->content)[index] != '\0')
 			{
-				if (((char*)tmp_lst->content)[index] != '_' && ft_isalpha(((char*)tmp_lst->content)[index]) != 1 \
+				if (((char*)tmp_lst->content)[index] != '_' && \
+					ft_isalpha(((char*)tmp_lst->content)[index]) != 1 \
 					&& ft_isalnum(((char*)tmp_lst->content)[index]) != 1)
 				{
 					error = delete_lst(cmd, &tmp_lst, num_of_lst, 1);
@@ -162,8 +165,7 @@ void	ft_export(t_commands **cmd, t_data **all)
 
 	index = -1;
 	check_args_for_validity(cmd);
-	change_var(all, cmd);//Меняет переменную окружения, если она уже существует
-	//и удаляет этот аргумент + меняет число аргкментов
+	change_var(all, cmd);
 	if ((*cmd)->lst)
 	{
 		(*all)->count_str += (*cmd)->count_args;
@@ -171,31 +173,14 @@ void	ft_export(t_commands **cmd, t_data **all)
 		temp_env = (*all)->envp;
 		if (!((*all)->envp = (char **)malloc(sizeof(char *) * ((*all)->count_str + 1))))
 			error_output(*cmd, *all, MALLOC_12);
-
-
 		while (temp_env[++index])
 			(*all)->envp[index] = temp_env[index];
 		while (index < (*all)->count_str)
 		{
-			(*all)->envp[index] = temp_list->content;
+			(*all)->envp[index++] = temp_list->content;
 			temp_list = temp_list->next;
-			index++;
 		}
 		(*all)->envp[index] = NULL;
 		free(temp_env);
-		
-		
-		// while (++index < (*all)->env_var)
-		// 	(*all)->envp[index] = temp_env[index];
-		// while (index < (*all)->count_str - 1)
-		// {
-		// 	(*all)->envp[index] = temp_list->content;
-		// 	temp_list = temp_list->next;
-		// 	index++;
-		// }
-		// (*all)->envp[index] = temp_env[(*all)->env_var];
-		// (*all)->env_var += (*cmd)->count_args;
-		// (*all)->envp[++index] = NULL;
-		// free(temp_env);
 	}
 }

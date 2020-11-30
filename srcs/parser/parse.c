@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/26 18:54:04 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/27 18:32:51 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,21 +132,24 @@ static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
 	tmp_cmd = (*cmd);
 	if (tmp->llisttok->type == CHAR_GREATER || tmp->llisttok->type == CHAR_LESSER)
 	{	
-		init(cmd);
+		init(cmd, data);
 		(*cmd)->redir = init_struct_commands(*cmd, data);
 		(*cmd) = (*cmd)->redir;
 		(*cmd)->previous = tmp_cmd;
-		(*cmd)->previous->type_redir = (*cmd)->previous->type_redir == CHAR_GREATER ? 3 : tmp->llisttok->type;
+		// (*cmd)->previous->type_redir = (*cmd)->previous->type_redir == CHAR_GREATER ? 3 : tmp->llisttok->type;
+		// if ((*cmd)->type_redir == CHAR_GREATER)
+			// (*cmd)->previous->type_redir = CHAR_GREATER;
+
 	}
 	else if (tmp->llisttok->type == CHAR_SEMICOLON)
 	{
-		init(cmd);
+		init(cmd, data);
 		(*cmd)->next = init_struct_commands(*cmd, data);
 		(*cmd) = (*cmd)->next;
 	}
 	else if (tmp->llisttok->type == CHAR_PIPE)
 	{
-		init(cmd);
+		init(cmd, data);
 		(*cmd)->pipe = init_struct_commands(*cmd, data);
 		(*cmd) = (*cmd)->pipe;
 	}
@@ -168,8 +171,8 @@ t_commands		*parse(t_data *data, t_lexer *lexerbuf)
 		lexerbuf->llisttok = lexerbuf->llisttok->next;
 	}
 	if (!syntax_tree->next && !syntax_tree->redir && !syntax_tree->pipe)
-		init(&syntax_tree);
+		init(&syntax_tree, data);
 	if (!tmp->next && !tmp->redir && !tmp->pipe && syntax_tree != tmp)
-		init(&tmp);
+		init(&tmp, data);
 	return (syntax_tree);	
 }

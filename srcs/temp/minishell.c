@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/27 18:41:58 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/30 14:03:01 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int    				main(int argc, char **argv, char **envp)
 	{
 		while (1)
 		{
+			flag = 0;
 			print_promt_string();
+			// signal(SIGINT,signal_handler);
 			read_cmd(data, &line);
 			lexer_build(line, ft_strlen(line), &lexerbuf);
 			ft_free_tmp(line);
@@ -83,7 +85,8 @@ int    				main(int argc, char **argv, char **envp)
 			}
 			#endif
 			executor(syntax_tree, data);
-	
+			if (flag == 0 && syntax_tree->num_cmd != CMD_IN_PATH)
+				write(1, "\n", 1);
 			if (line == '\0')
 				print_promt_string();
 			freeing_memory_from_lexer(&lexerbuf);
@@ -93,7 +96,7 @@ int    				main(int argc, char **argv, char **envp)
 			// 	print_result(cmd, line);
 			// 	// print_promt_string();
 			// } 
-			// freeing_memory_from_struct_commands(cmd);
+			// freeing_memory_from_struct_commands(syntax_tree);
 		}
 	}
 	exit(EXIT_SUCCESS);

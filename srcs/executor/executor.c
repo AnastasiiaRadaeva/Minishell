@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/26 18:09:32 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/30 11:49:11 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,40 @@ void			give_env(t_data *data)
 }
 #endif
 
+int			check_syntax_error(t_commands *redir)
+{
+	char	*token_err;
+
+	if (redir->redir->type_redir != 3)
+	{
+		if (!redir->redir->cmd && redir->redir->pipe->cmd)
+		{
+			token_err = ft_strdup("`|'\n");
+			error_case("minishell: syntax error near unexpected token ", token_err, NULL);
+			ft_free_tmp(token_err);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 void			selection_cmd(t_commands *cmd, t_data *data,
 								t_commands *redirect, t_commands *pip)
 {
 	// #if 0
 	(void)pip;
 	// #endif
+
 	if (redirects(redirect))
+	{
+		// check_syntax_error(redirect);
 		return;
+	}
+	// if (check_syntax_error(redirect))
+		// return;
 	if (cmd->num_cmd == CMD_PWD)
 		ft_pwd(cmd, data);
 	else if (cmd->num_cmd == CMD_ENV)
-		// give_env(data);
 		ft_env(cmd, data);
 	else if (cmd->num_cmd == CMD_CD)
 		ft_cd(&cmd, data);
@@ -91,7 +113,9 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 	else if (cmd->num_cmd == CMD_UNSET)
 		ft_unset(&cmd, &data);
 	else if (cmd->num_cmd == CMD_IN_PATH)
-		ft_check_cmd_in_path(&cmd, &data);	
+		ft_check_cmd_in_path(&cmd, &data);
+	if (cmd->num_cmd == CMD_ERROR)
+		error_case("minishell: ", cmd->cmd, " command not found");
 }
 
 void			execute_cmd_line(t_commands *cmd, t_data *data)
@@ -100,7 +124,7 @@ void			execute_cmd_line(t_commands *cmd, t_data *data)
 	t_commands	*pip;
 	t_commands	*redirect;
 
-	if (cmd->cmd)
+	if (cmd->cmd || cmd->type_redir)
 	{
 		pip = cmd;
 		redirect = cmd;
@@ -116,9 +140,9 @@ void			execute_cmd_line(t_commands *cmd, t_data *data)
 
 void	executor(t_commands *syntax_tree, t_data *data)
 {
-	if (syntax_tree && syntax_tree->invalid != CMD_ERROR)
+	if (syntax_tree)
 	{
-		while (syntax_tree && syntax_tree->invalid != CMD_ERROR)
+		while (syntax_tree)
 		{
 			execute_cmd_line(syntax_tree, data);
 			syntax_tree = syntax_tree->next;
@@ -126,11 +150,11 @@ void	executor(t_commands *syntax_tree, t_data *data)
 			dup2(data->fd_0, 0);
 		}
 	}
-	else
-	{
-		ft_putendl("Invalid command");
-		ft_free_tmp(data->error_string);
-		if (!(data->error_string =ft_strdup("127")))
-			error_output(syntax_tree, data, NULL);
-	}	
+	// else
+	// {
+	// 	ft_putendl("Invalid command");
+	// 	ft_free_tmp(data->error_string);
+	// 	if (!(data->error_string =ft_strdup("127")))
+	// 		error_output(syntax_tree, data, NULL);
+	// }	
 }
