@@ -22,7 +22,7 @@ void	signal_handler(int num)
 	// }
 	if (num == SIGINT)
 	{
-		ft_putendl("\b\b  ");
+		ft_putendl("\b\b  \b\b");
 		print_promt_string();
 	}
 	if (num == SIGQUIT)
