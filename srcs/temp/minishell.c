@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 19:44:54 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/30 19:45:45 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int    				main(int argc, char **argv, char **envp)
 	}
 	else
 	// #endif
-	{_
+	{
 		while (1)
 		{
 			// flag = 0;
