@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 18:08:54 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/30 18:11:25 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	_if_char_whitespace(t_tok **token, int *arr, int size)
 	if (arr[1] > 0)
 	{
 		(*token)->data[arr[1]] = 0;
-		(*token)->next = init_tok_list();
+		(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 		*token = (*token)->next;
 		(*token)->data = malloc(size - arr[0] + 1);
 		(*token)->data[0] = 0;
@@ -128,7 +128,7 @@ void	_if_char_separator(t_tok **token, int *arr, int size)
 	if (arr[1] > 0)
 	{
 		(*token)->data[arr[1]] = 0;
-		(*token)->next = init_tok_list();
+		(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 		*token = (*token)->next;
 		(*token)->data = malloc(size - arr[0] + 1);
 		(*token)->data[0] = 0;
@@ -138,7 +138,7 @@ void	_if_char_separator(t_tok **token, int *arr, int size)
 	(*token)->data[0] = arr[4];
 	(*token)->data[1] = 0;
 	(*token)->type = arr[4];
-	(*token)->next = init_tok_list();
+	(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 	*token = (*token)->next;
 	(*token)->data = malloc(size - arr[0] + 1);
 	(*token)->data[0] = 0;
