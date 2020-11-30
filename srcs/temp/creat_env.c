@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:37:28 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 17:15:26 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/30 17:22:05 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static	size_t	find_char(char *str, char symb)
 	return (i);
 }
 
-static void	del_env_var(t_data **all, t_commands **cmd, char *del)
+static void	del_env_var(t_data **all, char *del)
 {
 	char	**temp_env;
 	int		index;
@@ -61,7 +61,7 @@ static void	del_env_var(t_data **all, t_commands **cmd, char *del)
 	i = -1;
 	temp_env = (*all)->envp;
 	if (!((*all)->envp = (char **)malloc(sizeof(char *) * (*all)->count_str)))
-		error_output(*cmd, *all, MALLOC_12);
+		error_output(NULL, *all, MALLOC_12);
 	while (temp_env[++index])
 	{
 		if (ft_strncmp(del, temp_env[index], find_char(temp_env[index],'='))\
@@ -98,7 +98,7 @@ static void	parse_env(t_data *data)
 	data->count_str = i;
 }
 
-void		create_env(t_data *data, char **envp, t_commands **cmd)
+void		create_env(t_data *data, char **envp)
 {
 	int		i;
 	int		j;
@@ -116,6 +116,6 @@ void		create_env(t_data *data, char **envp, t_commands **cmd)
 	}
 	data->envp[j] = NULL;
 	data->count_str = i;
-	del_env_var(&data, cmd, "OLDPWD=");
+	del_env_var(&data, "OLDPWD=");
 	parse_env(data);
 }
