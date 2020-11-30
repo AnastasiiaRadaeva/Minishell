@@ -1,3 +1,3 @@
 git add .
-git commit -m "for vbox(141 tests are running)"
+git commit -m "for vbox"
 git push
