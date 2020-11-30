@@ -13,18 +13,9 @@
 
 #include "minishell.h"
 
-#if 0
-char	*ft_pwd(t_commands *cmd, t_data *all)
-{
-	if (!(all->envp[all->current_pwd]))
-		error_output(cmd, all, PWD_GETCWD); // ошибку getcwd переписать 
-	return (all->envp[all->current_pwd] + 4);
-}
-#endif
-
 void	ft_pwd(t_commands *cmd, t_data *all)
 {
 	if (!(all->envp[all->current_pwd]))
 		error_output(cmd, all, PWD_GETCWD); // эту ошибку переписать
-	ft_putstr(all->envp[all->current_pwd] + 4);
+	ft_putendl(all->envp[all->current_pwd] + 4);
 }

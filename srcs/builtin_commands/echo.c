@@ -6,11 +6,21 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/27 18:22:53 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/30 13:45:58 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	add_new_line(char **line_for_print, t_commands *cmd)
+{
+	char	*temp_line;
+
+	temp_line = *line_for_print;
+	if (!((*line_for_print) = ft_strjoin(*line_for_print, "\n")))
+		error_output(cmd, NULL, MALLOC_6);
+	free(temp_line);
+}
 
 static char	*ft_join_all_args(t_commands *cmd, t_list *start, int flag)
 {
@@ -24,32 +34,24 @@ static char	*ft_join_all_args(t_commands *cmd, t_list *start, int flag)
 		{
 			temp_line = line_for_print;
 			if (!(line_for_print = ft_strjoin(line_for_print, start->content)))
-				error_output(cmd, NULL, MALLOC_6); //добавить в параметры строку, которую можно потом очистить (чтобы не засорять строками) 
+				error_output(cmd, NULL, MALLOC_6);
 			free(temp_line);
 			temp_line = line_for_print;
-			if (!(line_for_print = start->next ? ft_strjoin(line_for_print, " ") : line_for_print))
+			if (!(line_for_print = start->next ? ft_strjoin(line_for_print, " ")\
+									 : line_for_print))
 					error_output(cmd, NULL, MALLOC_6);
 			if (ft_strcmp(temp_line, line_for_print) != 0)
 				free(temp_line);
 			start = start->next;
 		}
-	// if (flag == 0)
-	// {
-	// 	temp_line = line_for_print;
-	// 	if (!(line_for_print = ft_strjoin(line_for_print, "\n")))
-	// 		error_output(cmd, NULL, MALLOC_6);
-	// 	free(temp_line);
-	// }
-	(void)flag;
+	if (flag == 0)
+		add_new_line(&line_for_print, cmd);
 	return (line_for_print);
 }
 
-// char	*ft_echo(t_commands *cmd)
 void	ft_echo(t_commands *cmd)
-/*в print_result нужно убрать \n в конце строки и добавлять их уже при обработке функциями
-*/
 {
-	// int		flag;
+	int		flag;
 	t_list	*start;
 
 	flag = 0;
@@ -61,6 +63,5 @@ void	ft_echo(t_commands *cmd)
 			start = cmd->lst->next;
 			cmd->count_args--;
 		}
-	// return (ft_join_all_args(cmd, start, flag));
 	ft_putstr(ft_join_all_args(cmd, start, flag));
 }

@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 11:49:25 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/30 12:44:41 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int    				main(int argc, char **argv, char **envp)
 	{
 		while (1)
 		{
-			flag = 0;
+			// flag = 0;
 			print_promt_string();
 			// signal(SIGINT,signal_handler);
 			read_cmd(data, &line);
@@ -85,8 +85,8 @@ int    				main(int argc, char **argv, char **envp)
 			}
 			#endif
 			executor(syntax_tree, data);
-			if (flag == 0 && syntax_tree->num_cmd != CMD_IN_PATH)
-				write(1, "\n", 1);
+			// if (flag == 0 && syntax_tree->num_cmd != CMD_IN_PATH)
+			// 	write(1, "\n", 1);
 			if (line == '\0')
 				print_promt_string();
 			freeing_memory_from_lexer(&lexerbuf);
