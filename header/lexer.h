@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:17:30 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 15:58:46 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/30 20:41:48 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef	enum		e_token_type
 	CHAR_WHITESPACE = ' ',
 	CHAR_GREATER = '>',
 	CHAR_LESSER = '<',
+	CHAR_GREATER_GREATER = 3,
 	CHAR_NULL = 0,
 	CHAR_DOLLAR = '$',
 	TOKEN = -1,
