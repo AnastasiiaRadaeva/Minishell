@@ -6,21 +6,12 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 18:51:20 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/30 17:54:29 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer.h"
-
-t_tok		*init_tok_list()
-{
-	t_tok 	*new_list;
-
-	if (!(new_list = (t_tok *)ft_calloc(sizeof(t_tok), 1)))
-		error_output(NULL, NULL, MALLOC_1);
-	return (new_list);
-}
 
 int			get_char_type(char *ch_type)
 {
@@ -266,8 +257,8 @@ int lexer_build(char *input, int size, t_lexer  *lexerbuf)
 	t_tok 	*token;
 	int		arr[6];
 
+	lexerbuf->llisttok = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 	init_arr(arr);
-	lexerbuf->llisttok = init_tok_list();
 	token = lexerbuf->llisttok;
 	tok_init(token, size);
 	while (input[++arr[0]] != '\0')
