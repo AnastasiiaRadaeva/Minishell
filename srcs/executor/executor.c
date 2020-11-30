@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 11:49:11 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/11/30 13:52:37 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,13 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 	else if (cmd->num_cmd == CMD_ECHO)
 		ft_echo(cmd);
 	else if (cmd->num_cmd == CMD_EXPORT)
-		ft_export(&cmd, &data);
+		ft_export(&cmd, &data, -1);
 	else if (cmd->num_cmd == CMD_UNSET)
 		ft_unset(&cmd, &data);
 	else if (cmd->num_cmd == CMD_IN_PATH)
 		ft_check_cmd_in_path(&cmd, &data);
 	if (cmd->num_cmd == CMD_ERROR)
-		error_case("minishell: ", cmd->cmd, " command not found");
+		error_case("minishell: ", cmd->cmd, ": command not found\n");
 }
 
 void			execute_cmd_line(t_commands *cmd, t_data *data)
