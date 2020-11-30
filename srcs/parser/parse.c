@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 20:03:14 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/30 20:05:31 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
 	{	
 		init(cmd, data);
 		(*cmd)->type_redir = tmp->llisttok->type;
-		if ((*cmd)->type_redir == CHAR_GREATER && (*cmd)->previous->type_redir == CHAR_GREATER)
-			(*cmd)->type_redir = 3;
+		// if ((*cmd)->type_redir == CHAR_GREATER && (*cmd)->previous->type_redir == CHAR_GREATER)
+		// 	(*cmd)->type_redir = 3;
 		(*cmd)->redir = init_struct_commands(*cmd, data);
 		(*cmd) = (*cmd)->redir;
 		(*cmd)->previous = tmp_cmd;
