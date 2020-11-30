@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 17:58:00 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/11/30 18:06:51 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int    				main(int argc, char **argv, char **envp)
 	// #if 0
 	if (argv[1][0] == '-' && argv[1][1] == 'c')
 	{
-		lexer_build(ft_strdup(argv[2]), ft_strlen(argv[2]), &lexerbuf);
-		syntax_tree = parse(data, &lexerbuf);
+		lexer_build(ft_strdup(argv[2]), ft_strlen(argv[2]), lexerbuf);
+		syntax_tree = parse(data, lexerbuf);
 		executor(syntax_tree, data);
 	}
 	else
