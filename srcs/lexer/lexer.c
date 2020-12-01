@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 20:32:07 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/01 09:14:36 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,18 +211,18 @@ int		_if_state_in_dollar(t_tok **token, int *arr, char c)
 	
 }
 
-void	_if_state_in_general(t_tok **token, int *arr, char c, int size)
+void	_if_state_in_general(t_tok **token, int *arr, char *input, int size)
 {
 	if (arr[4] == CHAR_QOUTE)
 		_if_char_quote(token, arr);
 	else if (arr[4] == CHAR_DQUOTE)
 		_if_char_dquote(token, arr);
 	else if (arr[4] == CHAR_GENERAL)
-		_if_char_general(token, arr, c);
+		_if_char_general(token, arr, input[arr[0]]);
 	else if (arr[4] == CHAR_WHITESPACE)
 		_if_char_whitespace(token, arr, size);
 	else if (arr[4] == CHAR_DOLLAR)
-		_if_char_dollar(token, arr, c);
+		_if_char_dollar(token, arr, input[arr[0]]);
 	else if ((_check_char_separator(arr[4])))
 		_if_char_separator(token, arr, size);
 
@@ -265,7 +265,7 @@ int lexer_build(char *input, int size, t_lexer  *lexerbuf)
 	{
 		arr[4] = get_char_type(ft_strchr(TOKEN_TYPE, input[arr[0]]));
 		if (arr[3] == STATE_GENERAL)
-			_if_state_in_general(&token, arr, input[arr[0]], size);
+			_if_state_in_general(&token, arr, input, size);
 		else if (arr[3] == STATE_IN_DQUOTE)
 			arr[3] = _if_state_in_dquote(&token, arr, input[arr[0]]);
 		else if (arr[3] == STATE_IN_QUOTE)
