@@ -164,12 +164,9 @@ t_commands		*parse(t_data *data, t_lexer *lexerbuf)
 	tmp = syntax_tree;
 	tmp_1 = lexerbuf->llisttok;
 	while (tmp_1)
-	// while (lexerbuf->llisttok)
 	{
-		// add_nodes(&tmp, lexerbuf, data);
 		add_nodes(&tmp, tmp_1, data);
 		tmp_1 = tmp_1->next;
-		// lexerbuf->llisttok = lexerbuf->llisttok->next;
 	}
 	if (!syntax_tree->next && !syntax_tree->redir && !syntax_tree->pipe)
 		init(&syntax_tree, data);

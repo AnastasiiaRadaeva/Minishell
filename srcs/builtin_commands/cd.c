@@ -52,7 +52,7 @@ void	ft_cd(t_commands **cmd, t_data *all)
 	{
 		if (!((*cmd)->lst = (t_list *)malloc(sizeof(t_list))))
 				error_output(*cmd, all, MALLOC_5);
-		((*cmd)->lst->content) = all->envp[all->home_dir] + 5;
+		((*cmd)->lst->content) = ft_strdup(all->envp[all->home_dir] + 5);
 		(*cmd)->lst->next = NULL;
 	}
 	if ((*cmd)->count_args > 1)
