@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/01 10:43:02 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/01 10:45:03 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ int		check_double_redirection(char *input, int *arr)
 
 void	_if_char_separator(t_tok **token, int *arr, int size, char *input)
 {
+	(void)input;
 	// if (arr[1] > 0)
 	// {
 	// 	(*token)->data[arr[1]] = 0;
