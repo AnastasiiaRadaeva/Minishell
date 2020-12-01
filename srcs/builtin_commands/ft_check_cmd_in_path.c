@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 19:13:31 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/01 15:58:14 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static	char	**creat_dimens_arr_for_execve(t_commands *cmd)
 		argv_for_execve[i] = tmp->content;
 		tmp = tmp->next;
 		i++;
-
 	}
 	argv_for_execve[i] = NULL;
 	return (argv_for_execve);
@@ -39,32 +38,31 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 	
 	pid_t	pid;
 	int		i;
-	char	**split_path;
-	char	*tmp_cmd;
 	char	**argv_for_execve;
-
+	char	*tmp;
+	// int		status;
 	i = -1;
-	tmp_cmd = ft_strjoin("/", (*cmd)->cmd);
-	split_path = ft_split((*data)->envp[(*data)->path] + 5, ':');
 	argv_for_execve = NULL;
 	argv_for_execve = creat_dimens_arr_for_execve(*cmd);
-	pid = fork();
 	// signal(SIGINT, )   - ?
+
+	tmp = (*cmd)->cmd;
+	(*cmd)->cmd = ft_strjoin((*cmd)->cmd_dir, (*cmd)->cmd);
+	ft_free_tmp(tmp);
+	pid = fork();
 	if (!pid)
 	{
-		while (split_path[++i])
-		{
-			split_path[i] = ft_strjoin_gnl(&split_path[i], tmp_cmd);
-			if ((execve(split_path[i], argv_for_execve, (*data)->envp)) == -1)
-			{
-				if (errno != 2)
-					exit(1);
-			}
-		}
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		execve((*cmd)->cmd, argv_for_execve, (*data)->envp);
+		exit(1);
 	}
 	else
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		wait(&pid);
-	ft_free_tmp(tmp_cmd);
-	ft_free_two_dimensional_arr(split_path);
-	ft_free_two_dimensional_arr(argv_for_execve);
+		// write(1, &status, 1);
+	}
+	// ft_free_two_dimensional_arr(argv_for_execve);
 }
