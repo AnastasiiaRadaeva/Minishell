@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/01 10:48:39 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/01 11:24:53 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	_if_char_separator(t_tok **token, int *arr, int size, char *input)
 	// }
 	// (*token)->data[0] = arr[4];
 	// (*token)->data[1] = 0;
-	(*token)->type = check_double_redirection(input, arr);
+	(*token)->type = arr[4];
 	(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 	*token = (*token)->next;
 	(*token)->data = (char *)malloc(size - arr[0] + 1);
@@ -189,11 +189,16 @@ void	_if_char_null(t_tok **token, int *arr, char c)
 	}
 }
 
-int		_check_char_separator(int chtype)
+int		_check_char_separator(int *arr, char *input, int chtype)
 {
 	if (chtype == CHAR_SEMICOLON || chtype == CHAR_GREATER ||
 		chtype == CHAR_LESSER || chtype == CHAR_AMPERSAND ||
 		chtype == CHAR_PIPE)
+		if (chtype == CHAR_GREATER && input[arr[4] + 1] == CHAR_GREATER)
+		{
+			input[arr[4]] = CHAR_GREATER_GREATER;
+			arr[0] += 2;
+		}
 		return (1);
 	return (0);
 }
@@ -232,7 +237,7 @@ void	_if_state_in_general(t_tok **token, int *arr, char *input, int size)
 		_if_char_whitespace(token, arr, size);
 	else if (arr[4] == CHAR_DOLLAR)
 		_if_char_dollar(token, arr, input[arr[0]]);
-	else if ((_check_char_separator(arr[4])))
+	else if ((_check_char_separator(arr, input, arr[4])))
 		_if_char_separator(token, arr, size, input);
 
 }
