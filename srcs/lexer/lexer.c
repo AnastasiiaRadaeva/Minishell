@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/01 09:14:36 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/01 09:34:10 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,17 @@ void	_if_char_whitespace(t_tok **token, int *arr, int size)
 	}
 }
 
-void	_if_char_separator(t_tok **token, int *arr, int size)
+int		check_double_redirection(char *input, int *arr)
+{
+	int	i;
+
+	i = arr[0] - 1;
+	if (input[i] == CHAR_GREATER && arr[4] == CHAR_GREATER)
+		return (CHAR_GREATER_GREATER);
+	return(arr[4]);
+}
+
+void	_if_char_separator(t_tok **token, int *arr, int size, char *input)
 {
 	if (arr[1] > 0)
 	{
@@ -137,7 +147,7 @@ void	_if_char_separator(t_tok **token, int *arr, int size)
 	}
 	(*token)->data[0] = arr[4];
 	(*token)->data[1] = 0;
-	(*token)->type = arr[4];
+	(*token)->type = check_double_redirection(input, arr);
 	(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 	*token = (*token)->next;
 	(*token)->data = malloc(size - arr[0] + 1);
@@ -224,7 +234,7 @@ void	_if_state_in_general(t_tok **token, int *arr, char *input, int size)
 	else if (arr[4] == CHAR_DOLLAR)
 		_if_char_dollar(token, arr, input[arr[0]]);
 	else if ((_check_char_separator(arr[4])))
-		_if_char_separator(token, arr, size);
+		_if_char_separator(token, arr, size, input);
 
 }
 
