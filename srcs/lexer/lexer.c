@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/01 09:34:10 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/01 10:30:36 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,8 @@ void	_if_char_separator(t_tok **token, int *arr, int size, char *input)
 		(*token)->data[arr[1]] = 0;
 		(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 		*token = (*token)->next;
-		(*token)->data = malloc(size - arr[0] + 1);
-		(*token)->data[0] = 0;
+		(*token)->data = (char *)malloc(size - arr[0] + 1);
+		// (*token)->data[0] = 0;
 		(*token)->type = CHAR_NULL;
 		arr[1] = 0;
 	}
@@ -150,8 +150,8 @@ void	_if_char_separator(t_tok **token, int *arr, int size, char *input)
 	(*token)->type = check_double_redirection(input, arr);
 	(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 	*token = (*token)->next;
-	(*token)->data = malloc(size - arr[0] + 1);
-	(*token)->data[0] = 0;
+	(*token)->data = (char *)malloc(size - arr[0] + 1);
+	// (*token)->data[0] = 0;
 	(*token)->type = CHAR_NULL;
 	arr[1] = 0;
 }
