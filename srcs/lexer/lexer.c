@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/01 11:24:53 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/01 11:29:30 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int		check_double_redirection(char *input, int *arr)
 
 void	_if_char_separator(t_tok **token, int *arr, int size, char *input)
 {
-	// (void)input;
+	(void)input;
 	// if (arr[1] > 0)
 	// {
 	// 	(*token)->data[arr[1]] = 0;
@@ -211,9 +211,9 @@ void	_if_char_dollar(t_tok **token, int *arr, char c)
 	arr[1]++;
 }
 
-int		_if_state_in_dollar(t_tok **token, int *arr, char c)
+int		_if_state_in_dollar(t_tok **token, int *arr, char c, char *input)
 {
-	if (_check_char_separator(arr[4]) || arr[4] == CHAR_WHITESPACE)
+	if (_check_char_separator(arr, input, arr[4]) || arr[4] == CHAR_WHITESPACE)
 	{
 		arr[0]--;
 		return (STATE_GENERAL);
@@ -285,7 +285,7 @@ int lexer_build(char *input, int size, t_lexer  *lexerbuf)
 		else if (arr[3] == STATE_IN_QUOTE)
 			arr[3] = _if_state_in_quote(&token, arr, input[arr[0]]);
 		else if (arr[3] == STATE_IN_DOLLAR)
-			arr[3] = _if_state_in_dollar(&token, arr, input[arr[0]]);
+			arr[3] = _if_state_in_dollar(&token, arr, input[arr[0]], input);
 	}
 	_if_char_null(&token, arr, input[arr[0]]);
 	token = lexerbuf->llisttok;
