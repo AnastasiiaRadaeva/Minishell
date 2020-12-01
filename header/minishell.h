@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 16:21:16 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/01 20:51:50 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct			s_commands
 }						t_commands;
 
 int				main(int argc, char **argv, char **environ);
-void			create_env(t_data *data, char **envp, t_commands **cmd);
+void			create_env(t_data *data, char **envp);
 void			print_promt_string(void);
 t_data			*init_struct_data(void);
 void			signal_handler(int num);
