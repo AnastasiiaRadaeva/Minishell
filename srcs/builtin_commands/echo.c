@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/30 13:45:58 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/02 14:01:24 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,19 @@ void	ft_echo(t_commands *cmd)
 	flag = 0;
 	start = cmd->lst;
 	if (cmd->count_args > 0)
+	{
 		if (ft_strcmp(cmd->lst->content, "-n") == 0)
 		{
 			flag = 1;
 			start = cmd->lst->next;
 			cmd->count_args--;
 		}
+		else if (!ft_strcmp(cmd->lst->content, "$?"))
+		{
+			ft_putnbr_fd(errno, 0);
+			write(1, "\n", 1);
+			return;
+		}
+	}
 	ft_putstr(ft_join_all_args(cmd, start, flag));
 }

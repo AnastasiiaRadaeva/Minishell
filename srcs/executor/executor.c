@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 13:52:37 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/02 14:03:37 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,6 @@ void			give_env(t_data *data)
 }
 #endif
 
-int			check_syntax_error(t_commands *redir)
-{
-	char	*token_err;
-
-	if (redir->redir->type_redir != 3)
-	{
-		if (!redir->redir->cmd && redir->redir->pipe->cmd)
-		{
-			token_err = ft_strdup("`|'\n");
-			error_case("minishell: syntax error near unexpected token ", token_err, NULL);
-			ft_free_tmp(token_err);
-			return (1);
-		}
-	}
-	return (0);
-}
 
 void			selection_cmd(t_commands *cmd, t_data *data,
 								t_commands *redirect, t_commands *pip)
@@ -138,10 +122,30 @@ void			execute_cmd_line(t_commands *cmd, t_data *data)
 	}
 }
 
+int			check_syntax_error(t_commands *cmd)
+{
+
+	if (cmd->redir)
+	{
+		if (cmd->redir->type_redir != 3)
+		{
+			if (!cmd->redir->cmd && cmd->redir->pipe->cmd)
+			{
+				errno = 2;
+				error_case("minishell: syntax error near unexpected token ", "`|'\n", NULL);
+				return (1);
+			}
+		}
+	}
+	return (0);
+}
+
 void	executor(t_commands *syntax_tree, t_data *data)
 {
 	if (syntax_tree)
 	{
+		if (check_syntax_error(syntax_tree))
+			return;
 		while (syntax_tree)
 		{
 			execute_cmd_line(syntax_tree, data);
