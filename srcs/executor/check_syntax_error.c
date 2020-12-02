@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:07:50 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 15:27:39 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 17:00:30 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ static	int	check_syntax_pipe(t_commands *cmd)
 {
 	 if (!cmd->pipe->cmd && cmd->pipe->next)
 	{
-		if (cmd->next->pipe->cmd)
+		if (cmd->pipe->next->cmd)
 		{
 			errno = 2;
 			error_case("minishell: syntax error near unexpected token ",
-						"`|\n", NULL);
+						"`|'\n", NULL);
 			return (1);
 		}
 	}

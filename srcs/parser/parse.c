@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 10:05:42 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 16:49:31 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,9 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 {
 	t_list		*lst;
 	
-	(void)data;
-	// if (type == CHAR_QOUTE || type == CHAR_DQUOTE)
-	{	
-		if (type == CHAR_DQUOTE)
-			_if_type_dollar(data, &content, NULL);	
+	if (type == CHAR_DQUOTE)
+		_if_type_dollar(data, &content, NULL);	
 	_strip_quotes(content, ft_strlen(content), 0);
-	}
 	if (type == CHAR_DOLLAR)
 		_if_type_dollar(data, &content, NULL);
 	if (*content)
@@ -134,6 +130,13 @@ static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
 	{	
 		init(cmd, data);
 		(*cmd)->type_redir = tmp->llisttok->type;
+		if ((*cmd)->previous && !(*cmd)->cmd)
+		{
+			if ((*cmd)->previous->type_redir == CHAR_GREATER && (*cmd)->type_redir == CHAR_GREATER)
+			(*cmd)->previous->type_redir = 3;
+			(*cmd)->type_redir = 0;
+			return;
+		}
 		(*cmd)->redir = init_struct_commands(*cmd, data);
 		(*cmd) = (*cmd)->redir;
 		(*cmd)->previous = tmp_cmd;

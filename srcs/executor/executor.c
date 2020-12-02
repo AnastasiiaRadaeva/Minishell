@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 15:13:27 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 16:51:55 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			redirects(t_commands *redir)
 			if (redir->type_redir == CHAR_GREATER && redir->redir->invalid != -2)
 				fd = open(redir->redir->cmd, O_CREAT |
 							O_RDWR | O_TRUNC, S_IRWXU);
-			if (redir->type_redir == 3 && !redir->redir->invalid)
+			if (redir->type_redir == 3 && redir->redir->invalid != -2)
 				fd = open(redir->redir->cmd, O_CREAT |
 							O_RDWR | O_APPEND, S_IRWXU);
 		}
