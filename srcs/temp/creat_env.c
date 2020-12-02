@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creat_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:37:28 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 18:33:00 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/02 19:07:41 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 // 		error_output(NULL, *all, MALLOC_12);
 // 	while (temp_env[++index])
 // 	{
-// 		if (ft_strncmp(del, temp_env[index], find_char(temp_env[index],'='))\
+// 		if (ft_strncmp(del, temp_env[index], find_char(temp_env[index],'='))
 // 				 == 0 && find_char(temp_env[index],'=') == ft_strlen(del) - 1)
 // 		{
 // 			index++;

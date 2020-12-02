@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 18:47:11 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/02 19:15:42 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int    				main(int argc, char **argv, char **envp)
 			executor(syntax_tree, data);
 			// if (flag == 0 && syntax_tree->num_cmd != CMD_IN_PATH)
 			// 	write(1, "\n", 1);
-			if (*line == '\0')
-				print_promt_string();
+			// if (*line == '\0')
+				// print_promt_string();
 			freeing_memory_from_lexer(lexerbuf);
 			// free_syntax_tree(syntax_tree);
 			// else

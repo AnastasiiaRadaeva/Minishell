@@ -6,54 +6,36 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:07:50 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 17:28:31 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 17:59:48 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+
+static	int	return_error_case(int err, char *str_err)
+{
+	errno = err;
+	error_case("minishell: syntax error near unexpected token ",
+							str_err, NULL);
+	return (1);
+}
 
 static int	check_syntax_redirect(t_commands *cmd)
 {
 	if (cmd->redir->type_redir != 3)
 	{
 		if (!cmd->redir->cmd && cmd->redir->pipe)
-		{
 			if (cmd->redir->pipe->cmd)
-			{
-				errno = 2;
-				error_case("minishell: syntax error near unexpected token ",
-							"`|'\n", NULL);
-				return (1);
-			}
-		}
+			return_error_case(2, "`|'\n");
 		if (!cmd->redir->cmd && cmd->redir->next)
-		{
 			if (cmd->redir->next->cmd)
-			{
-				errno = 2;
-				error_case("minishell: syntax error near unexpected token ",
-							"`;'\n", NULL);
-				return (1);
-			}
-		}
+				return_error_case(2, "`;'\n");
 		if (!cmd->redir->cmd && cmd->redir->redir)
-		{
 			if (!cmd->redir->redir->cmd)
-			{
-				errno = 2;
-				error_case("minishell: syntax error near unexpected token ",
-							"`>>'\n", NULL);
-				return (1);
-			}
-		}
-		if (!cmd->redir->cmd && !cmd->redir->next && !cmd->redir->pipe && !cmd->redir->redir)
-		{
-			errno = 2;
-			error_case("minishell: syntax error near unexpected token ",
-						"`>'\n", NULL);
-			return (1);
-		}
-		
+				return_error_case(2, "`>>'\n");
+		if (!cmd->redir->cmd && !cmd->redir->next &&
+			!cmd->redir->pipe && !cmd->redir->redir)
+			return_error_case(2, "`>'");
 	}
 	return (0);
 }
