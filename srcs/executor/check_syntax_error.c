@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:07:50 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 17:00:30 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 17:28:31 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,24 @@ static int	check_syntax_redirect(t_commands *cmd)
 				return (1);
 			}
 		}
+		if (!cmd->redir->cmd && cmd->redir->redir)
+		{
+			if (!cmd->redir->redir->cmd)
+			{
+				errno = 2;
+				error_case("minishell: syntax error near unexpected token ",
+							"`>>'\n", NULL);
+				return (1);
+			}
+		}
+		if (!cmd->redir->cmd && !cmd->redir->next && !cmd->redir->pipe && !cmd->redir->redir)
+		{
+			errno = 2;
+			error_case("minishell: syntax error near unexpected token ",
+						"`>'\n", NULL);
+			return (1);
+		}
+		
 	}
 	return (0);
 }
@@ -62,6 +80,23 @@ static	int	check_syntax_next(t_commands *cmd)
 			return (1);
 		}
 	}
+	if (!cmd->next->cmd && cmd->next->next)
+	{
+		if (!cmd->next->next->cmd)
+		{
+			errno = 2;
+			error_case("minishell: syntax error near unexpected token ",
+						"`;;'\n", NULL);
+			return (1);
+		}
+	}
+	if (!cmd->next->cmd && !cmd->next->next && !cmd->next->pipe && !cmd->next->redir)
+	{
+		errno = 2;
+		error_case("minishell: syntax error near unexpected token ",
+					"`;'\n", NULL);
+		return (1);
+	}
 	return (0);
 }
 
@@ -86,6 +121,23 @@ static	int	check_syntax_pipe(t_commands *cmd)
 						"`|'\n", NULL);
 			return (1);
 		}
+	}
+	if (!cmd->pipe->cmd && cmd->pipe->pipe)
+	{
+		if (!cmd->pipe->pipe->cmd)
+		{
+			errno = 2;
+			error_case("minishell: syntax error near unexpected token ",
+						"`||'\n", NULL);
+			return (1);
+		}
+	}
+	if (!cmd->pipe->cmd && !cmd->pipe->next && !cmd->pipe->pipe && !cmd->pipe->redir)
+	{
+		errno = 2;
+		error_case("minishell: syntax error near unexpected token ",
+					"`|'\n", NULL);
+		return (1);
 	}
 	return (0);
 }
