@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/02 10:22:10 by anatashi         ###   ########.fr        #
+#    Updated: 2020/12/02 15:12:09 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ TOOLS_LIST			=	ft_trim_string.c \
 
 EXECUTOR_DIR		=	srcs/executor/
 EXECUTOR_LIST		=	executor.c\
-						# give_pwd.c deleted ?
+						check_syntax_error.c
 
 BUILTIN_CMD_DIR		= 	srcs/builtin_commands/
 BUILTIN_CMD_LIST	= 	pwd.c\

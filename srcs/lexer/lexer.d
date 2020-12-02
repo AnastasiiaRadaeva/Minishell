@@ -67,4 +67,8 @@ srcs/lexer/lexer.o: srcs/lexer/lexer.c /usr/include/stdc-predef.h \
  /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
  /usr/include/x86_64-linux-gnu/bits/stat.h /usr/include/wait.h \
- /usr/include/x86_64-linux-gnu/sys/wait.h header/lexer.h
+ /usr/include/x86_64-linux-gnu/sys/wait.h /usr/include/errno.h \
+ /usr/include/x86_64-linux-gnu/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/x86_64-linux-gnu/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ header/lexer.h
