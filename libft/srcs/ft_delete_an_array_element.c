@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 10:48:06 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/10 16:44:29 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:00:31 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		ft_delete_an_array_element(char ***array, size_t i)
 	{
 		tmp = *(array)[i];
 		*(array)[i] = *(array)[i + 1];
+		ft_free_tmp(tmp);
 		i++;
 	}
 	ft_free_tmp((*array)[i]);

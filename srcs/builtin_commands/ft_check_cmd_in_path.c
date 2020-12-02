@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/01 20:57:10 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:03:44 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 {
 	
 	pid_t	pid;
-	int		i;
 	char	**argv_for_execve;
 	char	*tmp;
 	// int		status;
-	i = -1;
 	argv_for_execve = NULL;
 	argv_for_execve = creat_dimens_arr_for_execve(*cmd);
 	// signal(SIGINT, )   - ?

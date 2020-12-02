@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
+#    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/11/26 14:59:20 by kbatwoma         ###   ########.fr        #
+#    Updated: 2020/12/02 10:22:10 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,10 +77,12 @@ lib:
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(FLAGS) $(OPFLAGS) -L$(LIBFT_DIR) -lft $(OBJ)
+	# $(CC) -o $(NAME) $(FLAGS) $(OPFLAGS) -L$(LIBFT_DIR) -lft $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) -L. $(LIBFT_DIR)libft.a -o $(NAME)
 	
 %.o: %.c 
-	$(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
+	# $(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
+	$(CC) $(FLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
 
 include $(wildcard $(D_FILE))
 

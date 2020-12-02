@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/01 20:45:14 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:12:12 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include "lexer.h"
 #include "parser.h"
 #include "executor.h"
-
-#if 0
-#endif 
 
 int    				main(int argc, char **argv, char **envp)
 {
@@ -57,38 +54,10 @@ int    				main(int argc, char **argv, char **envp)
 			lexer_build(line, ft_strlen(line), lexerbuf);
 			ft_free_tmp(line);
 			syntax_tree = parse(data, lexerbuf);
-	
-			
-			/*
-			** print contents of cmd
-			*/
-			#if 0
-			t_commands *tmp = syntax_tree;
-			while (tmp)
-			{
-				ft_putendl("---next output cmd->cmd---");
-				ft_putendl(tmp->cmd);
-				ft_putendl("---next output cmd->lst---");
-				for (int i = 0, size = ft_lstsize(tmp->lst); i < size ; i++)
-				{
-					ft_putendl(tmp->lst->content);
-					tmp->lst = tmp->lst->next;
-				}
-				if (tmp->next)
-					tmp = tmp->next;
-				else if (tmp->pipe)
-					tmp = tmp->pipe;
-				else if (tmp->redir)
-					tmp = tmp->redir;
-				else
-					tmp = tmp->next;
-				ft_putendl("--------------------------");
-			}
-			#endif
 			executor(syntax_tree, data);
 			// if (flag == 0 && syntax_tree->num_cmd != CMD_IN_PATH)
 			// 	write(1, "\n", 1);
-			if (line == '\0')
+			if (*line == '\0')
 				print_promt_string();
 			freeing_memory_from_lexer(lexerbuf);
 			// free_syntax_tree(syntax_tree);
