@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/02 15:14:05 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 19:21:53 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_echo(t_commands *cmd)
 		}
 		else if (!ft_strcmp(cmd->lst->content, "$?"))
 		{
-			ft_putnbr_fd(errno, 0);
+			ft_putnbr_fd(global_status, 0);
 			write(1, "\n", 1);
 			return;
 		}

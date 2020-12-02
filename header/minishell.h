@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 18:46:28 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/02 19:07:39 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define CD_STR_NOT "cd: string not in pwd: "
 # define CD_MANY_ARGS "cd: too many arguments"
 # define CD_NO_SUCH_F_D "cd: no such file or directory: "
+
+int	global_status;
 
 typedef struct			s_data
 {
