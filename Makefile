@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
+#    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/02 15:12:09 by anatashi         ###   ########.fr        #
+#    Updated: 2020/12/02 18:33:57 by kbatwoma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,12 +77,12 @@ lib:
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	# $(CC) -o $(NAME) $(FLAGS) $(OPFLAGS) -L$(LIBFT_DIR) -lft $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -L. $(LIBFT_DIR)libft.a -o $(NAME)
+	$(CC) -o $(NAME) $(FLAGS) $(OPFLAGS) -L$(LIBFT_DIR) -lft $(OBJ)
+	# $(CC) $(FLAGS) $(OBJ) -L. $(LIBFT_DIR)libft.a -o $(NAME)
 	
 %.o: %.c 
-	# $(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
-	$(CC) $(FLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
+	$(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
+	# $(CC) $(FLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
 
 include $(wildcard $(D_FILE))
 

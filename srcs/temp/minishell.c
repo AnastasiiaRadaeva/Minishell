@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 17:02:27 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 18:47:11 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int    				main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
 	data = init_struct_data();
 	lexerbuf = (t_lexer *)ft_calloc(sizeof(t_lexer), 1);
 	create_env(data, envp);
@@ -47,6 +45,8 @@ int    				main(int argc, char **argv, char **envp)
 	{
 		while (1)
 		{
+			signal(SIGINT, signal_handler);
+			signal(SIGQUIT, signal_handler);
 			// flag = 0;
 			print_promt_string();
 			// signal(SIGINT,signal_handler);

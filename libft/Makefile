@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
+#    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/15 16:48:11 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/02 09:58:11 by anatashi         ###   ########.fr        #
+#    Updated: 2020/12/02 18:34:08 by kbatwoma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,8 @@ $(NAME): $(OBJ)
 	ar rcs $(NAME) $?
 	ranlib $(NAME)
 %.o: %.c
-	# $(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER) -c $< -o $@ -MD
-	$(CC) $(FLAGS) -I$(HEADER) -c $< -o $@ -MD
+	$(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER) -c $< -o $@ -MD
+	# $(CC) $(FLAGS) -I$(HEADER) -c $< -o $@ -MD
 include $(wildcard $(D_FILE))
 
 clean:

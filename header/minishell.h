@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 13:41:00 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 18:46:28 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <errno.h>
 # include <signal.h>
 # include "../libft/header/libft.h"
-# include <wait.h>
-# include <errno.h>
 
 # define MALLOC_1 "Error : Malloc fail (init_struct_commands)"
 # define MALLOC_2 "Error : Malloc fail (ft_command_line)"
@@ -73,6 +72,7 @@ void			create_env(t_data *data, char **envp);
 void			print_promt_string(void);
 t_data			*init_struct_data(void);
 void			signal_handler(int num);
+void			signal_handler_2(int num);
 void			read_cmd(t_data *data, char **line);
 void			error_output(t_commands *cmd, t_data *data, char *str);
 int				program_exit(t_commands *cmd, t_data *data, int num);
