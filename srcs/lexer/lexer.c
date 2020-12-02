@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/01 20:43:30 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:37:25 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int			get_char_type(char *ch_type)
 		return (CHAR_DQUOTE);
 	else if ((ch_type) && *ch_type == '|')
 		return (CHAR_PIPE);
+	else if ((ch_type) && *ch_type == '&')
+		return (CHAR_AMPERSAND);
 	else if ((ch_type) && *ch_type == ' ')
 		return (CHAR_WHITESPACE);
 	else if ((ch_type) && *ch_type == ';')
@@ -71,6 +73,13 @@ void 		strip_quotes(char *src, char *dest, size_t n, int j)
 	dest[j] = 0;
 }
 
+void	tok_init(t_tok *tok, int datasize)
+{
+	tok->data = malloc(datasize + 1);
+	tok->data[0] = 0;
+	tok->type = CHAR_NULL;
+	tok->next = NULL;
+}
 
 #if 0
 #endif
@@ -89,31 +98,36 @@ void	init_arr(int *arr)
 void	_if_char_quote(t_tok **token, int *arr)
 {
 	arr[3] = STATE_IN_QUOTE;
-	(*token)->data[arr[1]++] = CHAR_QOUTE;
+	(*token)->data[arr[1]] = CHAR_QOUTE;
 	(*token)->type = CHAR_QOUTE;
+	arr[1]++;
 }
 
 void 	_if_char_dquote(t_tok **token, int *arr)
 {
 	arr[3] = STATE_IN_DQUOTE;
-	(*token)->data[arr[1]++] = CHAR_DQUOTE;
+	(*token)->data[arr[1]] = CHAR_DQUOTE;
 	(*token)->type = CHAR_DQUOTE;
+	arr[1]++;
 }
 
 void	_if_char_general(t_tok **token, int *arr, char c)
 {
-	(*token)->data[arr[1]++] = c;
+	(*token)->data[arr[1]] = c;
 	(*token)->type = TOKEN;
+	arr[1]++;
 }
 
 void	_if_char_whitespace(t_tok **token, int *arr, int size)
 {
 	if (arr[1] > 0)
 	{
-		(*token)->data[arr[1]] = '\0';
-		(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
+		(*token)->data[arr[1]] = 0;
+		(*token)->next = init_tok_list();
 		*token = (*token)->next;
-		(*token)->data = (char *)malloc(size - arr[0] + 1);
+		(*token)->data = malloc(size - arr[0] + 1);
+		(*token)->data[0] = 0;
+		(*token)->type = CHAR_NULL;
 		arr[1] = 0;
 	}
 }
@@ -123,22 +137,28 @@ void	_if_char_separator(t_tok **token, int *arr, int size)
 	if (arr[1] > 0)
 	{
 		(*token)->data[arr[1]] = 0;
-		(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
+		(*token)->next = init_tok_list();
 		*token = (*token)->next;
-		(*token)->data = (char *)malloc(size - arr[0] + 1);
+		(*token)->data = malloc(size - arr[0] + 1);
+		(*token)->data[0] = 0;
+		(*token)->type = CHAR_NULL;
 		arr[1] = 0;
-		return;
 	}
+	(*token)->data[0] = arr[4];
+	(*token)->data[1] = 0;
 	(*token)->type = arr[4];
-	(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
+	(*token)->next = init_tok_list();
 	*token = (*token)->next;
-	(*token)->data = (char *)malloc(size - arr[0] + 1);
+	(*token)->data = malloc(size - arr[0] + 1);
+	(*token)->data[0] = 0;
+	(*token)->type = CHAR_NULL;
 	arr[1] = 0;
 }
 
 int		_if_state_in_dquote(t_tok **token, int *arr, char c)
 {
-	(*token)->data[arr[1]++] = c;
+	(*token)->data[arr[1]] = c;
+	arr[1]++;
 	if (arr[4] == CHAR_DQUOTE)
 		return (STATE_GENERAL);
 	return (STATE_IN_DQUOTE);
@@ -146,7 +166,8 @@ int		_if_state_in_dquote(t_tok **token, int *arr, char c)
 
 int		_if_state_in_quote(t_tok **token, int *arr, char c)
 {
-	(*token)->data[arr[1]++] = c;
+	(*token)->data[arr[1]] = c;
+	arr[1]++;
 	if (arr[4] == CHAR_QOUTE)
 		return (STATE_GENERAL);
 	return (STATE_IN_QUOTE);
@@ -216,6 +237,20 @@ void	_if_state_in_general(t_tok **token, int *arr, char c, int size)
 
 }
 
+void strip_quotes_in_lst(t_tok **token, int *arr)
+{
+	char *stripped;
+
+	if ((*token)->type == TOKEN)
+	{
+		stripped = malloc(ft_strlen((*token)->data) + 1);
+		strip_quotes((*token)->data, stripped, ft_strlen((*token)->data), 0);
+		(*token)->data = stripped;
+		arr[5]++;
+	}
+	(*token) = (*token)->next;
+}
+
 /*
 ** arr is array of counters and flags
 ** arr[0] - i - count
@@ -226,16 +261,15 @@ void	_if_state_in_general(t_tok **token, int *arr, char c, int size)
 ** arr[5] - k - count
 */
 
-
 int lexer_build(char *input, int size, t_lexer  *lexerbuf)
 {
 	t_tok 	*token;
 	int		arr[6];
 
 	init_arr(arr);
-	lexerbuf->llisttok = (t_tok *)ft_calloc(sizeof(t_tok), 1);
+	lexerbuf->llisttok = init_tok_list();
 	token = lexerbuf->llisttok;
-	token->data = (char *)malloc(size + 1);	
+	tok_init(token, size);
 	while (input[++arr[0]] != '\0')
 	{
 		arr[4] = get_char_type(ft_strchr(TOKEN_TYPE, input[arr[0]]));
@@ -250,6 +284,8 @@ int lexer_build(char *input, int size, t_lexer  *lexerbuf)
 	}
 	_if_char_null(&token, arr, input[arr[0]]);
 	token = lexerbuf->llisttok;
+	// while (token)
+		// strip_quotes_in_lst(&token, arr);
 	lexerbuf->ntoks = arr[5];
 	return (arr[5]);
 }

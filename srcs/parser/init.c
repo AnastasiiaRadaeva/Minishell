@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 18:25:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/27 17:56:18 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 11:29:38 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ static void		init_arg(t_commands *cmd)
 	cmd->count_args = ft_lstsize(cmd->lst);
 }
 
+int			check_full_path(t_commands *cmd, char *tmp, char *p)
+{
+	char	*rewrite;
+
+	if (!access(tmp, F_OK))
+	{
+		rewrite = cmd->cmd;
+		cmd->cmd = ft_strdup(tmp);
+		free(rewrite);
+		rewrite = NULL;
+		cmd->cmd_dir = ft_strdup(p);
+		return (0);
+	}
+	return (1);
+}
+
 int			check_cmd_in_path(t_commands *cmd, char *tmp, char *path)
 {
 	DIR		*dir;
@@ -31,9 +47,15 @@ int			check_cmd_in_path(t_commands *cmd, char *tmp, char *path)
 	int		i;
 	int		j;
 	char	**split_path;
+	char	*p;
 	
 	i = -1;
 	split_path = ft_split(path + 5, ':');
+	if ((p = ft_strrchr(tmp, '/')))
+	{
+		ft_free_two_dimensional_arr(split_path);
+		return (check_full_path(cmd, tmp, ++p));
+	}
 	while (split_path[++i])
 	{
 		dir = opendir(split_path[i]);
