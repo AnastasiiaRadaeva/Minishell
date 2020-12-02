@@ -6,16 +6,16 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 18:30:25 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/02 18:46:28 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <errno.h>
 # include <signal.h>
 # include "../libft/header/libft.h"
-# include <errno.h>
 
 # define MALLOC_1 "Error : Malloc fail (init_struct_commands)"
 # define MALLOC_2 "Error : Malloc fail (ft_command_line)"
