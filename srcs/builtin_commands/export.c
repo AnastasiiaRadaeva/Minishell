@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/02 15:06:26 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/02 19:11:54 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	empty_export(t_data **all, t_commands **cmd)
 {
 	int		i;
 	int		index;
-	int		flag;
+	// int		flag;
 	int		flag_2;
 	char	**tmp;
 	char	**new;
@@ -71,13 +71,13 @@ static void	empty_export(t_data **all, t_commands **cmd)
 			{
 				new[i + 1] = new[i];
 				new[i++] = tmp[index];
-				flag = 0;
+				// flag = 0;
 				flag_2 = 0;
 			}
 			else
 			{
 				new[++i] = tmp[index];
-				flag = 1;
+				// flag = 1;
 			}	
 		}
 		new[++i] = NULL;
