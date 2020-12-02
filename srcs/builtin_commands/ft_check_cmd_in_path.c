@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 17:22:28 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/02 17:16:26 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 	}
 	else
 	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, signal_handler_2);
+		signal(SIGQUIT, signal_handler_2);
 		wait(&pid);
 		// write(1, &status, 1);
 	}

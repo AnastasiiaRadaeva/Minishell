@@ -6,76 +6,47 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:37:28 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/30 17:22:05 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/02 14:17:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static void	change_place(t_data **all, t_commands **cmd)
+// static	size_t	find_char(char *str, char symb)
 // {
-// 	int		i;
-// 	int		index;
-// 	int		flag;
-// 	char	**tmp;
+// 	size_t	i;
 
-// 	tmp = (*all)->envp;
-// 	index = 0;
 // 	i = 0;
-// 	if (!((*all)->envp = (char **)malloc(sizeof(char *) * ((*all)->count_str + 1))))
-// 		error_output(*cmd, *all, MALLOC_12);
-// 	(*all)->envp[i] = tmp[index];
-// 	while (tmp[++index])
-// 	{
-// 		if (ft_strcmp((*all)->envp[i], tmp[index]) < 0)
-// 		{
-// 			(*all)->envp[i] = tmp[index];
-// 			(*all)->envp[++i] = tmp[index - 1];
-// 		}
-// 		else
-// 		{
-// 			(*all)->envp[i] = tmp[index];
-// 		}
-		
-// 	}
-
+// 	while (str[i] != symb)
+// 		i++;
+// 	return (i);
 // }
 
-static	size_t	find_char(char *str, char symb)
-{
-	size_t	i;
+// static void	del_env_var(t_data **all, char *del)
+// {
+// 	char	**temp_env;
+// 	int		index;
+// 	int		i;
 
-	i = 0;
-	while (str[i] != symb)
-		i++;
-	return (i);
-}
-
-static void	del_env_var(t_data **all, char *del)
-{
-	char	**temp_env;
-	int		index;
-	int		i;
-
-	index = -1;
-	i = -1;
-	temp_env = (*all)->envp;
-	if (!((*all)->envp = (char **)malloc(sizeof(char *) * (*all)->count_str)))
-		error_output(NULL, *all, MALLOC_12);
-	while (temp_env[++index])
-	{
-		if (ft_strncmp(del, temp_env[index], find_char(temp_env[index],'='))\
-				 == 0 && find_char(temp_env[index],'=') == ft_strlen(del) - 1)
-		{
-			index++;
-			free(temp_env[index - 1]);
-		}
-		if (temp_env[index])
-			(*all)->envp[++i] = temp_env[index];
-	}
-	(*all)->envp[i] = NULL;
-	free(temp_env);
-}
+// 	index = -1;
+// 	i = -1;
+// 	temp_env = (*all)->envp;
+// 	if (!((*all)->envp = (char **)malloc(sizeof(char *) * (*all)->count_str)))
+// 		error_output(NULL, *all, MALLOC_12);
+// 	while (temp_env[++index])
+// 	{
+// 		if (ft_strncmp(del, temp_env[index], find_char(temp_env[index],'='))\
+// 				 == 0 && find_char(temp_env[index],'=') == ft_strlen(del) - 1)
+// 		{
+// 			index++;
+// 			free(temp_env[index - 1]);
+// 		}
+// 		if (temp_env[index])
+// 			(*all)->envp[++i] = temp_env[index];
+// 	}
+// 	(*all)->envp[i] = NULL;
+// 	free(temp_env);
+// }
 
 static void	parse_env(t_data *data)
 {
@@ -116,6 +87,5 @@ void		create_env(t_data *data, char **envp)
 	}
 	data->envp[j] = NULL;
 	data->count_str = i;
-	del_env_var(&data, "OLDPWD=");
 	parse_env(data);
 }
