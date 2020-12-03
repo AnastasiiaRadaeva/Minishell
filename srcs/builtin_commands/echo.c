@@ -6,11 +6,12 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/02 19:21:53 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 13:35:52 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <errno.h>
 
 static void	add_new_line(char **line_for_print, t_commands *cmd)
 {
@@ -49,7 +50,7 @@ static char	*ft_join_all_args(t_commands *cmd, t_list *start, int flag)
 	return (line_for_print);
 }
 
-void	ft_echo(t_commands *cmd)
+static void	echo(t_commands *cmd)
 {
 	int		flag;
 	t_list	*start;
@@ -72,4 +73,35 @@ void	ft_echo(t_commands *cmd)
 		}
 	}
 	ft_putstr(ft_join_all_args(cmd, start, flag));
+}
+
+void	ft_echo(t_commands *cmd)
+{
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (!pid)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		echo(cmd);
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		signal(SIGINT, signal_handler_2);
+		signal(SIGQUIT, signal_handler_2);
+
+		if (waitpid(pid, &status, WUNTRACED) == -1)
+			error_output(cmd, NULL, strerror(errno));
+		if (WIFEXITED(status))
+			global_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			global_status = WTERMSIG(status);
+		else if (WIFSTOPPED(status))
+			global_status = WSTOPSIG(status);
+		else if (WIFCONTINUED(status))
+			ft_putendl("continued");
+	}
 }

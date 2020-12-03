@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 19:07:39 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 12:40:24 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <errno.h>
 # include <signal.h>
+# include <string.h>
 # include "../libft/header/libft.h"
 
 # define MALLOC_1 "Error : Malloc fail (init_struct_commands)"
