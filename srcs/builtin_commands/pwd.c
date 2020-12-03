@@ -13,9 +13,40 @@
 
 #include "minishell.h"
 
-void	ft_pwd(t_commands *cmd, t_data *all)
+static void	pwd(t_commands *cmd, t_data *all)
 {
 	if (!(all->envp[all->current_pwd]))
 		error_output(cmd, all, PWD_GETCWD); // эту ошибку переписать
 	ft_putendl(all->envp[all->current_pwd] + 4);
+}
+
+void	ft_pwd(t_commands *cmd, t_data *all)
+{ 
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (!pid)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		pwd(cmd, all);
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		signal(SIGINT, signal_handler_2);
+		signal(SIGQUIT, signal_handler_2);
+
+		if (waitpid(pid, &status, WUNTRACED) == -1)
+			error_output(cmd, NULL, strerror(errno));
+		if (WIFEXITED(status))
+			global_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			global_status = WTERMSIG(status);
+		else if (WIFSTOPPED(status))
+			global_status = WSTOPSIG(status);
+		else if (WIFCONTINUED(status))
+			ft_putendl("continued");
+	}
 }
