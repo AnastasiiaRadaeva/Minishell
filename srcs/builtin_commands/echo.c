@@ -6,21 +6,11 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/02 15:14:05 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 11:40:49 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	add_new_line(char **line_for_print, t_commands *cmd)
-{
-	char	*temp_line;
-
-	temp_line = *line_for_print;
-	if (!((*line_for_print) = ft_strjoin(*line_for_print, "\n")))
-		error_output(cmd, NULL, MALLOC_6);
-	free(temp_line);
-}
 
 static char	*ft_join_all_args(t_commands *cmd, t_list *start, int flag)
 {
@@ -45,13 +35,14 @@ static char	*ft_join_all_args(t_commands *cmd, t_list *start, int flag)
 			start = start->next;
 		}
 	if (flag == 0)
-		add_new_line(&line_for_print, cmd);
+		line_for_print = ft_strjoin_gnl(&line_for_print, "\n");
 	return (line_for_print);
 }
 
 void	ft_echo(t_commands *cmd)
 {
 	int		flag;
+	char	*print_line;
 	t_list	*start;
 
 	flag = 0;
@@ -68,8 +59,11 @@ void	ft_echo(t_commands *cmd)
 		{
 			ft_putnbr_fd(errno, 0);
 			write(1, "\n", 1);
+			errno = 0;
 			return;
 		}
 	}
-	ft_putstr(ft_join_all_args(cmd, start, flag));
+	print_line = ft_join_all_args(cmd, start, flag);
+	ft_putstr(print_line);
+	ft_free_tmp(print_line);
 }

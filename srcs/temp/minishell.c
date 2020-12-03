@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 19:15:42 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 11:41:21 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int    				main(int argc, char **argv, char **envp)
 	
 	(void)argc;
 	(void)argv;
-	(void)envp;
 	data = init_struct_data();
 	lexerbuf = (t_lexer *)ft_calloc(sizeof(t_lexer), 1);
 	create_env(data, envp);
@@ -33,7 +32,7 @@ int    				main(int argc, char **argv, char **envp)
 	/*
 	**	for minishell_test
 	*/
-	#if 0
+	// #if 0
 	if (argv[1][0] == '-' && argv[1][1] == 'c')
 	{
 		lexer_build(ft_strdup(argv[2]), ft_strlen(argv[2]), lexerbuf);
@@ -41,7 +40,7 @@ int    				main(int argc, char **argv, char **envp)
 		executor(syntax_tree, data);
 	}
 	else
-	#endif
+	// #endif
 	{
 		while (1)
 		{
@@ -59,7 +58,7 @@ int    				main(int argc, char **argv, char **envp)
 			// 	write(1, "\n", 1);
 			// if (*line == '\0')
 				// print_promt_string();
-			freeing_memory_from_lexer(lexerbuf);
+			// freeing_memory_from_lexer(lexerbuf);
 			// free_syntax_tree(syntax_tree);
 			// else
 			// {

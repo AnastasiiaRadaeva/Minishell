@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 16:49:31 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 11:32:47 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,13 +162,17 @@ t_commands		*parse(t_data *data, t_lexer *lexerbuf)
 {
 	t_commands	*syntax_tree;
 	t_commands	*tmp;
+	// t_tok		*tmp_1;
 
 	syntax_tree = NULL;
 	syntax_tree = init_struct_commands(syntax_tree, data);
 	tmp = syntax_tree;
+	// tmp_1 = lexerbuf->llisttok;
+	// while (tmp_1)
 	while (lexerbuf->llisttok)
 	{
 		add_nodes(&tmp, lexerbuf, data);
+		// tmp_1 = tmp_1->next;
 		lexerbuf->llisttok = lexerbuf->llisttok->next;
 	}
 	if (!syntax_tree->next && !syntax_tree->redir && !syntax_tree->pipe)
