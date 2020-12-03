@@ -6,20 +6,23 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:20:39 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/30 12:44:05 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 14:18:46 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(t_commands *cmd, t_data *all)
+static void	env(t_commands *cmd, t_data *all)
 {
 	int		i;
 	char	*string;
 	char	*temp_str;
 
 	if (cmd->count_args > 0)
-		error_case("env: ", cmd->lst->content, ": No such file or directory");
+	{
+		error_case("env: ", cmd->lst->content, ": No such file or directory\n");
+		exit(EXIT_FAILURE);
+	}
 	else
 	{
 		if (!(string = ft_strdup("")))
@@ -38,5 +41,38 @@ void	ft_env(t_commands *cmd, t_data *all)
 				free(temp_str);
 		}
 		ft_putendl(string);
+	}
+}
+
+void	ft_env(t_commands *cmd, t_data *all)
+{
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (!pid)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		env(cmd, all);
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		signal(SIGINT, signal_handler_2);
+		signal(SIGQUIT, signal_handler_2);
+
+		if (waitpid(pid, &status, WUNTRACED) == -1)
+			error_output(cmd, NULL, strerror(errno));
+		if (WIFEXITED(status))
+			global_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			global_status = WTERMSIG(status);
+		else if (WIFSTOPPED(status))
+			global_status = WSTOPSIG(status);
+		else if (WIFCONTINUED(status))
+			ft_putendl("continued");
+		if (global_status != 0)
+			global_status = 127;
 	}
 }
