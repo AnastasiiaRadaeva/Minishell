@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 17:02:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 11:10:22 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 12:26:42 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 void	freeing_memory_from_struct_commands(t_commands *cmd)
 {
+	t_list	*tmp;
+
 	if (cmd)
 	{
-		// ft_free_tmp(cmd->cmd);
 		ft_free_tmp(cmd->cmd_dir);
-		ft_lstclear(&cmd->lst, ft_lstdelone_f);
+		tmp = cmd->lst;
+		while(tmp)
+		{
+			ft_lstdelone(tmp, NULL);
+			tmp = tmp->next;
+		}
+		free(tmp);
+		tmp = NULL;
 		if (cmd->previous)
 			free(cmd->previous);
 		freeing_memory_from_struct_commands(cmd->redir);

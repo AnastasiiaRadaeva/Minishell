@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 11:32:47 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 12:07:47 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 		ft_lstadd_back(&(*syntax_tree)->lst, lst);
 	}
 }
-
+#if 0
 static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
 {
 	t_lexer		*tmp;
@@ -157,23 +157,64 @@ static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
 	else
 		add_lst_to_node(cmd, data, tmp->llisttok->data, tmp->llisttok->type);
 }
+#endif
+
+static	void	add_nodes(t_commands **cmd, t_tok *llisttok, t_data *data)
+{
+	// t_lexer		*tmp;
+	t_commands	*tmp_cmd;
+
+	// tmp = lexerbuf;
+	tmp_cmd = (*cmd);
+	if (llisttok->type == CHAR_GREATER || llisttok->type == CHAR_LESSER)
+	{	
+		init(cmd, data);
+		(*cmd)->type_redir = llisttok->type;
+		if ((*cmd)->previous && !(*cmd)->cmd)
+		{
+			if ((*cmd)->previous->type_redir == CHAR_GREATER && (*cmd)->type_redir == CHAR_GREATER)
+			(*cmd)->previous->type_redir = 3;
+			(*cmd)->type_redir = 0;
+			return;
+		}
+		(*cmd)->redir = init_struct_commands(*cmd, data);
+		(*cmd) = (*cmd)->redir;
+		(*cmd)->previous = tmp_cmd;
+
+	}
+	else if (llisttok->type == CHAR_SEMICOLON)
+	{
+		init(cmd, data);
+		(*cmd)->next = init_struct_commands(*cmd, data);
+		(*cmd) = (*cmd)->next;
+	}
+	else if (llisttok->type == CHAR_PIPE)
+	{
+		init(cmd, data);
+		(*cmd)->pipe = init_struct_commands(*cmd, data);
+		(*cmd) = (*cmd)->pipe;
+	}
+	else
+		add_lst_to_node(cmd, data, llisttok->data, llisttok->type);
+}
 
 t_commands		*parse(t_data *data, t_lexer *lexerbuf)
 {
 	t_commands	*syntax_tree;
 	t_commands	*tmp;
-	// t_tok		*tmp_1;
+	t_tok		*tmp_1;
 
 	syntax_tree = NULL;
 	syntax_tree = init_struct_commands(syntax_tree, data);
 	tmp = syntax_tree;
-	// tmp_1 = lexerbuf->llisttok;
-	// while (tmp_1)
-	while (lexerbuf->llisttok)
+	tmp_1 = lexerbuf->llisttok;
+	while (tmp_1)
+	// while (lexerbuf->llisttok)
 	{
-		add_nodes(&tmp, lexerbuf, data);
-		// tmp_1 = tmp_1->next;
-		lexerbuf->llisttok = lexerbuf->llisttok->next;
+		// add_nodes(&tmp, lexerbuf, data);
+		add_nodes(&tmp, tmp_1, data);
+		tmp_1 = tmp_1->next;
+		// lexerbuf->llisttok = lexerbuf->llisttok->next;
 	}
 	if (!syntax_tree->next && !syntax_tree->redir && !syntax_tree->pipe)
 		init(&syntax_tree, data);
