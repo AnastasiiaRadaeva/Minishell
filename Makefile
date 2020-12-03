@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/03 16:23:40 by anatashi         ###   ########.fr        #
+#    Updated: 2020/12/03 16:29:34 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,8 @@ clean:
 
 
 fclean : clean
+	rm -rf $(LIBFT_DIR)/libft.a
+
 	rm -rf $(NAME)
 
 
