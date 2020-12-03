@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/02 15:14:05 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 19:59:45 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_echo(t_commands *cmd)
 		{
 			ft_putnbr_fd(errno, 0);
 			write(1, "\n", 1);
+			errno = 0;
 			return;
 		}
 	}

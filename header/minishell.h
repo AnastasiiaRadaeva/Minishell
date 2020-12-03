@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 19:32:33 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 21:07:10 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <errno.h>
 # include <signal.h>
 # include "../libft/header/libft.h"
-// # include <wait.h>
+# include <wait.h>
 
 # define MALLOC_1 "Error : Malloc fail (init_struct_commands)"
 # define MALLOC_2 "Error : Malloc fail (ft_command_line)"
@@ -78,5 +78,5 @@ void			read_cmd(t_data *data, char **line);
 void			error_output(t_commands *cmd, t_data *data, char *str);
 int				program_exit(t_commands *cmd, t_data *data, int num);
 void			error_case(char *str1, char *str2, char *str3);
-
+void			freeing_memory_from_struct_commands(t_commands *cmd);
 #endif

@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:07:50 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 17:59:48 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 20:37:42 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static	int	return_error_case(int err, char *str_err)
 {
 	errno = err;
+	
 	error_case("minishell: syntax error near unexpected token ",
 							str_err, NULL);
 	return (1);
@@ -25,15 +26,21 @@ static int	check_syntax_redirect(t_commands *cmd)
 	if (cmd->redir->type_redir != 3)
 	{
 		if (!cmd->redir->cmd && cmd->redir->pipe)
+		{
 			if (cmd->redir->pipe->cmd)
-			return_error_case(2, "`|'\n");
-		if (!cmd->redir->cmd && cmd->redir->next)
+				return_error_case(2, "`|'\n");
+		}
+		else if (!cmd->redir->cmd && cmd->redir->next)
+		{
 			if (cmd->redir->next->cmd)
 				return_error_case(2, "`;'\n");
-		if (!cmd->redir->cmd && cmd->redir->redir)
+		}
+		else if (!cmd->redir->cmd && cmd->redir->redir)
+		{
 			if (!cmd->redir->redir->cmd)
 				return_error_case(2, "`>>'\n");
-		if (!cmd->redir->cmd && !cmd->redir->next &&
+		}
+		else if (!cmd->redir->cmd && !cmd->redir->next &&
 			!cmd->redir->pipe && !cmd->redir->redir)
 			return_error_case(2, "`>'");
 	}
@@ -45,82 +52,44 @@ static	int	check_syntax_next(t_commands *cmd)
 	if (!cmd->next->cmd && cmd->next->pipe)
 	{
 		if (cmd->next->pipe->cmd)
-		{
-			errno = 2;
-			error_case("minishell: syntax error near unexpected token ",
-						"`;'\n", NULL);
-			return (1);
-		}
+			return_error_case(2, "`;'\n");
 	}
-	if (!cmd->next->cmd && cmd->next->redir)
+	else if (!cmd->next->cmd && cmd->next->redir)
 	{
 		if (cmd->next->redir->cmd)
-		{
-			errno = 2;
-			error_case("minishell: syntax error near unexpected token ",
-						"`;'\n", NULL);
-			return (1);
-		}
+			return_error_case(2, "`;'\n");
 	}
-	if (!cmd->next->cmd && cmd->next->next)
+	else if (!cmd->next->cmd && cmd->next->next)
 	{
 		if (!cmd->next->next->cmd)
-		{
-			errno = 2;
-			error_case("minishell: syntax error near unexpected token ",
-						"`;;'\n", NULL);
-			return (1);
-		}
+			return_error_case(2, "`;;'\n");
 	}
-	if (!cmd->next->cmd && !cmd->next->next && !cmd->next->pipe && !cmd->next->redir)
-	{
-		errno = 2;
-		error_case("minishell: syntax error near unexpected token ",
-					"`;'\n", NULL);
-		return (1);
-	}
+	else if (!cmd->next->cmd && !cmd->next->next && !cmd->next->pipe &&
+			!cmd->next->redir)
+		return_error_case(2, "`;'\n");
 	return (0);
 }
 
 static	int	check_syntax_pipe(t_commands *cmd)
 {
-	 if (!cmd->pipe->cmd && cmd->pipe->next)
+	if (!cmd->pipe->cmd && cmd->pipe->next)
 	{
 		if (cmd->pipe->next->cmd)
-		{
-			errno = 2;
-			error_case("minishell: syntax error near unexpected token ",
-						"`|'\n", NULL);
-			return (1);
-		}
+			return_error_case(2, "`|'\n");
 	}
-	if (!cmd->pipe->cmd && cmd->pipe->redir)
+	else if (!cmd->pipe->cmd && cmd->pipe->redir)
 	{
 		if (cmd->pipe->redir->cmd)
-		{
-			errno = 2;
-			error_case("minishell: syntax error near unexpected token ",
-						"`|'\n", NULL);
-			return (1);
-		}
+			return_error_case(2, "`|'\n");
 	}
-	if (!cmd->pipe->cmd && cmd->pipe->pipe)
+	else if (!cmd->pipe->cmd && cmd->pipe->pipe)
 	{
 		if (!cmd->pipe->pipe->cmd)
-		{
-			errno = 2;
-			error_case("minishell: syntax error near unexpected token ",
-						"`||'\n", NULL);
-			return (1);
-		}
+			return_error_case(2, "`||'\n");
 	}
-	if (!cmd->pipe->cmd && !cmd->pipe->next && !cmd->pipe->pipe && !cmd->pipe->redir)
-	{
-		errno = 2;
-		error_case("minishell: syntax error near unexpected token ",
-					"`|'\n", NULL);
-		return (1);
-	}
+	else if (!cmd->pipe->cmd && !cmd->pipe->next && !cmd->pipe->pipe
+			&& !cmd->pipe->redir)
+		return_error_case(2, "`|'\n");
 	return (0);
 }
 
