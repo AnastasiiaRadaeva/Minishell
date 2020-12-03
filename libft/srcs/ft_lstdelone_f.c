@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 12:26:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/08/19 12:28:10 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 12:12:45 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void		ft_lstdelone_f(void *d)
 {
-	free(d);
-	d = NULL;
+	if (d)
+	{
+		free(d);
+		d = NULL;
+	}
 }
