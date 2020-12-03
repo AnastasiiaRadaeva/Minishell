@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 12:07:47 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 17:40:33 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void			_if_type_dollar(t_data *data, char **content, char *rem)
 	char		*p;
 	int			i;
 	int			num_env;
-
 	i = 0;
 	p = rem ? ft_strchr(rem, CHAR_DOLLAR) : ft_strchr(*content, CHAR_DOLLAR);
 	if (p)
@@ -104,7 +103,7 @@ void			_if_type_dollar(t_data *data, char **content, char *rem)
 static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 								char *content, int type)
 {
-	t_list		*lst;
+	// t_list		*lst;
 	
 	if (type == CHAR_DQUOTE)
 		_if_type_dollar(data, &content, NULL);	
@@ -113,51 +112,9 @@ static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 		_if_type_dollar(data, &content, NULL);
 	if (*content)
 	{
-		if (!(lst = ft_lstnew(content)))
-			error_output(NULL, NULL, NULL);
-		ft_lstadd_back(&(*syntax_tree)->lst, lst);
+		ft_lstadd_back(&(*syntax_tree)->lst, ft_lstnew(content));
 	}
 }
-#if 0
-static	void	add_nodes(t_commands **cmd, t_lexer *lexerbuf, t_data *data)
-{
-	t_lexer		*tmp;
-	t_commands	*tmp_cmd;
-
-	tmp = lexerbuf;
-	tmp_cmd = (*cmd);
-	if (tmp->llisttok->type == CHAR_GREATER || tmp->llisttok->type == CHAR_LESSER)
-	{	
-		init(cmd, data);
-		(*cmd)->type_redir = tmp->llisttok->type;
-		if ((*cmd)->previous && !(*cmd)->cmd)
-		{
-			if ((*cmd)->previous->type_redir == CHAR_GREATER && (*cmd)->type_redir == CHAR_GREATER)
-			(*cmd)->previous->type_redir = 3;
-			(*cmd)->type_redir = 0;
-			return;
-		}
-		(*cmd)->redir = init_struct_commands(*cmd, data);
-		(*cmd) = (*cmd)->redir;
-		(*cmd)->previous = tmp_cmd;
-
-	}
-	else if (tmp->llisttok->type == CHAR_SEMICOLON)
-	{
-		init(cmd, data);
-		(*cmd)->next = init_struct_commands(*cmd, data);
-		(*cmd) = (*cmd)->next;
-	}
-	else if (tmp->llisttok->type == CHAR_PIPE)
-	{
-		init(cmd, data);
-		(*cmd)->pipe = init_struct_commands(*cmd, data);
-		(*cmd) = (*cmd)->pipe;
-	}
-	else
-		add_lst_to_node(cmd, data, tmp->llisttok->data, tmp->llisttok->type);
-}
-#endif
 
 static	void	add_nodes(t_commands **cmd, t_tok *llisttok, t_data *data)
 {

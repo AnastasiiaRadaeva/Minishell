@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 18:25:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 11:29:38 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 14:58:24 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,17 @@ int			check_cmd_in_path(t_commands *cmd, char *tmp, char *path)
 				cmd->cmd_dir = split_path[i--];
 				while (i)
 					ft_free_tmp(split_path[i--]);
+				ft_free_tmp(split_path[i]);
 				while (split_path[j])
 					ft_free_tmp(split_path[j++]);
 				free(split_path);
+				free(dir);
+				dir = NULL;
 				return (0);
 			}
 		}
+		free(dir);
+		dir = NULL;
 	}
 	ft_free_two_dimensional_arr(split_path);
 	return (1);

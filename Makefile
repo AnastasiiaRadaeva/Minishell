@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
+#    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/03 13:57:41 by kbatwoma         ###   ########.fr        #
+#    Updated: 2020/12/03 18:07:47 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ SOURCE_BUILTIN		= $(addprefix $(BUILTIN_CMD_DIR), $(BUILTIN_CMD_LIST))
 
 
 OBJ	= $(patsubst %.c, %.o, $(SOURCE_TEMP) $(SOURCE_PARSER) $(SOURCE_TOOLS) $(SOURCE_EXECUTOR) $(SOURCE_LEXER) $(SOURCE_BUILTIN))
-D_FILES = $(patsubst %.c, %.d, $(SOURCE_TEMP) $(SOURCE_PARSER) $(SOURCE_TOOLS) $(SOURCE_EXECUTOR) $(SOURCE_BUILTIN))
+D_FILES = $(patsubst %.c, %.d, $(SOURCE_TEMP) $(SOURCE_PARSER) $(SOURCE_TOOLS) $(SOURCE_EXECUTOR) $(SOURCE_LEXER) $(SOURCE_BUILTIN))
 
 .PHONY: all clean fclean re test norm
 
@@ -92,7 +92,7 @@ clean:
 
 
 fclean : clean
-	$(MAKE) fclean -C $(LIBFT_DIR)
+	rm -rf $(LIBFT_DIR)/libft.a
 
 	rm -rf $(NAME)
 
@@ -100,6 +100,6 @@ fclean : clean
 re : fclean all
 
 norm:
-	norminette $(TEMP_DIR). $(ERROR_OUTPUT_DIR). $(HEADER_DIR). $(MAKE) norm -C $(LIBFT_DIR)
+	norminette $(HEADER_DIR). $(TEMP_DIR). $(LEXER_DIR). $(PARSER_DIR). $(TOOLS_DIR). $(EXECUTOR_DIR). $(BUILTIN_CMD_DIR). $(MAKE) norm -C $(LIBFT_DIR)
 
 test:

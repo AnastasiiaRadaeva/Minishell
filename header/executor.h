@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:39:16 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 15:11:49 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 18:06:17 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,63 +16,65 @@
 # include <string.h>
 # include "minishell.h"
 
-void			executor(t_commands *syntax_tree, t_data *data);
-void			execute_cmd_line(t_commands *cmd, t_data *data);
-void			selection_cmd(t_commands *cmd, t_data *data,
+/*
+** commands execotor
+** parametrs input:	syntax_tree - NULL or not
+**						   data - not NULL
+*/
+void	executor(t_commands *syntax_tree, t_data *data);
+void	execute_cmd_line(t_commands *cmd, t_data *data);
+void	selection_cmd(t_commands *cmd, t_data *data,
 								t_commands *redirect, t_commands *pip);
 
 /*
-** Функция показывает текущую директорию. 
-** Возвращает строку с директорией. 
-** Уточнить вывод функции.
-** В случае ошибки функция печатает строку ошибки и вызывает error_output.
+** The function shows the current directory.
+** Returns a string with the directory.
+** Refine the function output.
+** If an error occurs, the function prints the error string and calls error_output.
 */
-// char			*ft_pwd(t_commands *cmd, t_data *all);
-void			ft_pwd(t_commands *cmd, t_data *all);
+void	ft_pwd(t_commands *cmd, t_data *all);
 
 /*
-*Функция возвращает одномерный массив со всеми переменными окружения.
-*В случае ошибки функция печатает строку ошибки и вызывает error_output.
-*Нужно подумать, как выводить эту ошибку, думаю, что тут не нужен exit.
+** The function returns a one-dimensional array with all environment variables.
+** If an error occurs, the function prints the error string and calls error_output.
+** You need to think about how to output this error, I think that there is no need for exit.
 */
-// char	*ft_env(t_commands *cmd, t_data *all)
 void	ft_env(t_commands *cmd, t_data *all);
-int				redirects(t_commands *redir);
+int		redirects(t_commands *redir);
 
 /*
-*Функция меняет рабочую директорию и в соответствии с этим меняет переменные 
-*окружения. 
-*В случае ошибки функция печатает строку ошибки и вызывает error_output.
-*Нужно подумать, как выводить эту ошибку, потому что тут не нужен exit, как 
-*я понимаю.
+** The function changes the working directory and in accordance with this change of variables
+** environments.
+** If an error occurs, the function prints the error string and calls error_output.
+** You need to think about how to output this error, because you don't need exit, as
+** I understand.
 */
-void		ft_cd(t_commands **cmd, t_data *all);
+void	ft_cd(t_commands **cmd, t_data *all);
 
 /*
-*Функция выдает поданные аргументы через пробел. 
-*Если нет флага -n, функция добавляет \n на конце строкию
-*Возвращает требуемую строку.
-*В случае ошибки функция печатает строку ошибки и вызывает error_output.
-*Нужно подумать, как выводить эту ошибку, думаю, что тут нужен exit.
-*К этому моменту все $ уже должны быть обработаны.
-*В функцию должны подаваться уже готовые аргументы.
+** The function returns the submitted arguments separated by a space.
+** If there is no-t flag, the function adds \t at the end of the string.
+** Returns the required string.
+** If an error occurs, the function prints the error string and calls error_output.
+** You need to think about how to output this error, I think that exit is needed here.
+** By this time, all $ should have been processed.
+** The function must be sold ready-made arguments.
 */
-// char	*ft_echo(t_commands *cmd) 
-void		ft_echo(t_commands *cmd);
+void	ft_echo(t_commands *cmd);
 
 /*
-*Функция выдает поданные аргументы через пробел. 
-*Если нет флага -n, функция добавляет \n на конце строкию
-*Возвращает требуемую строку.
-*В случае ошибки функция печатает строку ошибки и вызывает error_output.
-*Нужно подумать, как выводить эту ошибку, думаю, что тут нужен exit.
-*К этому моменту все $ уже должны быть обработаны.
-*В функцию должны подаваться уже готовые аргументы.
+** The function returns the submitted arguments separated by a space.
+** If there is no-t flag, the function adds \t at the end of the string.
+**  Returns the required string.
+** If an error occurs, the function prints the error string and calls error_output.
+** You need to think about how to output this error, I think that exit is needed here.
+** By this time, all $ should have been processed.
+** The function must be sold ready-made arguments.
 */
 
-void		ft_export(t_commands **cmd, t_data **all, int index);
-void		ft_check_cmd_in_path(t_commands **cmd, t_data **data);
-void		ft_unset(t_commands **cmd, t_data **all);
-int			check_syntax_error(t_commands *cmd);
+void	ft_export(t_commands **cmd, t_data **all, int index);
+void	ft_check_cmd_in_path(t_commands **cmd, t_data **data);
+void	ft_unset(t_commands **cmd, t_data **all);
+int		check_syntax_error(t_commands *cmd);
 
 #endif

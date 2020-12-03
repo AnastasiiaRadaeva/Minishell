@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/02 19:11:54 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 17:43:49 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ void	ft_export(t_commands **cmd, t_data **all, int index)
 			(*all)->envp[index] = temp_env[index];
 		while (index < (*all)->count_str)
 		{
-			(*all)->envp[index++] = temp_list->content;
+			(*all)->envp[index++] = ft_strdup(temp_list->content);
 			temp_list = temp_list->next;
 		}
 		(*all)->envp[index] = NULL;
