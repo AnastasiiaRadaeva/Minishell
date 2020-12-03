@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/03 13:36:09 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 16:19:28 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	change_var(t_commands *cmd, t_data **all)
 {
 	char	*tmp;
 	char	*tmp_2;
+	char	*tmp_3;
 
 	tmp = (*all)->envp[(*all)->old_pwd];
 	if (!((*all)->envp[(*all)->old_pwd] = ft_strjoin("OLD", \
@@ -26,11 +27,14 @@ static void	change_var(t_commands *cmd, t_data **all)
 		error_output(cmd, *all, MALLOC_11);
 	getcwd(tmp_2, 100);
 	tmp = (*all)->envp[(*all)->current_pwd];
+	tmp_3 = ft_strndup(tmp_2, ft_strlen(tmp_2));
+
 	if (!((*all)->envp[(*all)->current_pwd] = ft_strjoin("PWD=", \
-			ft_strndup(tmp_2, ft_strlen(tmp_2)))))
+			tmp_3)))
 		error_output(cmd, *all, MALLOC_11);
 	free(tmp);
 	free(tmp_2);
+	free(tmp_3);
 }
 
 void	ft_cd(t_commands **cmd, t_data *all)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_cmd_in_path.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 14:31:17 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 15:59:51 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 			global_status = WSTOPSIG(status);
 		else if (WIFCONTINUED(status))
 			ft_putendl("continued");
-
+		free(argv_for_execve);
 		// wait(&status);
     	// if (WIFEXITED(status))
         // 	global_status = WEXITSTATUS(status);
@@ -86,5 +86,4 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 		// 	global_status = WSTOPSIG(status);
 		// write(1, &status, 1);
 	}
-	// ft_free_two_dimensional_arr(argv_for_execve);
 }
