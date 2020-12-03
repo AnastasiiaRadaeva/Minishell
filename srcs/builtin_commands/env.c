@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:20:39 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/03 14:18:46 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 17:29:00 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	env(t_commands *cmd, t_data *all)
 {
 	int		i;
-	char	*string;
-	char	*temp_str;
+	// char	*string;
+	// char	*temp_str;
 
 	if (cmd->count_args > 0)
 	{
@@ -24,23 +24,26 @@ static void	env(t_commands *cmd, t_data *all)
 		exit(EXIT_FAILURE);
 	}
 	else
-	{
-		if (!(string = ft_strdup("")))
-			error_output(cmd,  all, "malloc: ft_env");
-		i = 0;
-		while (all->envp[i])
-		{
-			temp_str = string;
-			if (!(string = ft_strjoin(string, all->envp[i])))
-				error_output(cmd, all, "malloc: ft_env");
-			free(temp_str);
-			temp_str = string;
-			if (!(string = all->envp[++i] ? ft_strjoin(string, "\n") : string))
-				error_output(cmd, all, "malloc: ft_env");
-			if (ft_strcmp(temp_str, string) != 0)
-				free(temp_str);
-		}
-		ft_putendl(string);
+	{		
+		// if (!(string = ft_strdup("")))
+		// 	error_output(cmd,  all, "malloc: ft_env");
+		// i = 0;
+		// while (all->envp[i])
+		// {
+		// 	temp_str = string;
+		// 	if (!(string = ft_strjoin(string, all->envp[i])))
+		// 		error_output(cmd, all, "malloc: ft_env");
+		// 	free(temp_str);
+		// 	temp_str = string;
+		// 	if (!(string = all->envp[++i] ? ft_strjoin(string, "\n") : string))
+		// 		error_output(cmd, all, "malloc: ft_env");
+		// 	if (ft_strcmp(temp_str, string) != 0)
+		// 		free(temp_str);
+		// }
+		// ft_putendl(string);
+		i = -1;
+		while (all->envp[++i])
+			ft_putendl(all->envp[i]);
 	}
 }
 
@@ -67,12 +70,10 @@ void	ft_env(t_commands *cmd, t_data *all)
 		if (WIFEXITED(status))
 			global_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			global_status = WTERMSIG(status);
+			global_status = 128 + WTERMSIG(status);
 		else if (WIFSTOPPED(status))
 			global_status = WSTOPSIG(status);
 		else if (WIFCONTINUED(status))
 			ft_putendl("continued");
-		if (global_status != 0)
-			global_status = 127;
 	}
 }

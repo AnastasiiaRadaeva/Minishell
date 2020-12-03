@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 15:03:58 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 14:16:31 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 16:24:59 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void		read_cmd(t_data *data, char **line)
 	get_input(line, data);
 	// if (get_next_line(0, line) < 0)
 	// 	error_output(NULL, data, GNL_1);
-	if (ft_strlen(*line) == 4 && ft_strncmp("exit", *line, 4) == 0)
-	{
-		ft_free_tmp(*line);
-		program_exit(NULL, data, 1);
-	}
+	// if (ft_strlen(*line) == 4 && ft_strncmp("exit", *line, 4) == 0)
+	// {
+	// 	ft_free_tmp(*line);
+	// 	program_exit(NULL, data, global_status);
+	// }
 }

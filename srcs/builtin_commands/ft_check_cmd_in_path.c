@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_cmd_in_path.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 15:59:51 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 18:22:26 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,11 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 		if (WIFEXITED(status))
 			global_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			global_status = WTERMSIG(status);
+			global_status = 128 + WTERMSIG(status);
 		else if (WIFSTOPPED(status))
 			global_status = WSTOPSIG(status);
 		else if (WIFCONTINUED(status))
 			ft_putendl("continued");
 		free(argv_for_execve);
-		// wait(&status);
-    	// if (WIFEXITED(status))
-        // 	global_status = WEXITSTATUS(status);
-		// else if (WIFSIGNALED(status))
-		// 	global_status = WTERMSIG(status);
-		// else if (WIFSTOPPED(status))
-		// 	global_status = WSTOPSIG(status);
-		// write(1, &status, 1);
 	}
 }
