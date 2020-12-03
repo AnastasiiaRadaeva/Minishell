@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/03 16:29:34 by anatashi         ###   ########.fr        #
+#    Updated: 2020/12/03 17:49:12 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,6 @@ fclean : clean
 re : fclean all
 
 norm:
-	norminette $(TEMP_DIR). $(ERROR_OUTPUT_DIR). $(HEADER_DIR). $(MAKE) norm -C $(LIBFT_DIR)
+	norminette $(HEADER_DIR). $(TEMP_DIR). $(LEXER_DIR). $(PARSER_DIR). $(TOOLS_DIR). $(EXECUTOR_DIR). $(BUILTIN_CMD_DIR). $(MAKE) norm -C $(LIBFT_DIR)
 
 test:
