@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 10:37:25 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/02 20:44:50 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ int lexer_build(char *input, int size, t_lexer  *lexerbuf)
 {
 	t_tok 	*token;
 	int		arr[6];
-
+	
 	init_arr(arr);
 	lexerbuf->llisttok = init_tok_list();
 	token = lexerbuf->llisttok;

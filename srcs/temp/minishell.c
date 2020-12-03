@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 19:15:42 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 10:30:14 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int    				main(int argc, char **argv, char **envp)
 	
 	(void)argc;
 	(void)argv;
-	(void)envp;
 	data = init_struct_data();
 	lexerbuf = (t_lexer *)ft_calloc(sizeof(t_lexer), 1);
 	create_env(data, envp);
