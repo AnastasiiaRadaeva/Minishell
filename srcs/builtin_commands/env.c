@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:20:39 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/03 13:36:27 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 14:18:46 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static void	env(t_commands *cmd, t_data *all)
 	char	*temp_str;
 
 	if (cmd->count_args > 0)
+	{
 		error_case("env: ", cmd->lst->content, ": No such file or directory\n");
+		exit(EXIT_FAILURE);
+	}
 	else
 	{
 		if (!(string = ft_strdup("")))
@@ -69,5 +72,7 @@ void	ft_env(t_commands *cmd, t_data *all)
 			global_status = WSTOPSIG(status);
 		else if (WIFCONTINUED(status))
 			ft_putendl("continued");
+		if (global_status != 0)
+			global_status = 127;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/03 13:51:35 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 14:24:10 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static void	echo(t_commands *cmd)
 		{
 			ft_putnbr_fd(global_status, 0);
 			write(1, "\n", 1);
-			errno = 0;
 			return;
 		}
 	}
