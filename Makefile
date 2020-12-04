@@ -67,8 +67,19 @@ SOURCE_LEXER		= $(addprefix $(LEXER_DIR), $(LEXER_LIST))
 SOURCE_BUILTIN		= $(addprefix $(BUILTIN_CMD_DIR), $(BUILTIN_CMD_LIST))
 
 
-OBJ	= $(patsubst %.c, %.o, $(SOURCE_TEMP) $(SOURCE_PARSER) $(SOURCE_TOOLS) $(SOURCE_EXECUTOR) $(SOURCE_LEXER) $(SOURCE_BUILTIN))
-D_FILES = $(patsubst %.c, %.d, $(SOURCE_TEMP) $(SOURCE_PARSER) $(SOURCE_TOOLS) $(SOURCE_EXECUTOR) $(SOURCE_LEXER) $(SOURCE_BUILTIN))
+OBJ	= $(patsubst %.c, %.o,	$(SOURCE_TEMP)\
+							$(SOURCE_PARSER)\
+							$(SOURCE_TOOLS)\
+							$(SOURCE_EXECUTOR)\
+							$(SOURCE_LEXER)\
+							$(SOURCE_BUILTIN))
+							
+D_FILES = $(patsubst %.c, %.d,	$(SOURCE_TEMP)\
+								$(SOURCE_PARSER)\
+								$(SOURCE_TOOLS)\
+								$(SOURCE_EXECUTOR)\
+								$(SOURCE_LEXER)\
+								$(SOURCE_BUILTIN))
 
 .PHONY: all clean fclean re test norm
 
@@ -78,12 +89,12 @@ lib:
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(FLAGS) $(OPFLAGS) -L$(LIBFT_DIR) -lft $(OBJ)
-	# $(CC) $(FLAGS) $(OBJ) -L. $(LIBFT_DIR)libft.a -o $(NAME)
+	# $(CC) -o $(NAME) $(FLAGS) $(OPFLAGS) -L$(LIBFT_DIR) -lft $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) -L. $(LIBFT_DIR)libft.a -o $(NAME)
 	
 %.o: %.c 
-	$(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
-	# $(CC) $(FLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
+	# $(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
+	$(CC) $(FLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
 
 include $(wildcard $(D_FILE))
 

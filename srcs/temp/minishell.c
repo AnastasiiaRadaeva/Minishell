@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 19:23:26 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 09:31:40 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,15 @@ int    				main(int argc, char **argv, char **envp)
 		{
 			signal(SIGINT, signal_handler);
 			signal(SIGQUIT, signal_handler);
-			// flag = 0;
 			print_promt_string();
-			// signal(SIGINT,signal_handler);
 			read_cmd(data, &line);
 			lexer_build(line, ft_strlen(line), lexerbuf);
 			ft_free_tmp(line);
 			syntax_tree = parse(data, lexerbuf);
 			executor(syntax_tree, data);
-			// if (flag == 0 && syntax_tree->num_cmd != CMD_IN_PATH)
-			// 	write(1, "\n", 1);
-			// if (*line == '\0')
-				// print_promt_string();
-			freeing_memory_from_lexer(lexerbuf);
-			// free_syntax_tree(syntax_tree);
-			// else
-			// {
-			// 	print_result(cmd, line);
-			// 	// print_promt_string();
-			// } 
+			freeing_memory_from_lexer(&lexerbuf);
 			freeing_memory_from_struct_commands(syntax_tree);
+			freeing_memory_from_struct_data(data);
 		}
 	}
 	exit(EXIT_SUCCESS);

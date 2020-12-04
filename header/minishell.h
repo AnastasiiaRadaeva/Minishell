@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 18:07:54 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 09:26:33 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <signal.h>
 # include <string.h>
 # include "../libft/header/libft.h"
-// # include <wait.h>
+# include <wait.h>
 
 # define MALLOC_1 "Error : Malloc fail (init_struct_commands)"
 # define MALLOC_2 "Error : Malloc fail (ft_command_line)"
@@ -52,7 +52,6 @@ typedef struct			s_data
 	int					env_var;
 	int					path;
 	int					count_str;
-	char				*error_string;
 }						t_data;
 
 typedef struct			s_commands
@@ -82,4 +81,5 @@ void			error_output(t_commands *cmd, t_data *data, char *str);
 int				program_exit(t_commands *cmd, t_data *data, int num);
 void			error_case(char *str1, char *str2, char *str3);
 void			freeing_memory_from_struct_commands(t_commands *cmd);
+void			freeing_memory_from_struct_data(t_data *data);
 #endif

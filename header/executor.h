@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:39:16 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 18:21:40 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 21:18:07 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "minishell.h"
 
 /*
-** commands execotor
+** commands executor
 ** parametrs input:	syntax_tree - NULL or not
 **						   data - not NULL
 */
