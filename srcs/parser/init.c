@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 18:25:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 14:58:24 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 11:55:22 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,66 @@ int			check_full_path(t_commands *cmd, char *tmp, char *p)
 	if (!access(tmp, F_OK))
 	{
 		rewrite = cmd->cmd;
-		cmd->cmd = ft_strdup(tmp);
+		cmd->cmd_dir = ft_strndup(tmp, p - tmp);
+		cmd->cmd = ft_strdup(p);
 		free(rewrite);
 		rewrite = NULL;
-		cmd->cmd_dir = ft_strdup(p);
 		return (0);
 	}
 	return (1);
 }
 
+// static int	check_cmd_in_dir(t_commands *cmd, char **command, char **split_path)
+// {
+	
+// }
+
+int			check_cmd_in_path(t_commands *cmd, char *tmp, char **split_path)
+{
+	DIR		*dir;
+	struct	dirent *entry;
+	int		i;
+	int		j;
+	char	*p;
+	char	*tmp_1;
+
+	i = -1;
+	if ((p = ft_strrchr(tmp, '/')))
+	{
+		ft_free_two_dimensional_arr(split_path);
+		return (check_full_path(cmd, tmp, ++p));
+	}
+	while (split_path[++i])
+	{
+		dir = opendir(split_path[i]);
+		while ((entry = readdir(dir)))
+		{
+			if (!ft_strcmp(entry->d_name, tmp))
+			{
+				j = i + 1;
+				tmp_1 = cmd->cmd;
+				cmd->cmd = ft_strjoin("/",cmd->cmd);
+				free(tmp_1);
+				cmd->cmd_dir = split_path[i--];
+				while (i)
+					ft_free_tmp(split_path[i--]);
+				ft_free_tmp(split_path[i]);
+				while (split_path[j])
+					ft_free_tmp(split_path[j++]);
+				free(split_path);
+				free(dir);
+				dir = NULL;
+				return (0);
+			}
+		}
+		free(dir);
+		dir = NULL;
+	}
+	ft_free_two_dimensional_arr(split_path);
+	return (1);
+}
+
+#if 0
 int			check_cmd_in_path(t_commands *cmd, char *tmp, char *path)
 {
 	DIR		*dir;
@@ -83,6 +134,7 @@ int			check_cmd_in_path(t_commands *cmd, char *tmp, char *path)
 	ft_free_two_dimensional_arr(split_path);
 	return (1);
 }
+#endif
 
 static	int		checking_cmd_for_tocken(t_commands *cmd, char *tmp, char *path)
 {
@@ -100,7 +152,7 @@ static	int		checking_cmd_for_tocken(t_commands *cmd, char *tmp, char *path)
 		return (CMD_ENV);
 	else if (!(ft_strcmp("exit", tmp)))
 		return (CMD_EXIT);
-	else if (!check_cmd_in_path(cmd, tmp, path))
+	else if (!check_cmd_in_path(cmd, tmp, ft_split(path + 5, ':')))
 		return (CMD_IN_PATH);
 	return(CMD_ERROR);
 }

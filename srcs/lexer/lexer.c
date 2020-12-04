@@ -6,13 +6,14 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:32:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 20:44:50 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 10:00:32 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer.h"
 
+#if 0
 t_tok		*init_tok_list()
 {
 	t_tok 	*new_list;
@@ -21,6 +22,7 @@ t_tok		*init_tok_list()
 		error_output(NULL, NULL, MALLOC_1);
 	return (new_list);
 }
+#endif
 
 int			get_char_type(char *ch_type)
 {
@@ -123,7 +125,7 @@ void	_if_char_whitespace(t_tok **token, int *arr, int size)
 	if (arr[1] > 0)
 	{
 		(*token)->data[arr[1]] = 0;
-		(*token)->next = init_tok_list();
+		(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 		*token = (*token)->next;
 		(*token)->data = malloc(size - arr[0] + 1);
 		(*token)->data[0] = 0;
@@ -137,7 +139,7 @@ void	_if_char_separator(t_tok **token, int *arr, int size)
 	if (arr[1] > 0)
 	{
 		(*token)->data[arr[1]] = 0;
-		(*token)->next = init_tok_list();
+		(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 		*token = (*token)->next;
 		(*token)->data = malloc(size - arr[0] + 1);
 		(*token)->data[0] = 0;
@@ -147,7 +149,7 @@ void	_if_char_separator(t_tok **token, int *arr, int size)
 	(*token)->data[0] = arr[4];
 	(*token)->data[1] = 0;
 	(*token)->type = arr[4];
-	(*token)->next = init_tok_list();
+	(*token)->next = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 	*token = (*token)->next;
 	(*token)->data = malloc(size - arr[0] + 1);
 	(*token)->data[0] = 0;
@@ -251,23 +253,13 @@ void strip_quotes_in_lst(t_tok **token, int *arr)
 	(*token) = (*token)->next;
 }
 
-/*
-** arr is array of counters and flags
-** arr[0] - i - count
-** arr[1] - j - count
-** arr[2] - ntemptok
-** arr[3] - state
-** arr[4] - chtype
-** arr[5] - k - count
-*/
-
 int lexer_build(char *input, int size, t_lexer  *lexerbuf)
 {
 	t_tok 	*token;
 	int		arr[6];
 	
 	init_arr(arr);
-	lexerbuf->llisttok = init_tok_list();
+	lexerbuf->llisttok = (t_tok *)ft_calloc(sizeof(t_tok), 1);
 	token = lexerbuf->llisttok;
 	tok_init(token, size);
 	while (input[++arr[0]] != '\0')
