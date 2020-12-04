@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
+#    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/03 19:17:22 by anatashi         ###   ########.fr        #
+#    Updated: 2020/12/03 18:23:01 by kbatwoma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ BUILTIN_CMD_LIST	= 	pwd.c\
 						echo.c\
 						export.c\
 						unset.c\
+						exit.c\
 						ft_check_cmd_in_path.c \
 						error_case.c
 

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   program_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 17:02:07 by anatashi          #+#    #+#             */
 /*   Updated: 2020/12/03 22:51:08 by anatashi         ###   ########.fr       */
@@ -21,7 +21,6 @@ void	freeing_memory_from_struct_data(t_data *data)
 
 void	freeing_memory_from_struct_commands(t_commands *cmd)
 {
-
 	if (cmd)
 	{
 		// ft_free_tmp(cmd->cmd);

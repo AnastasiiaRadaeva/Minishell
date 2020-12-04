@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/03 14:24:10 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/03 14:46:33 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_echo(t_commands *cmd)
 		if (WIFEXITED(status))
 			global_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			global_status = WTERMSIG(status);
+			global_status = 128 + WTERMSIG(status);
 		else if (WIFSTOPPED(status))
 			global_status = WSTOPSIG(status);
 		else if (WIFCONTINUED(status))

@@ -43,7 +43,7 @@ void	ft_pwd(t_commands *cmd, t_data *all)
 		if (WIFEXITED(status))
 			global_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			global_status = WTERMSIG(status);
+			global_status = 128 + WTERMSIG(status);
 		else if (WIFSTOPPED(status))
 			global_status = WSTOPSIG(status);
 		else if (WIFCONTINUED(status))
