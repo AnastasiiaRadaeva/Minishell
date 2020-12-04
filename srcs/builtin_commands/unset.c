@@ -6,11 +6,18 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 15:28:40 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/30 12:43:17 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 11:52:04 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	error_with_status(t_list **lst_for_del)
+{
+	error_case("minishell: unset: `", (*lst_for_del)->content, \
+					"': not a valid identifier\n");
+	global_status = 1;
+}
 
 static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, int error)
 {
@@ -18,8 +25,7 @@ static int delete_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, in
 	t_list	*tmp_lst;
 
 	if (error == 1)
-		error_case("minishell: unset: `", (*lst_for_del)->content, \
-					"': not a valid identifier\n");
+		error_with_status(lst_for_del);
 	tmp_lst = (*lst_for_del);
 	new_lst = (*cmd)->lst;
 	error = 0;

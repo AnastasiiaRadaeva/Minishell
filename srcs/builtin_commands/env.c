@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:20:39 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/03 22:46:53 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:40:34 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	env(t_commands *cmd, t_data *all)
 	if (cmd->count_args > 0)
 	{
 		error_case("env: ", cmd->lst->content, ": No such file or directory\n");
-		exit(EXIT_FAILURE);
+		exit(127);
 	}
 	else
 	{		
