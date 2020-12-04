@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_cmd_in_path.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 11:05:09 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 13:07:09 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,17 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 
 	argv_for_execve = NULL;
 	argv_for_execve = creat_dimens_arr_for_execve(*cmd);
+	for (int i = 0; argv_for_execve[i]; i++)
+		ft_putendl(argv_for_execve[i]);
 	command = ft_strjoin((*cmd)->cmd_dir, (*cmd)->cmd);
+	// (*cmd)->cmd = ft_strjoin((*cmd)->cmd_dir, (*cmd)->cmd);
 	pid = fork();
 	if (!pid)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		execve(command, argv_for_execve, (*data)->envp);
+		// execve((*cmd)->cmd, argv_for_execve, (*data)->envp);
 		exit(EXIT_FAILURE);
 	}
 	else
