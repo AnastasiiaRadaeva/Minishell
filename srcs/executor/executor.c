@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 17:14:41 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:26:03 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ void			give_env(t_data *data)
 }
 #endif
 
+static void	error_with_status(t_commands *cmd)
+{
+	error_case("minishell: ", cmd->cmd, ": command not found\n");
+	global_status = 127;
+}
 
 void			selection_cmd(t_commands *cmd, t_data *data,
 								t_commands *redirect, t_commands *pip)
@@ -101,7 +106,7 @@ void			selection_cmd(t_commands *cmd, t_data *data,
 	else if (cmd->num_cmd == CMD_EXIT)
 		ft_exit(cmd, data);
 	else if (cmd->num_cmd == CMD_ERROR)
-		error_case("minishell: ", cmd->cmd, ": command not found\n");
+		error_with_status(cmd);
 }
 
 void			execute_cmd_line(t_commands *cmd, t_data *data)

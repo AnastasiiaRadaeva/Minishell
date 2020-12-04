@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 16:15:19 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/03 19:19:12 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:22:10 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ static long long int		atoi_with_long(const char *str, int *flag)
 	int			index;
 	long long int	n;
 	int			sign;
+	int			str_len;
 
 	index = 0;
 	n = 0;
 	sign = 1;
+	str_len = ft_strlen(str);
 	while ((str[index] >= 9 && str[index] <= 13) || str[index] == 32)
 		index++;
 	if (str[index] == '-' || str[index] == '+')
@@ -43,6 +45,7 @@ static long long int		atoi_with_long(const char *str, int *flag)
 		n = (n * 10 + (str[index] - '0'));
 		index++;
 	}
+	*flag = ((str_len != index) || *flag) ? 1 : 0;
 	n = n * sign;
 	return (n);
 }
@@ -61,13 +64,18 @@ void	ft_exit(t_commands *cmd, t_data *all)
 	else if (cmd->count_args > 0)
 	{
 		number = atoi_with_long((char *)cmd->lst->content, &flag);
-		while (((char *)cmd->lst->content)[++i])
-			if (ft_isdigit(((char *)cmd->lst->content)[i]) == 0 || (((char *)cmd->lst->content)[0] != '-' \
-			&& ((char *)cmd->lst->content)[0] != '+' && flag == 1))
-			{
-				error_case("minishell: exit: ", (char *)cmd->lst->content, ": numeric argument required\n");
-				program_exit(cmd, all, global_status);
-			}
+		// while (((char *)cmd->lst->content)[++i])
+		// 	if (ft_isdigit(((char *)cmd->lst->content)[i]) == 0 || (((char *)cmd->lst->content)[0] != '-' \
+		// 	&& ((char *)cmd->lst->content)[0] != '+' && flag == 1))
+		// 	{
+		// 		error_case("minishell: exit: ", (char *)cmd->lst->content, ": numeric argument required\n");
+		// 		program_exit(cmd, all, global_status);
+		// 	}
+		if (flag == 1)
+		{
+			error_case("minishell: exit: ", (char *)cmd->lst->content, ": numeric argument required\n");
+			program_exit(cmd, all, global_status);
+		}
 		if (cmd->count_args == 1)
 		{
 			if (number > 255)
