@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
+#    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/04 12:36:09 by anatashi         ###   ########.fr        #
+#    Updated: 2020/12/04 18:20:34 by kbatwoma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,11 @@ BUILTIN_CMD_LIST	= 	pwd.c\
 						cd.c\
 						echo.c\
 						export.c\
+						export_2.c\
+						export_3.c\
 						unset.c\
+						unset_2.c\
+						unset_3.c\
 						exit.c\
 						ft_check_cmd_in_path.c \
 						error_case.c
@@ -89,12 +93,12 @@ lib:
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(FLAGS) $(OPFLAGS) -L$(LIBFT_DIR) -lft $(OBJ)
-	# $(CC) $(FLAGS) $(OBJ) -L. $(LIBFT_DIR)libft.a -o $(NAME)
+	# $(CC) -o $(NAME) $(FLAGS) $(OPFLAGS) -L$(LIBFT_DIR) -lft $(OBJ)
+	$(CC) $(FLAGS) $(OBJ) -L. $(LIBFT_DIR)libft.a -o $(NAME)
 	
 %.o: %.c 
-	$(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
-	# $(CC) $(FLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
+	# $(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
+	$(CC) $(FLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
 
 include $(wildcard $(D_FILE))
 

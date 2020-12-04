@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/04 11:29:33 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 14:45:59 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,22 @@ static void	change_var(t_commands *cmd, t_data **all)
 	getcwd(tmp_2, 100);
 	tmp = (*all)->envp[(*all)->current_pwd];
 	tmp_3 = ft_strndup(tmp_2, ft_strlen(tmp_2));
-
+	free(tmp_2);
 	if (!((*all)->envp[(*all)->current_pwd] = ft_strjoin("PWD=", \
 			tmp_3)))
 		error_output(cmd, *all, MALLOC_11);
 	free(tmp);
-	free(tmp_2);
 	free(tmp_3);
 }
 
-void	ft_cd(t_commands **cmd, t_data *all)
+void		ft_cd(t_commands **cmd, t_data *all)
 {
 	char	*tmp_path;
 
 	if ((*cmd)->count_args == 0)
 	{
 		if (!((*cmd)->lst = (t_list *)malloc(sizeof(t_list))))
-				error_output(*cmd, all, MALLOC_5);
+			error_output(*cmd, all, MALLOC_5);
 		((*cmd)->lst->content) = all->envp[all->home_dir] + 5;
 		(*cmd)->lst->next = NULL;
 	}
@@ -59,9 +58,9 @@ void	ft_cd(t_commands **cmd, t_data *all)
 		error_with_status(cmd);
 	if (((char*)(*cmd)->lst->content)[0] == '~')
 	{
-		if (!(tmp_path = ft_strjoin(all->envp[all->home_dir] + 5, \
-							(char *)(*cmd)->lst->content + 1)))
-			error_output(*cmd,  all, MALLOC_5);
+		if (!(tmp_path = ft_strjoin(all->envp[all->home_dir] + 5,
+								(char *)(*cmd)->lst->content + 1)))
+			error_output(*cmd, all, MALLOC_5);
 		free((char *)((*cmd)->lst->content));
 		((*cmd)->lst->content) = tmp_path;
 	}

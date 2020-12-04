@@ -6,12 +6,11 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/03 14:46:33 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 17:58:44 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <errno.h>
 
 static char	*ft_join_all_args(t_commands *cmd, t_list *start, int flag)
 {
@@ -28,9 +27,9 @@ static char	*ft_join_all_args(t_commands *cmd, t_list *start, int flag)
 				error_output(cmd, NULL, MALLOC_6);
 			free(temp_line);
 			temp_line = line_for_print;
-			if (!(line_for_print = start->next ? ft_strjoin(line_for_print, " ")\
-									 : line_for_print))
-					error_output(cmd, NULL, MALLOC_6);
+			if (!(line_for_print = start->next ?\
+						ft_strjoin(line_for_print, " ") : line_for_print))
+				error_output(cmd, NULL, MALLOC_6);
 			if (ft_strcmp(temp_line, line_for_print) != 0)
 				free(temp_line);
 			start = start->next;
@@ -60,15 +59,16 @@ static void	echo(t_commands *cmd)
 		{
 			ft_putnbr_fd(global_status, 0);
 			write(1, "\n", 1);
-			return;
+			exit(EXIT_SUCCESS);
 		}
 	}
 	print_line = ft_join_all_args(cmd, start, flag);
 	ft_putstr(print_line);
 	ft_free_tmp(print_line);
+	exit(EXIT_SUCCESS);
 }
 
-void	ft_echo(t_commands *cmd)
+void		ft_echo(t_commands *cmd)
 {
 	pid_t	pid;
 	int		status;
@@ -79,13 +79,11 @@ void	ft_echo(t_commands *cmd)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		echo(cmd);
-		exit(EXIT_SUCCESS);
 	}
 	else
 	{
 		signal(SIGINT, signal_handler_2);
 		signal(SIGQUIT, signal_handler_2);
-
 		if (waitpid(pid, &status, WUNTRACED) == -1)
 			error_output(cmd, NULL, strerror(errno));
 		if (WIFEXITED(status))

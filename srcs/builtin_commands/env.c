@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:20:39 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/04 12:40:34 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 14:56:52 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,20 @@
 static void	env(t_commands *cmd, t_data *all)
 {
 	int		i;
-	// char	*string;
-	// char	*temp_str;
 
+	i = -1;
 	if (cmd->count_args > 0)
 	{
 		error_case("env: ", cmd->lst->content, ": No such file or directory\n");
 		exit(127);
 	}
 	else
-	{		
-		// if (!(string = ft_strdup("")))
-		// 	error_output(cmd,  all, "malloc: ft_env");
-		// i = 0;
-		// while (all->envp[i])
-		// {
-		// 	temp_str = string;
-		// 	if (!(string = ft_strjoin(string, all->envp[i])))
-		// 		error_output(cmd, all, "malloc: ft_env");
-		// 	free(temp_str);
-		// 	temp_str = string;
-		// 	if (!(string = all->envp[++i] ? ft_strjoin(string, "\n") : string))
-		// 		error_output(cmd, all, "malloc: ft_env");
-		// 	if (ft_strcmp(temp_str, string) != 0)
-		// 		free(temp_str);
-		// }
-		// ft_putendl(string);
-		i = -1;
 		while (all->envp[++i])
 			ft_putendl(all->envp[i]);
-	}
+	exit(EXIT_SUCCESS);
 }
 
-void	ft_env(t_commands *cmd, t_data *all)
+void		ft_env(t_commands *cmd, t_data *all)
 {
 	pid_t	pid;
 	int		status;
@@ -58,13 +39,11 @@ void	ft_env(t_commands *cmd, t_data *all)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		env(cmd, all);
-		exit(EXIT_SUCCESS);
 	}
 	else
 	{
 		signal(SIGINT, signal_handler_2);
 		signal(SIGQUIT, signal_handler_2);
-
 		if (waitpid(pid, &status, WUNTRACED) == -1)
 			error_output(cmd, NULL, strerror(errno));
 		if (WIFEXITED(status))
