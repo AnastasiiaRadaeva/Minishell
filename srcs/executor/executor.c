@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 16:51:55 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 22:39:56 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,5 @@ void	executor(t_commands *syntax_tree, t_data *data)
 			dup2(data->fd_1, 1);
 			dup2(data->fd_0, 0);
 		}
-	}
-	// else
-	// {
-	// 	ft_putendl("Invalid command");
-	// 	ft_free_tmp(data->error_string);
-	// 	if (!(data->error_string =ft_strdup("127")))
-	// 		error_output(syntax_tree, data, NULL);
-	// }	
+	}	
 }

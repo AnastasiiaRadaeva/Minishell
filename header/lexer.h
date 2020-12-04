@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:17:30 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 15:58:46 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/03 22:54:39 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ typedef	struct		s_lexer
 }					t_lexer;
 
 int lexer_build(char *input, int size, t_lexer  *lexerbuf);
-void freeing_memory_from_lexer(t_lexer *lexerbuf);
+void freeing_memory_from_lexer(t_lexer **lexerbuf);
 #endif
