@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 11:06:08 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:42:19 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <signal.h>
 # include <string.h>
 # include "../libft/header/libft.h"
-# include <wait.h>
+// # include <wait.h>
 
 # define MALLOC_1 "Error : Malloc fail (init_struct_commands)"
 # define MALLOC_2 "Error : Malloc fail (ft_command_line)"

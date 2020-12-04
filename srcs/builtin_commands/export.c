@@ -6,11 +6,18 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/03 18:22:11 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 11:49:05 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	error_with_status(t_list **lst)
+{
+	error_case("minishell: export: `", (*lst)->content,\
+								"': not a valid identifier\n");
+	global_status = 1;
+}
 
 static void	ft_env_for_export(t_commands *cmd, t_data *all, char **new)
 {
@@ -44,7 +51,6 @@ static void	empty_export(t_data **all, t_commands **cmd)
 {
 	int		i;
 	int		index;
-	// int		flag;
 	int		flag_2;
 	char	**tmp;
 	char	**new;
@@ -71,14 +77,10 @@ static void	empty_export(t_data **all, t_commands **cmd)
 			{
 				new[i + 1] = new[i];
 				new[i++] = tmp[index];
-				// flag = 0;
 				flag_2 = 0;
 			}
 			else
-			{
 				new[++i] = tmp[index];
-				// flag = 1;
-			}	
 		}
 		new[++i] = NULL;
 		free(tmp);
@@ -94,8 +96,7 @@ static int delete_lst(t_commands **cmd, t_list **lst, int num_of_l, int error)
 	t_list	*tmp_lst;
 
 	if (error == 1)
-		error_case("minishell: export: `", (*lst)->content,\
-								"': not a valid identifier\n");
+		error_with_status(lst);
 	tmp_lst = (*lst);
 	new_lst = (*cmd)->lst;
 	error = -1;
@@ -142,6 +143,7 @@ static void	change_var(t_data **all, t_commands **cmd, int num_of_lst, int i)
 		index = -1;
 		while ((*all)->envp[++index])
 		{
+
 			if (ft_strncmp((char *)tmp_lst->content, (*all)->envp[index],\
 							find_char((*all)->envp[index],'=') + 1) == 0)
 			{
@@ -217,12 +219,12 @@ void	ft_export(t_commands **cmd, t_data **all, int index)
 	char	**temp_env;
 	t_list	*temp_list;
 
-	check_args_for_validity(cmd);
-	while (++index < (*cmd)->count_args)
-		change_var(all, cmd, 0, 1);
-	index = -1;
 	if ((*cmd)->lst)
 	{
+		check_args_for_validity(cmd);
+		while (++index < (*cmd)->count_args)
+			change_var(all, cmd, 0, 1);
+		index = -1;
 		(*all)->count_str += (*cmd)->count_args;
 		temp_list = (*cmd)->lst;
 		temp_env = (*all)->envp;
