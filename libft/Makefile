@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/15 16:48:11 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/04 16:35:32 by anatashi         ###   ########.fr        #
+#    Updated: 2020/12/04 23:05:10 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,8 @@ $(NAME): $(OBJ)
 	ar rcs $(NAME) $?
 	ranlib $(NAME)
 %.o: %.c
-	# $(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER) -c $< -o $@ -MD
-	$(CC) $(FLAGS) -I$(HEADER) -c $< -o $@ -MD
+	$(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER) -c $< -o $@ -MD
+	# $(CC) $(FLAGS) -I$(HEADER) -c $< -o $@ -MD
 include $(wildcard $(D_FILE))
 
 clean:

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/04 18:40:00 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 23:01:59 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	error_with_status(t_commands **cmd)
 	global_status = 1;
 }
 
-static void	change_var(t_commands *cmd, t_data **all)
+static void	change_var_cd(t_commands *cmd, t_data **all)
 {
 	char	*tmp;
 	char	*tmp_2;
@@ -66,5 +66,5 @@ void		ft_cd(t_commands **cmd, t_data *all)
 	}
 	if (chdir((char *)(*cmd)->lst->content) != 0)
 		error_with_status(cmd);
-	change_var(*cmd, &all);
+	change_var_cd(*cmd, &all);
 }

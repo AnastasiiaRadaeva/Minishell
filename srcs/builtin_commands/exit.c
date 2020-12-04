@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 16:15:19 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/04 22:43:48 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 23:02:40 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static long long int	atoi_with_long(const char *str, int *flag)
 
 void					ft_exit(t_commands *cmd, t_data *all)
 {
-	int					i;
+	// int					i;
 	long long int		number;
 	int					flag;
 
-	i = -1;
+	// i = -1;
 	flag = 0;
 	ft_putendl("exit");
 	if (cmd->count_args == 0)

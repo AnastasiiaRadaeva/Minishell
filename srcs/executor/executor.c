@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 22:45:56 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 22:54:04 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void			selection_cmd(t_commands **cmd, t_data *data,
 	else if ((*cmd)->num_cmd == CMD_ECHO)
 		ft_echo(*cmd);
 	else if ((*cmd)->num_cmd == CMD_EXPORT)
-		ft_export(cmd, &data, -1);
+		ft_export(cmd, &data);
 	else if ((*cmd)->num_cmd == CMD_UNSET)
 		ft_unset(cmd, &data);
 	else if ((*cmd)->num_cmd == CMD_IN_PATH)
@@ -101,7 +101,6 @@ void			selection_cmd(t_commands **cmd, t_data *data,
 	}
 	else
 		(*cmd) = (*cmd)->next;
->>>>>>> anatashi
 }
 
 void			execute_cmd_line(t_commands **cmd, t_data *data)

@@ -1,7 +1,0 @@
-hello
-header
-libft
-Makefile
-minishell
-srcs
-test.txt
