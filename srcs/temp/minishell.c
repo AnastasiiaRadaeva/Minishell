@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 11:37:26 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:18:56 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int    				main(int argc, char **argv, char **envp)
 			executor(syntax_tree, data);
 			freeing_memory_from_lexer(&lexerbuf);
 			freeing_memory_from_struct_commands(syntax_tree);
-			// ft_free_two_dimensional_arr(data->envp);
 		}
 	}
 	exit(EXIT_SUCCESS);

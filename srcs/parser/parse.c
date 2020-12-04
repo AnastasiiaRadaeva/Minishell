@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 11:53:14 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:03:39 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void			_if_type_dollar(t_data *data, char **content, char *rem)
 			else
 			{
 				ft_free_tmp(*content);
-				*content = ft_strdup("");
+				// *content = ft_strdup("");
+				*content = "";
 			}
 			
 
