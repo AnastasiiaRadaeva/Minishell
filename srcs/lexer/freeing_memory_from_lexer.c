@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 17:25:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 22:57:22 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 11:00:52 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void		freeing_memory_from_lexer(t_lexer **lexerbuf)
 	if (!lexerbuf)
 		return;
 	freeing_memory_from_tok(&(*lexerbuf)->llisttok);
-	free(*lexerbuf);
-	*lexerbuf = NULL;
+	// free(*lexerbuf);
+	// *lexerbuf = NULL;
 }

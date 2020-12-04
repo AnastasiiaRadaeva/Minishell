@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:37:28 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 19:07:41 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 09:57:57 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ void		create_env(t_data *data, char **envp)
 	j = -1;
 	while (envp[i])
 		i++;
-	if (!(data->envp = (char **)malloc(sizeof(char *) * (i + 1))))
-		error_output(NULL, data, NULL);
+	data->envp = (char **)malloc(sizeof(char *) * (i + 1));
 	while (++j != i)
 		data->envp[j] = ft_strdup(envp[j]);
 	data->envp[j] = NULL;

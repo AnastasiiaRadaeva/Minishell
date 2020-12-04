@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:17:30 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 22:54:39 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 09:52:31 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,15 @@ typedef	struct		s_lexer
 	int 	ntoks;
 }					t_lexer;
 
+/*
+** arr is array of counters and flags
+** arr[0] - i - count for the input
+** arr[1] - j - count for the data in t_tok;
+** arr[2] - ntemptok
+** arr[3] - state
+** arr[4] - chtype
+** arr[5] - k - count
+*/
 int lexer_build(char *input, int size, t_lexer  *lexerbuf);
 void freeing_memory_from_lexer(t_lexer **lexerbuf);
 #endif

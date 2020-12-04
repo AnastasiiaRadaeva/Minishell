@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_cmd_in_path.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 21:19:03 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 11:05:09 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,18 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 	
 	pid_t	pid;
 	char	**argv_for_execve;
-	char	*tmp;
+	char	*command;
 	int		status;
 
 	argv_for_execve = NULL;
 	argv_for_execve = creat_dimens_arr_for_execve(*cmd);
-	tmp = (*cmd)->cmd;
-	(*cmd)->cmd = ft_strjoin((*cmd)->cmd_dir, (*cmd)->cmd);
-	ft_free_tmp(tmp);
+	command = ft_strjoin((*cmd)->cmd_dir, (*cmd)->cmd);
 	pid = fork();
 	if (!pid)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		execve((*cmd)->cmd, argv_for_execve, (*data)->envp);
+		execve(command, argv_for_execve, (*data)->envp);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -77,5 +75,6 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 		else if (WIFCONTINUED(status))
 			ft_putendl("continued");
 		free(argv_for_execve);
+		ft_free_tmp(command);
 	}
 }
