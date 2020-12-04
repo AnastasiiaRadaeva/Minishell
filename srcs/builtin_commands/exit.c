@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 16:15:19 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/04 12:22:10 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 16:37:05 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ static long long int		atoi_with_long(const char *str, int *flag)
 
 void	ft_exit(t_commands *cmd, t_data *all)
 {
-	int			i;
+	// int			i;
 	long long int	number;
 	int			flag;
 
-	i = -1;
+	// i = -1;
 	flag = 0;
 	ft_putendl("exit");
 	if (cmd->count_args == 0)
@@ -65,7 +65,7 @@ void	ft_exit(t_commands *cmd, t_data *all)
 	{
 		number = atoi_with_long((char *)cmd->lst->content, &flag);
 		// while (((char *)cmd->lst->content)[++i])
-		// 	if (ft_isdigit(((char *)cmd->lst->content)[i]) == 0 || (((char *)cmd->lst->content)[0] != '-' \
+		// 	if (ft_isdigit(((char *)cmd->lst->content)[i]) == 0 || (((char *)cmd->lst->content)[0] != '-'
 		// 	&& ((char *)cmd->lst->content)[0] != '+' && flag == 1))
 		// 	{
 		// 		error_case("minishell: exit: ", (char *)cmd->lst->content, ": numeric argument required\n");

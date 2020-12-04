@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:39:16 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 21:18:07 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 22:04:04 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@
 **						   data - not NULL
 */
 void	executor(t_commands *syntax_tree, t_data *data);
-void	execute_cmd_line(t_commands *cmd, t_data *data);
-void	selection_cmd(t_commands *cmd, t_data *data,
-								t_commands *redirect, t_commands *pip);
+void	execute_cmd_line(t_commands **cmd, t_data *data);
+void	selection_cmd(t_commands **cmd, t_data *data, t_commands *redirect);
 
 /*
 ** The function shows the current directory.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 13:12:50 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 22:35:48 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ int    				main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	data = init_struct_data();
-	lexerbuf = (t_lexer *)ft_calloc(sizeof(t_lexer), 1);
 	create_env(data, envp);
 	
 	/*
 	**	for minishell_test
 	*/
-	#if 0
+	// #if 0
 	if (argv[1][0] == '-' && argv[1][1] == 'c')
 	{
 		lexer_build(ft_strdup(argv[2]), ft_strlen(argv[2]), lexerbuf);
@@ -40,7 +39,7 @@ int    				main(int argc, char **argv, char **envp)
 		executor(syntax_tree, data);
 	}
 	else
-	#endif
+	// #endif
 	{
 		while (1)
 		{
@@ -48,6 +47,7 @@ int    				main(int argc, char **argv, char **envp)
 			signal(SIGQUIT, signal_handler);
 			print_promt_string();
 			read_cmd(data, &line);
+			lexerbuf = (t_lexer *)ft_calloc(sizeof(t_lexer), 1);
 			lexer_build(line, ft_strlen(line), lexerbuf);
 			ft_free_tmp(line);
 			syntax_tree = parse(data, lexerbuf);

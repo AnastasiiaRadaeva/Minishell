@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 17:25:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 11:00:52 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 17:14:10 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 static void	freeing_memory_from_tok(t_tok **llistok)
 {
-// 	if (llistok)
-// 	{
-// 		free(llistok->data);
-// 		llistok->data = NULL;
-// 		freeing_memory_from_tok(llistok->next);
-// 		free(llistok);
-// 		llistok = NULL;
-// 	}
+	// if (llistok)
+	// {
+	// 	free((*llistok)->data);
+	// 	(*llistok)->data = NULL;
+	// 	freeing_memory_from_tok(&(*llistok)->next);
+	// 	free(llistok);
+	// 	llistok = NULL;
+	// }
 
 	t_tok	*dell;
 	t_tok	*plst;
@@ -50,6 +50,6 @@ void		freeing_memory_from_lexer(t_lexer **lexerbuf)
 	if (!lexerbuf)
 		return;
 	freeing_memory_from_tok(&(*lexerbuf)->llisttok);
-	// free(*lexerbuf);
-	// *lexerbuf = NULL;
+	free(*lexerbuf);
+	*lexerbuf = NULL;
 }
