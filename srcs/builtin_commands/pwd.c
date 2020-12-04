@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 14:12:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/11/23 18:39:32 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 18:25:45 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +15,13 @@
 static void	pwd(t_commands *cmd, t_data *all)
 {
 	if (!(all->envp[all->current_pwd]))
-		error_output(cmd, all, PWD_GETCWD); // эту ошибку переписать
+		error_output(cmd, all, PWD_GETCWD);
 	ft_putendl(all->envp[all->current_pwd] + 4);
+	exit(EXIT_SUCCESS);
 }
 
-void	ft_pwd(t_commands *cmd, t_data *all)
-{ 
+void		ft_pwd(t_commands *cmd, t_data *all)
+{
 	pid_t	pid;
 	int		status;
 
@@ -31,13 +31,11 @@ void	ft_pwd(t_commands *cmd, t_data *all)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		pwd(cmd, all);
-		exit(EXIT_SUCCESS);
 	}
 	else
 	{
 		signal(SIGINT, signal_handler_2);
 		signal(SIGQUIT, signal_handler_2);
-
 		if (waitpid(pid, &status, WUNTRACED) == -1)
 			error_output(cmd, NULL, strerror(errno));
 		if (WIFEXITED(status))

@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 12:42:19 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/04 18:20:06 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,18 @@ int				program_exit(t_commands *cmd, t_data *data, int num);
 void			error_case(char *str1, char *str2, char *str3);
 void			freeing_memory_from_struct_commands(t_commands *cmd);
 void			freeing_memory_from_struct_data(t_data *data);
+
+/*
+** for export
+*/
+int		delete_lst(t_commands **cmd, t_list **lst, int num_of_l, int error);
+void	change_var(t_data **all, t_commands **cmd, int num_of_lst);
+void	empty_export(t_data **all, t_commands **cmd);
+
+/*
+** for unset
+*/
+int 	del_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, int error);
+void	delete_right_env_variable(t_data **all, t_commands **cmd);
+
 #endif

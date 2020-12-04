@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:39:16 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/03 21:18:07 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 18:20:00 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	ft_echo(t_commands *cmd);
 ** By this time, all $ should have been processed.
 ** The function must be sold ready-made arguments.
 */
+void	ft_export(t_commands **cmd, t_data **all);
 
-void	ft_export(t_commands **cmd, t_data **all, int index);
 void	ft_check_cmd_in_path(t_commands **cmd, t_data **data);
 void	ft_unset(t_commands **cmd, t_data **all);
 void	ft_exit(t_commands *cmd, t_data *all);
