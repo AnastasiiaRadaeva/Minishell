@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 12:03:39 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/04 21:39:52 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			_if_type_dollar(t_data *data, char **content, char *rem)
 	char		*p;
 	int			i;
 	int			num_env;
+	
 	i = 0;
 	p = rem ? ft_strchr(rem, CHAR_DOLLAR) : ft_strchr(*content, CHAR_DOLLAR);
 	if (p)
@@ -95,8 +96,6 @@ void			_if_type_dollar(t_data *data, char **content, char *rem)
 				// *content = ft_strdup("");
 				*content = "";
 			}
-			
-
 		}
 	}
 }
