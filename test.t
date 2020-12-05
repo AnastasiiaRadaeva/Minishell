@@ -1,1 +1,0 @@
-/home/anatashi/Desktop/Minishell
