@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 21:39:52 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/05 11:10:00 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,27 @@ void			_if_type_dollar(t_data *data, char **content, char *rem)
 			else
 			{
 				ft_free_tmp(*content);
-				// *content = ft_strdup("");
-				*content = "";
+				*content = ft_strdup("");
+				// *content = "";
 			}
 		}
 	}
+	ft_free_tmp(rem);
 }
 
 static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
-								char *content, int type)
+								char **content, int type)
 {
 	if (type == CHAR_DQUOTE)
-		_if_type_dollar(data, &content, NULL);	
-	_strip_quotes(content, ft_strlen(content), 0);
+		_if_type_dollar(data, content, NULL);	
+	_strip_quotes(*content, ft_strlen(*content), 0);
 	if (type == CHAR_DOLLAR)
-		_if_type_dollar(data, &content, NULL);
-	if (content)
-		ft_lstadd_back(&(*syntax_tree)->lst, ft_lstnew(ft_strdup(content)));
+		_if_type_dollar(data, content, NULL);
+	if (*content)
+	{
+		// ft_lstadd_back(&(*syntax_tree)->lst, ft_lstnew(content));
+		ft_lstadd_back(&(*syntax_tree)->lst, ft_lstnew(ft_strdup(*content)));
+	}
 
 }
 
@@ -149,7 +153,7 @@ static	void	add_nodes(t_commands **cmd, t_tok *llisttok, t_data *data)
 		(*cmd) = (*cmd)->pipe;
 	}
 	else
-		add_lst_to_node(cmd, data, llisttok->data, llisttok->type);
+		add_lst_to_node(cmd, data, &llisttok->data, llisttok->type);
 }
 
 t_commands		*parse(t_data *data, t_lexer *lexerbuf)

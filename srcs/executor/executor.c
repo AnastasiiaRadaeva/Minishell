@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 22:54:04 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/05 11:40:22 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ void	executor(t_commands *syntax_tree, t_data *data)
 	next_nod = syntax_tree;
 	if (next_nod)
 	{
-		// if (check_syntax_error(next_nod))
-		// 	return;
+		if (check_syntax_error(next_nod))
+			return;
 		while (next_nod)
 		{
 			execute_cmd_line(&next_nod, data);

@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 15:03:58 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 17:04:43 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/05 11:47:29 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ static void	get_input(char **line, t_data *data)
 void		read_cmd(t_data *data, char **line)
 {
 	get_input(line, data);
-	// if (get_next_line(0, line) < 0)
-	// 	error_output(NULL, data, GNL_1);
-	// if (ft_strlen(*line) == 4 && ft_strncmp("exit", *line, 4) == 0)
-	// {
-	// 	ft_free_tmp(*line);
-	// 	program_exit(NULL, data, global_status);
-	// }
+	if (**line == '\0')
+	{
+		free(*line);
+		*line = NULL;
+		print_promt_string();
+		read_cmd(data, line);
+	}
+
 }
