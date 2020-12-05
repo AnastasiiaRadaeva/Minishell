@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/05 11:47:49 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/05 16:07:09 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int    				main(int argc, char **argv, char **envp)
 	/*
 	**	for minishell_test
 	*/
-	// #if 0
+	#if 0
 	if (argv[1][0] == '-' && argv[1][1] == 'c')
 	{
 		lexer_build(ft_strdup(argv[2]), ft_strlen(argv[2]), lexerbuf);
@@ -39,7 +39,7 @@ int    				main(int argc, char **argv, char **envp)
 		executor(syntax_tree, data);
 	}
 	else
-	// #endif
+	#endif
 	{
 		while (1)
 		{
@@ -49,11 +49,16 @@ int    				main(int argc, char **argv, char **envp)
 			read_cmd(data, &line);
 			lexerbuf = (t_lexer *)ft_calloc(sizeof(t_lexer), 1);
 			lexer_build(line, ft_strlen(line), lexerbuf);
+			if (check_syntax(lexerbuf))
+				;
+			else
+			{
+				syntax_tree = parse(data, lexerbuf);
+				executor(syntax_tree, data);
+				freeing_memory_from_lexer(&lexerbuf);
+				freeing_memory_from_struct_commands(syntax_tree);
+			}
 			ft_free_tmp(line);
-			syntax_tree = parse(data, lexerbuf);
-			executor(syntax_tree, data);
-			freeing_memory_from_lexer(&lexerbuf);
-			freeing_memory_from_struct_commands(syntax_tree);
 		}
 	}
 	exit(EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/05 10:00:11 by anatashi         ###   ########.fr        #
+#    Updated: 2020/12/05 16:07:48 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ TEMP_LIST			=	minishell.c\
 						creat_env.c\
 						init_struct_data.c\
 						error_output.c\
-						program_exit.c
+						program_exit.c\
+						check_syntax.c
 
 LEXER_DIR			=	srcs/lexer/
 LEXER_LIST			=	lexer.c\
