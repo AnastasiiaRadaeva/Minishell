@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:11:33 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/05 11:32:09 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/07 11:17:56 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ static void	ft_env_for_export(t_commands *cmd, t_data *all, char **new)
 			free(temp_str);
 	}
 	ft_putendl(string);
-	free(string);
-	string = NULL;
 }
 
 static int	create_array_for_export(char ***new, t_commands **cmd, \
