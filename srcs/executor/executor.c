@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/05 11:40:22 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/05 16:06:59 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int			redirects(t_commands *redir)
 
 static void	error_with_status(t_commands *cmd)
 {
+	if (!*cmd->cmd)
+		return;
 	error_case("minishell: ", cmd->cmd, ": command not found\n");
 	global_status = 127;
 }
@@ -134,8 +136,8 @@ void	executor(t_commands *syntax_tree, t_data *data)
 	next_nod = syntax_tree;
 	if (next_nod)
 	{
-		if (check_syntax_error(next_nod))
-			return;
+		// if (check_syntax_error(next_nod))
+		// 	return;
 		while (next_nod)
 		{
 			execute_cmd_line(&next_nod, data);
