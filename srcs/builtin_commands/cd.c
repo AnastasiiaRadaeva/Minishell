@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/04 23:01:59 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/07 14:13:18 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	error_with_status(t_commands **cmd)
 	global_status = 1;
 }
 
-static void	change_var_cd(t_commands *cmd, t_data **all)
+static void	change_var_for_cd(t_commands *cmd, t_data **all)
 {
 	char	*tmp;
 	char	*tmp_2;
@@ -50,12 +50,10 @@ void		ft_cd(t_commands **cmd, t_data *all)
 	if ((*cmd)->count_args == 0)
 	{
 		if (!((*cmd)->lst = (t_list *)malloc(sizeof(t_list))))
-				error_output(*cmd, all, MALLOC_5);
-		((*cmd)->lst->content) = ft_strdup(all->envp[all->home_dir] + 5);
+			error_output(*cmd, all, MALLOC_5);
+		((*cmd)->lst->content) = all->envp[all->home_dir] + 5;
 		(*cmd)->lst->next = NULL;
 	}
-	if ((*cmd)->count_args > 1)
-		error_with_status(cmd);
 	if (((char*)(*cmd)->lst->content)[0] == '~')
 	{
 		if (!(tmp_path = ft_strjoin(all->envp[all->home_dir] + 5,
@@ -66,5 +64,5 @@ void		ft_cd(t_commands **cmd, t_data *all)
 	}
 	if (chdir((char *)(*cmd)->lst->content) != 0)
 		error_with_status(cmd);
-	change_var_cd(*cmd, &all);
+	change_var_for_cd(*cmd, &all);
 }
