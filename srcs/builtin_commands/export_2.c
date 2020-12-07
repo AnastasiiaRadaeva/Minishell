@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:11:33 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 11:17:56 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/07 12:47:36 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,31 @@ static void	error_with_status(t_list **lst)
 int			delete_lst(t_commands **cmd, t_list **lst, int num_of_l, int error)
 {
 	t_list	*new_lst;
-	t_list	*tmp_lst;
+	// t_list	*tmp_lst;
 
 	if (error == 1)
 		error_with_status(lst);
-	tmp_lst = (*lst);
+	// tmp_lst = (*lst);
 	new_lst = (*cmd)->lst;
 	error = -1;
 	if (num_of_l == 0)
 	{
 		(*lst) = new_lst->next;
-		(*cmd)->lst = new_lst->next;
+		free((*cmd)->lst);
+		(*cmd)->lst = NULL;
+		(*cmd)->lst = (*lst);
 	}
 	else
 	{
 		while (new_lst && ++error != num_of_l - 1)
 			new_lst = new_lst->next;
 		new_lst->next = (*lst)->next;
+		free((*lst));
+		(*lst) = NULL;
 		(*lst) = new_lst->next;
 	}
 	(*cmd)->count_args--;
-	free(tmp_lst);
+	// free(tmp_lst);
 	return (1);
 }
 
