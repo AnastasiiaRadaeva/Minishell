@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:17:30 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 09:52:31 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/05 16:43:14 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define LEXER_H
 
 # define TOKEN_TYPE "|&\'\"; ><0$"
-
+# define ERR_1 "minishell: syntax error near unexpected token "
 
 typedef	enum		e_token_type
 {
@@ -63,4 +63,5 @@ typedef	struct		s_lexer
 */
 int lexer_build(char *input, int size, t_lexer  *lexerbuf);
 void freeing_memory_from_lexer(t_lexer **lexerbuf);
+int			check_syntax(t_lexer *lexerbuf);
 #endif

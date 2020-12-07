@@ -6,7 +6,7 @@
 #    By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/05 10:00:11 by anatashi         ###   ########.fr        #
+#    Updated: 2020/12/07 11:10:16 by anatashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ TEMP_LIST			=	minishell.c\
 						creat_env.c\
 						init_struct_data.c\
 						error_output.c\
-						program_exit.c
+						program_exit.c\
+						check_syntax.c
 
 LEXER_DIR			=	srcs/lexer/
 LEXER_LIST			=	lexer.c\
@@ -93,12 +94,12 @@ lib:
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	# $(CC) -o $(NAME) $(FLAGS) $(OPFLAGS) -L$(LIBFT_DIR) -lft $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -L. $(LIBFT_DIR)libft.a -o $(NAME)
+	$(CC) -o $(NAME) $(FLAGS) $(OPFLAGS) -L$(LIBFT_DIR) -lft $(OBJ)
+	# $(CC) $(FLAGS) $(OBJ) -L. $(LIBFT_DIR)libft.a -o $(NAME)
 	
 %.o: %.c 
-	# $(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
-	$(CC) $(FLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
+	$(CC) $(FLAGS) $(OPFLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
+	# $(CC) $(FLAGS) -I$(HEADER_DIR) -c $< -o $@ -MD
 
 include $(wildcard $(D_FILE))
 
