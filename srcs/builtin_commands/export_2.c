@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:11:33 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 13:10:20 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/07 13:36:10 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int			delete_lst(t_commands **cmd, t_list **lst, int num_of_l, int error)
 		(*lst) = new_lst->next;
 	}
 	(*cmd)->count_args--;
+	free(tmp_lst->content);
 	free(tmp_lst);
 	return (1);
 }

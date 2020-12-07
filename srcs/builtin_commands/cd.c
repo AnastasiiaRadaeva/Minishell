@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 11:24:18 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/07 14:13:18 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void		ft_cd(t_commands **cmd, t_data *all)
 		((*cmd)->lst->content) = all->envp[all->home_dir] + 5;
 		(*cmd)->lst->next = NULL;
 	}
-	if ((*cmd)->count_args > 1)
-		error_with_status(cmd);
 	if (((char*)(*cmd)->lst->content)[0] == '~')
 	{
 		if (!(tmp_path = ft_strjoin(all->envp[all->home_dir] + 5,
