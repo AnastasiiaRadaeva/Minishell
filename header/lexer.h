@@ -6,7 +6,7 @@
 /*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:17:30 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/05 16:43:14 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/07 15:26:06 by anatashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # define TOKEN_TYPE "|&\'\"; ><0$"
 # define ERR_1 "minishell: syntax error near unexpected token "
-
+# define ERR_2 "minishell.: filename argument required\n .: usage: . filename [arguments]\n"
+# define ERR_3 "minishell: : No such file or directory\n"
 typedef	enum		e_token_type
 {
 	CHAR_GENERAL = -1,
