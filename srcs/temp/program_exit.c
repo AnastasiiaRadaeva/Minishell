@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 17:02:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/07 14:10:55 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/08 20:34:48 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,25 @@ void	freeing_memory_from_lst(t_list **lst)
 	}
 }
 
-void	freeing_memory_from_struct_commands(t_commands *cmd)
+void	freeing_memory_from_struct_commands(t_commands **cmd)
 {
-	if (cmd)
+	if ((*cmd))
 	{
-		ft_free_tmp(cmd->cmd);
-		ft_free_tmp(cmd->cmd_dir);
-		ft_lstclear(&cmd->lst, ft_lstdelone_f);
-		freeing_memory_from_struct_commands(cmd->redir);
-		freeing_memory_from_struct_commands(cmd->pipe);
-		freeing_memory_from_struct_commands(cmd->next);
-		free(cmd);
-		cmd = NULL;
+		ft_free_tmp((*cmd)->cmd);
+		ft_free_tmp((*cmd)->cmd_dir);
+		ft_lstclear(&(*cmd)->lst, ft_lstdelone_f);
+		freeing_memory_from_struct_commands(&((*cmd)->redir));
+		freeing_memory_from_struct_commands(&((*cmd)->pipe));
+		freeing_memory_from_struct_commands(&((*cmd)->next));
+		free((*cmd));
+		(*cmd) = NULL;
 	}
 }
 
 int		program_exit(t_commands *cmd, t_data *data, int num)
 {
 	if (cmd)
-		freeing_memory_from_struct_commands(cmd);
+		freeing_memory_from_struct_commands(&cmd);
 	if (data)
 		freeing_memory_from_struct_data(data);
 	// sleep(10000000);

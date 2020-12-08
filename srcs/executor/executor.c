@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:38:26 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/07 15:15:15 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/08 20:33:14 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		executor(t_commands *syntax_tree, t_data *data)
 		while (next_nod)
 		{
 			execute_cmd_line(&next_nod, data);
+			next_nod = next_nod->next;
 			dup2(data->fd_1, 1);
 			dup2(data->fd_0, 0);
 		}

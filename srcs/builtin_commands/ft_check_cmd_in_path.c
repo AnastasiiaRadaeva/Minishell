@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 13:07:09 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/08 20:42:04 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-static	char	**creat_dimens_arr_for_execve(t_commands *cmd)
+static char	**creat_dimens_arr_for_execve(t_commands *cmd)
 {
 	char		**argv_for_execve;
 	int			i;
 	t_list		*tmp;
-	
+
 	i = 0;
 	tmp = cmd->lst;
-	argv_for_execve = (char **)malloc(sizeof(char *) * cmd->count_args + 2);
+	argv_for_execve = (char **)malloc(sizeof(char *) * (cmd->count_args + 2));
 	argv_for_execve[i] = ft_strdup(cmd->cmd);
 	i++;
 	while (tmp)
@@ -40,31 +40,33 @@ static	char	**creat_dimens_arr_for_execve(t_commands *cmd)
 	return (argv_for_execve);
 }
 
-void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
+static void	if_childpid(t_data **data, t_commands **cmd)
 {
-	
-	pid_t	pid;
 	char	**argv_for_execve;
 	char	*command;
-	int		status;
 
-	argv_for_execve = NULL;
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	argv_for_execve = creat_dimens_arr_for_execve(*cmd);
 	command = ft_strjoin((*cmd)->cmd_dir, (*cmd)->cmd);
-	// (*cmd)->cmd = ft_strjoin((*cmd)->cmd_dir, (*cmd)->cmd);
+	execve(command, argv_for_execve, (*data)->envp);
+	ft_free_tmp(command);
+	ft_free_two_dimensional_arr(argv_for_execve);
+	exit(EXIT_FAILURE);
+}
+
+void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
+{
+	pid_t	pid;
+	int		status;
+
 	pid = fork();
 	if (!pid)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		execve(command, argv_for_execve, (*data)->envp);
-		exit(EXIT_FAILURE);
-	}
+		if_childpid(data, cmd);
 	else
 	{
 		signal(SIGINT, signal_handler_2);
 		signal(SIGQUIT, signal_handler_2);
-
 		if (waitpid(pid, &status, WUNTRACED) == -1)
 			error_output(*cmd, *data, (strerror(errno)));
 		if (WIFEXITED(status))
@@ -73,11 +75,5 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 			global_status = 128 + WTERMSIG(status);
 		else if (WIFSTOPPED(status))
 			global_status = WSTOPSIG(status);
-		else if (WIFCONTINUED(status))
-			ft_putendl("continued");
-		// for (int i = 0; argv_for_execve[i]; i++)
-			// free(argv_for_execve[1]);
 	}
-		ft_free_tmp(command);
-		ft_free_two_dimensional_arr(argv_for_execve);
 }

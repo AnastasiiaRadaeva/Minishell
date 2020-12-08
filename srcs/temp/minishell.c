@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:00:57 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/08 11:09:22 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/08 20:24:13 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int    				main(int argc, char **argv, char **envp)
 				syntax_tree = parse(data, lexerbuf);
 				executor(syntax_tree, data);
 				freeing_memory_from_lexer(&lexerbuf);
-				freeing_memory_from_struct_commands(syntax_tree);
+				freeing_memory_from_struct_commands(&syntax_tree);
 			}
 			ft_free_tmp(line);
 		}

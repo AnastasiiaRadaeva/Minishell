@@ -1,0 +1,14 @@
+total 160
+drwxr-xr-x  13 kbatwoma  student    416 Dec  8 20:36 .
+drwx------   4 kbatwoma  student    128 Dec  8 19:06 ..
+-rw-r--r--   1 kbatwoma  student   8196 Dec  8 10:58 .DS_Store
+drwxr-xr-x  13 kbatwoma  student    416 Dec  8 11:14 .git
+drwxr-xr-x   3 kbatwoma  student     96 Dec  8 19:08 .vscode
+-rw-r--r--   1 kbatwoma  student   3216 Dec  8 11:07 Makefile
+drwxr-xr-x   6 kbatwoma  student    192 Dec  8 11:07 header
+drwxr-xr-x   7 kbatwoma  student    224 Dec  8 19:12 libft
+-rwxr-xr-x   1 kbatwoma  student  58284 Dec  8 20:34 minishell
+drwxr-xr-x   3 kbatwoma  student     96 Dec  8 10:58 minishell.dSYM
+drwxr-xr-x   8 kbatwoma  student    256 Dec  8 11:05 srcs
+-rwx------   1 kbatwoma  student     88 Dec  8 16:31 test.txt
+-rwx------   1 kbatwoma  student      0 Dec  8 20:36 text.txt

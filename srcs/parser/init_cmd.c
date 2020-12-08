@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:48:22 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 17:07:58 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/08 20:46:00 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int	check_cmd_in_path_add(t_commands **cmd, char ***split_path,\
 	while ((*split_path)[j])
 		ft_free_tmp((*split_path)[j++]);
 	free((*split_path));
+	free((*dir)->__dd_buf);
 	free(*dir);
 	*dir = NULL;
 	return (0);
@@ -69,10 +70,9 @@ static int	check_cmd_in_path(t_commands *cmd, char *tmp, char **split_path)
 	{
 		dir = opendir(split_path[i]);
 		while ((entry = readdir(dir)))
-		{
 			if (!ft_strcmp(entry->d_name, tmp))
 				return (check_cmd_in_path_add(&cmd, &split_path, &dir, &i));
-		}
+		free(dir->__dd_buf);
 		free(dir);
 		dir = NULL;
 	}

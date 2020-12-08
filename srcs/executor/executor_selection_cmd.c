@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:12:38 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 15:14:42 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/08 20:33:55 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ static void	error_with_status(t_commands *cmd)
 	global_status = 127;
 }
 
-static void	selection_ft(t_commands **cmd, t_data *data)
+void		selection_cmd(t_commands **cmd, t_data *data,
+								t_commands *redirect)
 {
+	if (redirects(redirect))
+		return ;
 	if ((*cmd)->num_cmd == CMD_PWD)
 		ft_pwd((*cmd), data);
 	else if ((*cmd)->num_cmd == CMD_ENV)
@@ -42,25 +45,4 @@ static void	selection_ft(t_commands **cmd, t_data *data)
 		ft_exit(*cmd, data);
 	else if ((*cmd)->num_cmd == CMD_ERROR)
 		error_with_status(*cmd);
-}
-
-void		selection_cmd(t_commands **cmd, t_data *data,
-								t_commands *redirect)
-{
-	if (redirects(redirect))
-		return ;
-	selection_ft(cmd, data);
-	if (redirect)
-	{
-		while (redirect->redir)
-			redirect = redirect->redir;
-		if (redirect->next || !redirect->redir)
-			(*cmd) = redirect->next;
-		else if (redirect->redir)
-			(*cmd) = redirect->redir;
-		else if (redirect->pipe)
-			(*cmd) = redirect->pipe;
-	}
-	else
-		(*cmd) = (*cmd)->next;
 }

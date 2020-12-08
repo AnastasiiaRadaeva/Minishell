@@ -6,29 +6,37 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:23:29 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 17:39:44 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/08 21:01:59 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// static void	if_type_dollar_add()
-// {
+static void	if_type_dollar_add(char **content, char flag, char **p, int *i)
+{
+	if (flag == 'a')
+	{
+		ft_free_tmp(*content);
+		*content = ft_strdup("");
+	}
+	else
+	{
+		*(p++);
+		*i = ((*p)[(*i)] == '_' || ft_isalpha((*p)[(*i)])) ? 1 : 0;
+	}
+}
 
-// }
-
-static void			if_type_dollar(t_data *data, char **content, char *rem)
+static void	if_type_dollar(t_data *data, char **content, char *rem, int i)
 {
 	char		*p;
-	int			i;
 	int			num_env;
 
-	i = 0;
 	p = rem ? ft_strchr(rem, CHAR_DOLLAR) : ft_strchr(*content, CHAR_DOLLAR);
 	if (p)
 	{
-		p++;
-		i = (p[i] == '_' || ft_isalpha(p[i])) ? 1 : 0;
+		// p++;
+		// i = (p[i] == '_' || ft_isalpha(p[i])) ? 1 : 0;
+		if_type_dollar_add(content, 'b', &p, &i);
 		if (i)
 		{
 			while (p[i] == '_' || ft_isalnum(p[i]))
@@ -41,26 +49,27 @@ static void			if_type_dollar(t_data *data, char **content, char *rem)
 				*content = ft_strjoin_gnl(content,\
 												data->envp[num_env] + i + 1);
 				if (*rem != '\0')
-					if_type_dollar(data, content, rem);
+					if_type_dollar(data, content, rem, 0);
 			}
 			else
-			{
-				ft_free_tmp(*content);
-				*content = ft_strdup("");
-			}
+			// {
+			// 	ft_free_tmp(*content);
+			// 	*content = ft_strdup("");
+			// }
+				if_type_dollar_add(content, 'a', &p, &i);
 		}
 	}
 	ft_free_tmp(rem);
 }
 
-static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
+static void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 								char **content, int type)
 {
 	if (type == CHAR_DQUOTE)
-		if_type_dollar(data, content, NULL);
+		if_type_dollar(data, content, NULL, 0);
 	strip_quotes_2(*content, ft_strlen(*content), 0);
 	if (type == CHAR_DOLLAR)
-		if_type_dollar(data, content, NULL);
+		if_type_dollar(data, content, NULL, 0);
 	if (*content)
 		ft_lstadd_back(&(*syntax_tree)->lst, ft_lstnew(ft_strdup(*content)));
 }
@@ -81,7 +90,7 @@ static void	init_pipe_or_semicolon(t_commands **cmd, t_data *data, char symb)
 	}
 }
 
-void	add_nodes(t_commands **cmd, t_tok *llisttok, t_data *data)
+void		add_nodes(t_commands **cmd, t_tok *llisttok, t_data *data)
 {
 	t_commands	*tmp_cmd;
 
