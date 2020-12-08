@@ -66,3 +66,4 @@ void		ft_cd(t_commands **cmd, t_data *all)
 		error_with_status(cmd);
 	change_var_for_cd(*cmd, &all);
 }
+
