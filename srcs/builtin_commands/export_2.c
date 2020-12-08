@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:11:33 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 13:36:10 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/07 15:43:07 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	ft_env_for_export(t_commands *cmd, t_data *all, char **new)
 	}
 	ft_putendl(string);
 	free(string);
-	string = NULL;
 }
 
 static int	create_array_for_export(char ***new, t_commands **cmd, \
