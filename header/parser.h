@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:35:52 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/27 14:49:39 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/07 17:32:04 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,9 @@ typedef	enum		e_cmd_type
 t_commands		*parse(t_data *data, t_lexer *lexerbuf);
 t_commands		*init_struct_commands(t_commands *cmd, t_data *data);
 void 			init(t_commands **cmd, t_data *data);
+int		checking_cmd(t_commands *cmd, char *path);
+void	add_nodes(t_commands **cmd, t_tok *llisttok, t_data *data);
+void		strip_quotes_2(char *content, size_t n, int j);
+int				check_env(char **envp, char *var, int size);
 
 #endif

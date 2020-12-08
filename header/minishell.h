@@ -6,11 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/12/07 11:15:38 by anatashi         ###   ########.fr       */
-=======
 /*   Updated: 2020/12/07 11:23:34 by kbatwoma         ###   ########.fr       */
->>>>>>> 31b2a5da86b2ec621a2ec76272f11ad1d9ad6b74
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +17,7 @@
 # include <signal.h>
 # include <string.h>
 # include "../libft/header/libft.h"
-# include <wait.h>
+// # include <wait.h>
 
 # define MALLOC_1 "Error : Malloc fail (init_struct_commands)"
 # define MALLOC_2 "Error : Malloc fail (ft_command_line)"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax_error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:07:50 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/05 14:12:21 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/07 14:58:12 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static	int	return_error_case(int err, char *str_err)
 {
 	errno = err;
-	
 	error_case("minishell: syntax error near unexpected token ",
 							str_err, NULL);
 	return (1);
@@ -95,7 +94,6 @@ static	int	check_syntax_pipe(t_commands *cmd)
 
 int			check_syntax_error(t_commands *cmd)
 {
-
 	if (cmd->redir)
 		return (check_syntax_redirect(cmd));
 	if (cmd->next)

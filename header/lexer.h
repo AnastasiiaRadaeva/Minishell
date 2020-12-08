@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 14:17:30 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/07 15:26:06 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/08 11:11:01 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define ERR_1 "minishell: syntax error near unexpected token "
 # define ERR_2 "minishell.: filename argument required\n .: usage: . filename [arguments]\n"
 # define ERR_3 "minishell: : No such file or directory\n"
+
 typedef	enum		e_token_type
 {
 	CHAR_GENERAL = -1,
@@ -65,4 +66,18 @@ typedef	struct		s_lexer
 int lexer_build(char *input, int size, t_lexer  *lexerbuf);
 void freeing_memory_from_lexer(t_lexer **lexerbuf);
 int			check_syntax(t_lexer *lexerbuf);
+int			get_char_type(char *ch_type);
+void	if_state_in_general(t_tok **token, int *arr, char c, int size);
+int		if_state_in_dollar(t_tok **token, int *arr, char c);
+void	if_char_dollar(t_tok **token, int *arr, char c);
+int		check_char_separator(int chtype);
+void	if_char_null(t_tok **token, int *arr, char c);
+int		if_state_in_quote(t_tok **token, int *arr, char c);
+int		if_state_in_dquote(t_tok **token, int *arr, char c);
+void	if_char_separator(t_tok **token, int *arr, int size);
+void	if_char_whitespace(t_tok **token, int *arr, int size);
+void	if_char_general(t_tok **token, int *arr, char c);
+void 	if_char_dquote(t_tok **token, int *arr);
+void	if_char_quote(t_tok **token, int *arr);
+
 #endif

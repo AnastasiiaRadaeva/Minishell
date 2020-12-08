@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 15:19:04 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/05 11:10:00 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/07 17:33:40 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int				check_env(char	**envp, char *var, int size)
+int			check_env(char **envp, char *var, int size)
 {
-	int			i;
-	int			j;
-	int			recover_size;
+	int		i;
+	int		j;
+	int		recover_size;
 
 	recover_size = size;
 	i = -1;
@@ -27,8 +27,9 @@ int				check_env(char	**envp, char *var, int size)
 		{
 			size = recover_size;
 			while (envp[i][j] == var[j] && size)
-			{	
-				if ((envp[i][j + 1] == '=' || envp[i][j + 1] == '\0') && size == 1)
+			{
+				if ((envp[i][j + 1] == '=' || envp[i][j + 1] == '\0') &&\
+																size == 1)
 					return (i);
 				j++;
 				size--;
@@ -38,10 +39,9 @@ int				check_env(char	**envp, char *var, int size)
 	return (0);
 }
 
-
-void 		_strip_quotes(char *content, size_t n, int j)
+void		strip_quotes_2(char *content, size_t n, int j)
 {
-	size_t 	i;
+	size_t	i;
 	char	lastquote;
 	char	c;
 
@@ -60,103 +60,7 @@ void 		_strip_quotes(char *content, size_t n, int j)
 	content[j] = 0;
 }
 
-
-/*
-** p 	- a pointer to the CHAR_DOLLAR
-** rem	- the remainder of the string after $ content
-*/
-void			_if_type_dollar(t_data *data, char **content, char *rem)
-{
-	char		*p;
-	int			i;
-	int			num_env;
-	
-	i = 0;
-	p = rem ? ft_strchr(rem, CHAR_DOLLAR) : ft_strchr(*content, CHAR_DOLLAR);
-	if (p)
-	{
-		p++;
-		i = (p[i] == '_' || ft_isalpha(p[i])) ? 1 : 0;
-		if (i)
-		{
-			while (p[i] == '_' || ft_isalnum(p[i]))
-				i++;
-			if ((num_env = check_env(data->envp, p, i)))
-			{
-				p--;
-				*p = '\0';
-				rem = ft_strdup(p + i + 1);
-				*content = ft_strjoin_gnl(content, data->envp[num_env] + i + 1);
-				if (*rem != '\0')
-					_if_type_dollar(data, content, rem);
-			}
-			else
-			{
-				ft_free_tmp(*content);
-				*content = ft_strdup("");
-				// *content = "";
-			}
-		}
-	}
-	ft_free_tmp(rem);
-}
-
-static	void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
-								char **content, int type)
-{
-	if (type == CHAR_DQUOTE)
-		_if_type_dollar(data, content, NULL);	
-	_strip_quotes(*content, ft_strlen(*content), 0);
-	if (type == CHAR_DOLLAR)
-		_if_type_dollar(data, content, NULL);
-	if (*content)
-	{
-		// ft_lstadd_back(&(*syntax_tree)->lst, ft_lstnew(content));
-		ft_lstadd_back(&(*syntax_tree)->lst, ft_lstnew(ft_strdup(*content)));
-	}
-
-}
-
-static	void	add_nodes(t_commands **cmd, t_tok *llisttok, t_data *data)
-{
-	// t_lexer		*tmp;
-	t_commands	*tmp_cmd;
-
-	// tmp = lexerbuf;
-	tmp_cmd = (*cmd);
-	if (llisttok->type == CHAR_GREATER || llisttok->type == CHAR_LESSER)
-	{	
-		init(cmd, data);
-		(*cmd)->type_redir = llisttok->type;
-		if ((*cmd)->previous && !(*cmd)->cmd)
-		{
-			if ((*cmd)->previous->type_redir == CHAR_GREATER && (*cmd)->type_redir == CHAR_GREATER)
-			(*cmd)->previous->type_redir = 3;
-			(*cmd)->type_redir = 0;
-			return;
-		}
-		(*cmd)->redir = init_struct_commands(*cmd, data);
-		(*cmd) = (*cmd)->redir;
-		(*cmd)->previous = tmp_cmd;
-
-	}
-	else if (llisttok->type == CHAR_SEMICOLON)
-	{
-		init(cmd, data);
-		(*cmd)->next = init_struct_commands(*cmd, data);
-		(*cmd) = (*cmd)->next;
-	}
-	else if (llisttok->type == CHAR_PIPE)
-	{
-		init(cmd, data);
-		(*cmd)->pipe = init_struct_commands(*cmd, data);
-		(*cmd) = (*cmd)->pipe;
-	}
-	else
-		add_lst_to_node(cmd, data, &llisttok->data, llisttok->type);
-}
-
-t_commands		*parse(t_data *data, t_lexer *lexerbuf)
+t_commands	*parse(t_data *data, t_lexer *lexerbuf)
 {
 	t_commands	*syntax_tree;
 	t_commands	*tmp;
@@ -175,5 +79,5 @@ t_commands		*parse(t_data *data, t_lexer *lexerbuf)
 		init(&syntax_tree, data);
 	if (!tmp->next && !tmp->redir && !tmp->pipe && syntax_tree != tmp)
 		init(&tmp, data);
-	return (syntax_tree);	
+	return (syntax_tree);
 }

@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 14:13:18 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:59:18 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,3 @@ void		ft_cd(t_commands **cmd, t_data *all)
 		error_with_status(cmd);
 	change_var_for_cd(*cmd, &all);
 }
-

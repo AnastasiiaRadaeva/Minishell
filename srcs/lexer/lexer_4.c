@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.h                                            :+:      :+:    :+:   */
+/*   lexer_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/07 15:00:58 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/25 19:13:33 by kbatwoma         ###   ########.fr       */
+/*   Created: 2020/12/07 15:28:36 by kbatwoma          #+#    #+#             */
+/*   Updated: 2020/12/07 15:36:57 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLS_H
-# define TOOLS_H
-
 #include "minishell.h"
+#include "lexer.h"
 
-char		*ft_trim_string(char *string, size_t size);
-char		*skip_spaces(char *p1);
-#endif
+void	if_char_quote(t_tok **token, int *arr)
+{
+	arr[3] = STATE_IN_QUOTE;
+	(*token)->data[arr[1]] = CHAR_QOUTE;
+	(*token)->type = CHAR_QOUTE;
+	arr[1]++;
+}
+
+void	if_char_dquote(t_tok **token, int *arr)
+{
+	arr[3] = STATE_IN_DQUOTE;
+	(*token)->data[arr[1]] = CHAR_DQUOTE;
+	(*token)->type = CHAR_DQUOTE;
+	arr[1]++;
+}
