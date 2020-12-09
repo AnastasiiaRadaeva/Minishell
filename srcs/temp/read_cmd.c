@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 15:03:58 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/05 11:47:29 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/09 13:35:29 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ static void	get_input(char **line, t_data *data)
 			tmp = baff;
 			baff = ft_strjoin(baff, *line);
 			free(tmp);
+			free(*line);
+			*line = NULL;
+		}
+		if (gnl == 0 && *line[0] == '\0')
+		{
+			free(*line);
+			*line = NULL;
 		}
 		if (gnl == 0 && *line[0] == '\0' && *baff == '\0')
 			exit(EXIT_SUCCESS);

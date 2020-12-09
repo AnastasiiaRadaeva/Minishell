@@ -6,13 +6,13 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:23:29 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/08 21:01:59 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 13:11:13 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	if_type_dollar_add(char **content, char flag, char **p, int *i)
+static void	if_type_dollar_add(char **content, char flag, char *p, int *i)
 {
 	if (flag == 'a')
 	{
@@ -20,56 +20,63 @@ static void	if_type_dollar_add(char **content, char flag, char **p, int *i)
 		*content = ft_strdup("");
 	}
 	else
-	{
-		*(p++);
-		*i = ((*p)[(*i)] == '_' || ft_isalpha((*p)[(*i)])) ? 1 : 0;
-	}
+		*i = (p[(*i)] == '_' || ft_isalpha(p[(*i)])) ? 1 : 0;
 }
 
-static void	if_type_dollar(t_data *data, char **content, char *rem, int i)
+static void	if_type_dollar(t_data *data, char **c, char **rem, int i)
 {
 	char		*p;
 	int			num_env;
+	char		*tmp;
 
-	p = rem ? ft_strchr(rem, CHAR_DOLLAR) : ft_strchr(*content, CHAR_DOLLAR);
+	p = *rem ? ft_strchr(*rem, CHAR_DOLLAR) : ft_strchr(*c, CHAR_DOLLAR);
 	if (p)
 	{
-		// p++;
-		// i = (p[i] == '_' || ft_isalpha(p[i])) ? 1 : 0;
-		if_type_dollar_add(content, 'b', &p, &i);
+		if_type_dollar_add(c, 'b', ++p, &i);
 		if (i)
 		{
 			while (p[i] == '_' || ft_isalnum(p[i]))
 				i++;
-			if ((num_env = check_env(data->envp, p, i)))
+			if ((num_env = check_env(data->envp, p--, i)))
 			{
-				p--;
 				*p = '\0';
-				rem = ft_strdup(p + i + 1);
-				*content = ft_strjoin_gnl(content,\
-												data->envp[num_env] + i + 1);
-				if (*rem != '\0')
-					if_type_dollar(data, content, rem, 0);
+				tmp = *rem;
+				*rem = ft_strdup(p + i + 1);
+				free(tmp);
+				*c = ft_strjoin_gnl(c, data->envp[num_env] + i + 1);
+				**rem != '\0' ? if_type_dollar(data, c, rem, 0) : NULL;
 			}
 			else
-			// {
-			// 	ft_free_tmp(*content);
-			// 	*content = ft_strdup("");
-			// }
-				if_type_dollar_add(content, 'a', &p, &i);
+				if_type_dollar_add(c, 'a', ++p, &i);
 		}
 	}
-	ft_free_tmp(rem);
 }
 
 static void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 								char **content, int type)
 {
+	char *rem;
+
+	rem = NULL;
 	if (type == CHAR_DQUOTE)
-		if_type_dollar(data, content, NULL, 0);
+	{
+		if_type_dollar(data, content, &rem, 0);
+		if (rem != NULL)
+		{
+			free(rem);
+			rem = NULL;
+		}
+	}
 	strip_quotes_2(*content, ft_strlen(*content), 0);
 	if (type == CHAR_DOLLAR)
-		if_type_dollar(data, content, NULL, 0);
+	{
+		if_type_dollar(data, content, &rem, 0);
+		if (rem != NULL)
+		{
+			free(rem);
+			rem = NULL;
+		}
+	}
 	if (*content)
 		ft_lstadd_back(&(*syntax_tree)->lst, ft_lstnew(ft_strdup(*content)));
 }
