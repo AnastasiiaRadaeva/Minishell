@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:48:22 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/08 20:46:00 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 18:24:00 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static int	check_full_path(t_commands *cmd, char *tmp, char *p)
 	return (1);
 }
 
-static int	check_cmd_in_path_add(t_commands **cmd, char ***split_path,\
-													DIR **dir, int *i)
+static int	check(t_commands **cmd, char ***split_path, DIR **dir, int *i)
 {
 	int		j;
 	char	*tmp_1;
@@ -53,7 +52,8 @@ static int	check_cmd_in_path_add(t_commands **cmd, char ***split_path,\
 	return (0);
 }
 
-static int	check_cmd_in_path(t_commands *cmd, char *tmp, char **split_path)
+static int	check_cmd_in_path(t_commands *cmd, char *tmp,\
+													char **split_path)
 {
 	DIR				*dir;
 	struct dirent	*entry;
@@ -71,10 +71,12 @@ static int	check_cmd_in_path(t_commands *cmd, char *tmp, char **split_path)
 		dir = opendir(split_path[i]);
 		while ((entry = readdir(dir)))
 			if (!ft_strcmp(entry->d_name, tmp))
-				return (check_cmd_in_path_add(&cmd, &split_path, &dir, &i));
-		free(dir->__dd_buf);
-		free(dir);
-		dir = NULL;
+				return (check(&cmd, &split_path, &dir, &i));
+		if (dir)
+		{
+			free(dir->__dd_buf);
+			ft_free_tmp(dir);
+		}
 	}
 	ft_free_two_dimensional_arr(split_path);
 	return (1);
@@ -96,7 +98,7 @@ static int	checking_cmd_for_tocken(t_commands *cmd, char *tmp, char *path)
 		return (CMD_ENV);
 	else if (!(ft_strcmp("exit", tmp)))
 		return (CMD_EXIT);
-	else if (!check_cmd_in_path(cmd, tmp, ft_split(path + 5, ':')))
+	else if (path && !check_cmd_in_path(cmd, tmp, ft_split(path + 5, ':')))
 		return (CMD_IN_PATH);
 	return (CMD_ERROR);
 }

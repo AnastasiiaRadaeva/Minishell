@@ -6,13 +6,13 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 18:15:10 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 11:19:25 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 18:19:41 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	size_t	find_char(char *str, char symb)
+size_t			find_char(char *str, char symb)
 {
 	size_t	i;
 
@@ -22,7 +22,8 @@ static	size_t	find_char(char *str, char symb)
 	return (i);
 }
 
-static void		del_arg(t_commands **cmd, char **temp_env, int *index)
+static void		del_arg(t_commands **cmd, char **temp_env, int *index,\
+																t_data **all)
 {
 	t_list	*temp_list;
 	size_t	f;
@@ -31,6 +32,8 @@ static void		del_arg(t_commands **cmd, char **temp_env, int *index)
 	while (temp_list && temp_env[*index])
 	{
 		f = find_char(temp_env[*index], '=');
+		if (ft_strncmp((char *)temp_list->content, "PATH", f) == 0 && f == 4)
+			(*all)->path = -1;
 		if (ft_strncmp((char *)temp_list->content, temp_env[*index], f) == 0\
 							&& f == ft_strlen((char *)temp_list->content))
 		{
@@ -58,7 +61,7 @@ void			delete_right_env_variable(t_data **all, t_commands **cmd)
 		error_output(*cmd, *all, MALLOC_12);
 	while (temp_env[index])
 	{
-		del_arg(cmd, temp_env, &index);
+		del_arg(cmd, temp_env, &index, all);
 		if (temp_env[index])
 		{
 			(*all)->envp[i] = temp_env[index];

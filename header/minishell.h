@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/09 14:31:19 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 17:50:15 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int						program_exit(t_commands *cmd, t_data *data, int num);
 void					error_case(char *str1, char *str2, char *str3);
 void					freeing_memory_from_struct_commands(t_commands **cmd);
 void					freeing_memory_from_struct_data(t_data *data);
+size_t					find_char(char *str, char symb);
 
 /*
 ** for export

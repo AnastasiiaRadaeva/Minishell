@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:23:29 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/09 13:11:13 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 17:12:41 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 		if_type_dollar(data, content, &rem, 0);
 		if (rem != NULL)
 		{
-			free(rem);
-			rem = NULL;
+			*content = ft_strjoin_gnl(content, rem);
+			ft_free_tmp(rem);
 		}
 	}
 	strip_quotes_2(*content, ft_strlen(*content), 0);
@@ -73,11 +73,11 @@ static void	add_lst_to_node(t_commands **syntax_tree, t_data *data,
 		if_type_dollar(data, content, &rem, 0);
 		if (rem != NULL)
 		{
-			free(rem);
-			rem = NULL;
+			*content = ft_strjoin_gnl(content, rem);
+			ft_free_tmp(rem);
 		}
 	}
-	if (*content)
+	if (*content && **content != '\0')
 		ft_lstadd_back(&(*syntax_tree)->lst, ft_lstnew(ft_strdup(*content)));
 }
 

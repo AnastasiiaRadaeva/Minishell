@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 18:25:17 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/07 15:52:55 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 17:36:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ static void	init_arg(t_commands *cmd)
 static void	init_cmd(t_commands *cmd, t_data *data)
 {
 	cmd->cmd = cmd->lst->content;
-	cmd->invalid = checking_cmd(cmd, data->envp[data->path]);
+	if (data->path == -1)
+		cmd->invalid = checking_cmd(cmd, NULL);
+	else
+		cmd->invalid = checking_cmd(cmd, data->envp[data->path]);
 	cmd->num_cmd = cmd->invalid;
 }
 

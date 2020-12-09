@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 16:22:37 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/08 11:01:22 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 17:48:16 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void	check_args_for_validity(t_commands **cmd)
 static void	add_args(char **temp_env, t_data **all, t_commands **cmd)
 {
 	int		index;
+	int		f;
 	t_list	*temp_list;
 
 	index = -1;
@@ -73,6 +74,9 @@ static void	add_args(char **temp_env, t_data **all, t_commands **cmd)
 	temp_list = (*cmd)->lst;
 	while (index < (*all)->count_str)
 	{
+		f = find_char(temp_list->content, '=');
+		if (ft_strncmp((char *)temp_list->content, "PATH", f) == 0 && f == 4)
+			(*all)->path = index;
 		(*all)->envp[index++] = ft_strdup(temp_list->content);
 		temp_list = temp_list->next;
 	}
