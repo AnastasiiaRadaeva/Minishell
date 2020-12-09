@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_add_element_to_two_dimensional_array.c          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 14:30:03 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/09 15:23:23 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:06:25 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static char	**creat_new_two_dimensionall_array(char *elem)
 	new_array[0] = elem;
 	new_array[1] = NULL;
 	return (new_array);
-
 }
 
 char		**ft_add_element_to_two_dimensional_array(char **array, char *elem)
@@ -29,7 +28,7 @@ char		**ft_add_element_to_two_dimensional_array(char **array, char *elem)
 	size_t	i;
 	size_t	len;
 	char	**new_array;
-	
+
 	i = -1;
 	if (!array)
 		return (new_array = creat_new_two_dimensionall_array(elem));

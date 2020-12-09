@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 09:22:15 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/20 14:27:31 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:07:02 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ char				**ft_add_element_to_two_dimensional_array(char **array,
 							char *elem);
 char				*ft_strchr2(const char *s1, const char *s2);
 void				ft_delete_an_array_element(char ***array, size_t i);
-char 				**create_two_dimensional_array_from_lst(t_list *lst);
+char				**create_two_dimensional_array_from_lst(t_list *lst);
 char				*ft_strnrchr(const char *s, int c, size_t size);
 char				*ft_strrchr2(const char *s1, const char *s2);
-char 				*ft_strcpy(char *dest, char *src);
+char				*ft_strcpy(char *dest, char *src);
 #endif

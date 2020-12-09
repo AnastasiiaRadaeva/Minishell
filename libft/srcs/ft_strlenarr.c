@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlenarr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 16:43:22 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/10 15:04:20 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:04:48 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 size_t		ft_strlenarr(char **array)
 {
 	size_t	i;
-	
+
 	i = 0;
 	if (!array)
 		return (0);

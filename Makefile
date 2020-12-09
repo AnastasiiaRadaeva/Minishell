@@ -6,7 +6,7 @@
 #    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/07 17:30:36 by kbatwoma         ###   ########.fr        #
+#    Updated: 2020/12/09 13:40:51 by kbatwoma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ TEMP_LIST			=	minishell.c\
 						promt_string.c\
 						signal.c\
 						read_cmd.c\
-						print_result.c\
 						creat_env.c\
 						init_struct_data.c\
 						error_output.c\

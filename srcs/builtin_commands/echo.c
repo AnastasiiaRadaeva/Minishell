@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:48:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/08 10:59:43 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:30:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	echo(t_commands *cmd)
 		}
 		else if (!ft_strcmp(cmd->lst->content, "$?"))
 		{
-			ft_putnbr_fd(global_status, 0);
+			ft_putnbr_fd(g_global_status, 0);
 			write(1, "\n", 1);
 			exit(EXIT_SUCCESS);
 		}
@@ -87,11 +87,11 @@ void		ft_echo(t_commands *cmd)
 		if (waitpid(pid, &status, WUNTRACED) == -1)
 			error_output(cmd, NULL, strerror(errno));
 		if (WIFEXITED(status))
-			global_status = WEXITSTATUS(status);
+			g_global_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			global_status = 128 + WTERMSIG(status);
+			g_global_status = 128 + WTERMSIG(status);
 		else if (WIFSTOPPED(status))
-			global_status = WSTOPSIG(status);
+			g_global_status = WSTOPSIG(status);
 		else if (WIFCONTINUED(status))
 			ft_putendl("continued");
 	}

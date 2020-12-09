@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 16:15:19 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/08 11:00:28 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:30:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void				error_with_status(t_commands *cmd, t_data *all)
 {
 	error_case("minishell: exit: ", (char *)cmd->lst->content,\
 									": numeric argument required\n");
-	program_exit(cmd, all, global_status);
+	program_exit(cmd, all, g_global_status);
 }
 
 static long long int	ft_flag(int *flag)
@@ -64,7 +64,7 @@ void					ft_exit(t_commands *cmd, t_data *all)
 	flag = 0;
 	ft_putendl("exit");
 	if (cmd->count_args == 0)
-		program_exit(cmd, all, global_status);
+		program_exit(cmd, all, g_global_status);
 	else if (cmd->count_args > 0)
 	{
 		number = atoi_with_long((char *)cmd->lst->content, &flag);
@@ -74,11 +74,11 @@ void					ft_exit(t_commands *cmd, t_data *all)
 		{
 			if (number > 255)
 				number -= 256;
-			global_status = number;
-			program_exit(cmd, all, global_status);
+			g_global_status = number;
+			program_exit(cmd, all, g_global_status);
 		}
 		else if (cmd->count_args > 1)
 			error_case("minishell: ", "exit: ", "too many arguments\n");
-		global_status = 1;
+		g_global_status = 1;
 	}
 }

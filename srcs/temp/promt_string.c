@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   promt_string.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 11:03:31 by anatashi          #+#    #+#             */
-/*   Updated: 2020/11/19 11:01:52 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/09 13:57:34 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void 	print_promt_string(void)
+void	print_promt_string(void)
 {
 	ft_putstr_fd("\033[1;34m", 1);
 	ft_putstr_fd("minishell$ ", 1);

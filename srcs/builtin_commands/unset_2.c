@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 18:12:22 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 11:19:08 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:30:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	error_with_status(t_list **lst_for_del)
 {
 	error_case("minishell: unset: `", (*lst_for_del)->content, \
 					"': not a valid identifier\n");
-	global_status = 1;
+	g_global_status = 1;
 }
 
 static void	del_next_lst(t_list **new_lst, int *error, int *num_of_lst,\

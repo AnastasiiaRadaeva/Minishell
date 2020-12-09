@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_delete_an_array_element.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 10:48:06 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/02 10:00:31 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:05:05 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		ft_delete_an_array_element(char ***array, size_t i)
 
 	len_arr = ft_strlenarr(*array);
 	if (len_arr <= i)
-		return;
+		return ;
 	while (array[i + 1])
 	{
 		tmp = *(array)[i];

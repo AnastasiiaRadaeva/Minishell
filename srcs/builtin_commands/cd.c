@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 11:22:15 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/08 10:59:18 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:30:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	error_with_status(t_commands **cmd)
 {
 	error_case("minishell: cd: ", (*cmd)->lst->content, \
 							": No such file or directory\n");
-	global_status = 1;
+	g_global_status = 1;
 }
 
 static void	change_var_for_cd(t_commands *cmd, t_data **all)

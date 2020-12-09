@@ -6,19 +6,17 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 15:03:58 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/09 13:35:29 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 13:59:29 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	get_input(char **line, t_data *data)
+static void	get_input(char **line, t_data *data, int gnl)
 {
-	int		gnl;
 	char	*baff;
 	char	*tmp;
 
-	gnl = 0;
 	baff = ft_strdup("");
 	while (gnl != 1)
 	{
@@ -29,14 +27,10 @@ static void	get_input(char **line, t_data *data)
 			tmp = baff;
 			baff = ft_strjoin(baff, *line);
 			free(tmp);
-			free(*line);
-			*line = NULL;
+			ft_free_tmp(*line);
 		}
 		if (gnl == 0 && *line[0] == '\0')
-		{
-			free(*line);
-			*line = NULL;
-		}
+			ft_free_tmp(*line);
 		if (gnl == 0 && *line[0] == '\0' && *baff == '\0')
 			exit(EXIT_SUCCESS);
 	}
@@ -48,7 +42,7 @@ static void	get_input(char **line, t_data *data)
 
 void		read_cmd(t_data *data, char **line)
 {
-	get_input(line, data);
+	get_input(line, data, 0);
 	if (**line == '\0')
 	{
 		free(*line);
@@ -56,5 +50,4 @@ void		read_cmd(t_data *data, char **line)
 		print_promt_string();
 		read_cmd(data, line);
 	}
-
 }

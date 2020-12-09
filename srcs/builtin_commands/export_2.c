@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:11:33 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/08 11:00:46 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:30:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	error_with_status(t_list **lst)
 {
 	error_case("minishell: export: `", (*lst)->content,\
 								"': not a valid identifier\n");
-	global_status = 1;
+	g_global_status = 1;
 }
 
 int			delete_lst(t_commands **cmd, t_list **lst, int num_of_l, int error)

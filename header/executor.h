@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anatashi <anatashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 12:39:16 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/04 22:47:38 by anatashi         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:08:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,30 @@ void	selection_cmd(t_commands **cmd, t_data *data, t_commands *redirect);
 ** The function shows the current directory.
 ** Returns a string with the directory.
 ** Refine the function output.
-** If an error occurs, the function prints the error string and calls error_output.
+** If an error occurs, the function prints the error string and calls
+** error_output.
 */
 void	ft_pwd(t_commands *cmd, t_data *all);
 
 /*
-** The function returns a one-dimensional array with all environment variables.
-** If an error occurs, the function prints the error string and calls error_output.
-** You need to think about how to output this error, I think that there is no need for exit.
+** The function returns a one-dimensional array with all environment
+** variables.
+** If an error occurs, the function prints the error string and calls
+** error_output.
+** You need to think about how to output this error, I think that there
+** is no need for exit.
 */
 void	ft_env(t_commands *cmd, t_data *all);
 int		redirects(t_commands *redir);
 
 /*
-** The function changes the working directory and in accordance with this change of variables
+** The function changes the working directory and in accordance with this
+** change of variables
 ** environments.
-** If an error occurs, the function prints the error string and calls error_output.
-** You need to think about how to output this error, because you don't need exit, as
+** If an error occurs, the function prints the error string and calls
+** error_output.
+** You need to think about how to output this error, because you don't need
+** exit, as
 ** I understand.
 */
 void	ft_cd(t_commands **cmd, t_data *all);
@@ -54,8 +61,10 @@ void	ft_cd(t_commands **cmd, t_data *all);
 ** The function returns the submitted arguments separated by a space.
 ** If there is no-t flag, the function adds \t at the end of the string.
 ** Returns the required string.
-** If an error occurs, the function prints the error string and calls error_output.
-** You need to think about how to output this error, I think that exit is needed here.
+** If an error occurs, the function prints the error string and calls
+** error_output.
+** You need to think about how to output this error, I think that exit is
+** needed here.
 ** By this time, all $ should have been processed.
 ** The function must be sold ready-made arguments.
 */
@@ -65,8 +74,10 @@ void	ft_echo(t_commands *cmd);
 ** The function returns the submitted arguments separated by a space.
 ** If there is no-t flag, the function adds \t at the end of the string.
 **  Returns the required string.
-** If an error occurs, the function prints the error string and calls error_output.
-** You need to think about how to output this error, I think that exit is needed here.
+** If an error occurs, the function prints the error string and calls
+** error_output.
+** You need to think about how to output this error, I think that exit is
+** needed here.
 ** By this time, all $ should have been processed.
 ** The function must be sold ready-made arguments.
 */

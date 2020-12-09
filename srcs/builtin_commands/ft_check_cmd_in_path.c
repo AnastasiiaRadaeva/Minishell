@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 19:07:39 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/08 20:42:04 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:30:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void		ft_check_cmd_in_path(t_commands **cmd, t_data **data)
 		if (waitpid(pid, &status, WUNTRACED) == -1)
 			error_output(*cmd, *data, (strerror(errno)));
 		if (WIFEXITED(status))
-			global_status = WEXITSTATUS(status);
+			g_global_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			global_status = 128 + WTERMSIG(status);
+			g_global_status = 128 + WTERMSIG(status);
 		else if (WIFSTOPPED(status))
-			global_status = WSTOPSIG(status);
+			g_global_status = WSTOPSIG(status);
 	}
 }

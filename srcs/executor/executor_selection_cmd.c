@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:12:38 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/08 20:33:55 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:30:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	error_with_status(t_commands *cmd)
 	if (!*cmd->cmd)
 		return ;
 	error_case("minishell: ", cmd->cmd, ": command not found\n");
-	global_status = 127;
+	g_global_status = 127;
 }
 
 void		selection_cmd(t_commands **cmd, t_data *data,

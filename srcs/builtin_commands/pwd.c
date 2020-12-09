@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 14:12:41 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/07 11:18:54 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:30:54 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void		ft_pwd(t_commands *cmd, t_data *all)
 		if (waitpid(pid, &status, WUNTRACED) == -1)
 			error_output(cmd, NULL, strerror(errno));
 		if (WIFEXITED(status))
-			global_status = WEXITSTATUS(status);
+			g_global_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			global_status = 128 + WTERMSIG(status);
+			g_global_status = 128 + WTERMSIG(status);
 		else if (WIFSTOPPED(status))
-			global_status = WSTOPSIG(status);
+			g_global_status = WSTOPSIG(status);
 		else if (WIFCONTINUED(status))
 			ft_putendl("continued");
 	}

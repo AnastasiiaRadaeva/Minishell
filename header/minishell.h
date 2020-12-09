@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 14:48:36 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/08 17:59:15 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:31:19 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <signal.h>
 # include <string.h>
 # include "../libft/header/libft.h"
-// # include <wait.h>
 
 # define MALLOC_1 "Error : Malloc fail (init_struct_commands)"
 # define MALLOC_2 "Error : Malloc fail (ft_command_line)"
@@ -39,8 +38,6 @@
 # define CD_MANY_ARGS "cd: too many arguments"
 # define CD_NO_SUCH_F_D "cd: no such file or directory: "
 
-int	global_status;
-
 typedef struct			s_data
 {
 	int					fd_0;
@@ -60,7 +57,6 @@ typedef struct			s_commands
 	int					num_cmd;
 	char				*cmd_dir;
 	int					count_args;
-	//int					dit_find;
 	int					type_redir;
 	int					invalid;
 	struct s_list		*lst;
@@ -70,30 +66,36 @@ typedef struct			s_commands
 	struct s_commands	*next;
 }						t_commands;
 
-int				main(int argc, char **argv, char **environ);
-void			create_env(t_data *data, char **envp);
-void			print_promt_string(void);
-t_data			*init_struct_data(void);
-void			signal_handler(int num);
-void			signal_handler_2(int num);
-void			read_cmd(t_data *data, char **line);
-void			error_output(t_commands *cmd, t_data *data, char *str);
-int				program_exit(t_commands *cmd, t_data *data, int num);
-void			error_case(char *str1, char *str2, char *str3);
-void			freeing_memory_from_struct_commands(t_commands **cmd);
-void			freeing_memory_from_struct_data(t_data *data);
+extern int				g_global_status;
+
+int						main(int argc, char **argv, char **environ);
+void					create_env(t_data *data, char **envp);
+void					print_promt_string(void);
+t_data					*init_struct_data(void);
+void					signal_handler(int num);
+void					signal_handler_2(int num);
+void					read_cmd(t_data *data, char **line);
+void					error_output(t_commands *cmd, t_data *data, char *str);
+int						program_exit(t_commands *cmd, t_data *data, int num);
+void					error_case(char *str1, char *str2, char *str3);
+void					freeing_memory_from_struct_commands(t_commands **cmd);
+void					freeing_memory_from_struct_data(t_data *data);
 
 /*
 ** for export
 */
-int		delete_lst(t_commands **cmd, t_list **lst, int num_of_l, int error);
-void	change_var(t_data **all, t_commands **cmd, int num_of_lst);
-void	empty_export(t_data **all, t_commands **cmd);
+int						delete_lst(t_commands **cmd, t_list **lst,\
+													int num_of_l, int error);
+void					change_var(t_data **all, t_commands **cmd,\
+																int num_of_lst);
+void					empty_export(t_data **all, t_commands **cmd);
 
 /*
 ** for unset
 */
-int 	del_lst(t_commands **cmd, t_list **lst_for_del, int num_of_lst, int error);
-void	delete_right_env_variable(t_data **all, t_commands **cmd);
+int						del_lst(t_commands **cmd, t_list **lst_for_del,\
+													int num_of_lst, int error);
+void					delete_right_env_variable(t_data **all,\
+															t_commands **cmd);
 
 #endif

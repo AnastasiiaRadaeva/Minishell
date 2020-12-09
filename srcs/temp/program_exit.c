@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 17:02:07 by anatashi          #+#    #+#             */
-/*   Updated: 2020/12/09 13:25:02 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/09 13:57:10 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,5 @@ int		program_exit(t_commands *cmd, t_data *data, int num)
 		freeing_memory_from_struct_commands(&cmd);
 	if (data)
 		freeing_memory_from_struct_data(data);
-	// sleep(10000000);
 	exit(num);
 }
