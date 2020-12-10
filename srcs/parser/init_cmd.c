@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:48:22 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/09 18:24:00 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/10 11:49:25 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,11 @@ static int	check(t_commands **cmd, char ***split_path, DIR **dir, int *i)
 	int		j;
 	char	*tmp_1;
 
-	j = (*i) + 1;
+	j = 0;
 	tmp_1 = (*cmd)->cmd;
 	(*cmd)->cmd = ft_strjoin("/", (*cmd)->cmd);
 	free(tmp_1);
-	(*cmd)->cmd_dir = (*split_path)[(*i)--];
-	while ((*i))
-		ft_free_tmp((*split_path)[(*i)--]);
-	ft_free_tmp((*split_path)[(*i)]);
+	(*cmd)->cmd_dir = ft_strdup((*split_path)[(*i)]);
 	while ((*split_path)[j])
 		ft_free_tmp((*split_path)[j++]);
 	free((*split_path));

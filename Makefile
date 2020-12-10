@@ -6,21 +6,21 @@
 #    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 13:03:41 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/09 16:01:03 by kbatwoma         ###   ########.fr        #
+#    Updated: 2020/12/10 11:27:26 by kbatwoma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC = gcc -g
+CC = gcc
 OPFLAGS = -O2
 FLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR			=	libft/
 HEADER_DIR			=	header/
 
-TEMP_DIR			=	srcs/temp/
-TEMP_LIST			=	minishell.c\
+MAJOR_DIR			=	srcs/major_functions/
+MAJOR_LIST			=	minishell.c\
 						promt_string.c\
 						signal.c\
 						read_cmd.c\
@@ -64,20 +64,20 @@ BUILTIN_CMD_LIST	= 	pwd.c\
 						ft_check_cmd_in_path.c \
 						error_case.c
 
-SOURCE_TEMP			= $(addprefix $(TEMP_DIR), $(TEMP_LIST))
+SOURCE_MAJOR			= $(addprefix $(MAJOR_DIR), $(MAJOR_LIST))
 SOURCE_PARSER		= $(addprefix $(PARSER_DIR), $(PARSER_LIST))
 SOURCE_EXECUTOR		= $(addprefix $(EXECUTOR_DIR), $(EXECUTOR_LIST))
 SOURCE_LEXER		= $(addprefix $(LEXER_DIR), $(LEXER_LIST))
 SOURCE_BUILTIN		= $(addprefix $(BUILTIN_CMD_DIR), $(BUILTIN_CMD_LIST))
 
 
-OBJ	= $(patsubst %.c, %.o,	$(SOURCE_TEMP)\
+OBJ	= $(patsubst %.c, %.o,	$(SOURCE_MAJOR)\
 							$(SOURCE_PARSER)\
 							$(SOURCE_EXECUTOR)\
 							$(SOURCE_LEXER)\
 							$(SOURCE_BUILTIN))
 							
-D_FILES = $(patsubst %.c, %.d,	$(SOURCE_TEMP)\
+D_FILES = $(patsubst %.c, %.d,	$(SOURCE_MAJOR)\
 								$(SOURCE_PARSER)\
 								$(SOURCE_EXECUTOR)\
 								$(SOURCE_LEXER)\
@@ -112,6 +112,4 @@ fclean : clean
 re : fclean all
 
 norm:
-	norminette $(HEADER_DIR). $(TEMP_DIR). $(LEXER_DIR). $(PARSER_DIR). $(EXECUTOR_DIR). $(BUILTIN_CMD_DIR). $(MAKE) norm -C $(LIBFT_DIR)
-
-test:
+	norminette $(HEADER_DIR). $(MAJOR_DIR). $(LEXER_DIR). $(PARSER_DIR). $(EXECUTOR_DIR). $(BUILTIN_CMD_DIR). $(MAKE) norm -C $(LIBFT_DIR)

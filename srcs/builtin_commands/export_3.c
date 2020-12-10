@@ -6,13 +6,13 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 17:04:43 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/08 11:01:02 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/10 11:15:17 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	find_char(char *str, char symb)
+static int	find_char_2(char *str, char symb)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ static int	change(t_data **all, t_list **tmp_lst, t_commands **cmd,\
 	index = -1;
 	while ((*all)->envp[++index])
 		if (ft_strncmp((char *)(*tmp_lst)->content, (*all)->envp[index],\
-						find_char((*all)->envp[index], '=') + 1) == 0)
+						find_char_2((*all)->envp[index], '=') + 1) == 0)
 		{
 			new_env = (*all)->envp;
 			if (!((*all)->envp = (char **)malloc(sizeof(char *) *\

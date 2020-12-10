@@ -6,7 +6,7 @@
 #    By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/15 16:48:11 by anatashi          #+#    #+#              #
-#    Updated: 2020/12/09 14:07:23 by kbatwoma         ###   ########.fr        #
+#    Updated: 2020/12/10 11:27:39 by kbatwoma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SOURCE = $(addprefix $(DIR), $(LIST))
 OBJ	= $(patsubst %.c, %.o, $(SOURCE))
 D_FILE = $(patsubst %.c, %.d, $(SOURCE))
 
-CC = gcc -g
+CC = gcc
 OPFLAGS = -O2
 FLAGS = -Wall -Wextra -Werror
 HEADER = header/

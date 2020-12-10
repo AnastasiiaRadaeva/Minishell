@@ -6,7 +6,7 @@
 /*   By: kbatwoma <kbatwoma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 15:12:38 by kbatwoma          #+#    #+#             */
-/*   Updated: 2020/12/09 14:30:54 by kbatwoma         ###   ########.fr       */
+/*   Updated: 2020/12/10 11:20:33 by kbatwoma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,7 @@ void		selection_cmd(t_commands **cmd, t_data *data,
 		ft_exit(*cmd, data);
 	else if ((*cmd)->num_cmd == CMD_ERROR)
 		error_with_status(*cmd);
+	if ((*cmd)->redir)
+		if ((*cmd)->redir->next)
+			*cmd = (*cmd)->redir;
 }
